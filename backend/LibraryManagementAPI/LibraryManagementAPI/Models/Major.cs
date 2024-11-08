@@ -6,7 +6,7 @@ namespace LibraryManagementAPI.Models
     {
         [Key]
         public int major_id { get; set; }
-        public string major_name { get; set; }
+        public string? major_name { get; set; }
         public int department_id { get; set; }
 
     }
