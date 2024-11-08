@@ -18,14 +18,14 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (user) => {
         console.log(user);
-        //Lưu trữ thông tin người dùng
+        // Lưu trữ thông tin người dùng
         localStorage.setItem('user', JSON.stringify(user));
         console.log('Đăng nhập thành công.');
-        //Điều hướng đến trang chính
-        this.router.navigate(['/book-list']);
+        // Điều hướng đến trang chính
+        this.router.navigate(['/home']);
       }, 
       error: (err) => {
-        //Hiển thị thông báo lỗi khi đăng nhập thất bại
+        // Hiển thị thông báo lỗi khi đăng nhập thất bại
         this.errorMessage = 'Tên đăng nhập hoặc mật khẩu không đúng.';
         console.error('Đăng nhập thất bại', err);
       }
