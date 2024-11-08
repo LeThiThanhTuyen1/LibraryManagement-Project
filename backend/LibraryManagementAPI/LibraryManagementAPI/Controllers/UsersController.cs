@@ -110,19 +110,18 @@ namespace LibraryManagementAPI.Controllers
             // Tìm người dùng theo username
             var user = await _context.Users.FirstOrDefaultAsync(u => u.username == loginModel.username);
 
-            // Nếu không tìm thấy người dùng, trả về Unauthorized
             if (user == null)
             {
                 return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng" });
             }
 
-            // So sánh mật khẩu (so sánh mật khẩu gốc với mật khẩu đã mã hóa)
-            if (!BCrypt.Net.BCrypt.Verify(loginModel.password_hash, user.password_hash))
+            // So sánh mật khẩu gốc (loginModel.password) với mật khẩu đã mã hóa (user.password_hash)
+            if (!BCrypt.Net.BCrypt.Verify(loginModel.password_hash, user.password_hash))  // Đảm bảo loginModel.password là mật khẩu gốc
             {
                 return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng" });
             }
 
-            // Nếu đăng nhập thành công, trả về thông tin người dùng
+            // Đăng nhập thành công
             return Ok(new
             {
                 user.user_id,
