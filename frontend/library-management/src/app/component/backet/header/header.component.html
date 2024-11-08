@@ -1,0 +1,27 @@
+<div class="header">
+    <header>
+      <!-- Banner (Poster) -->
+      <div class="banner">
+        <img src="/assets/logo/banner.png" alt="Banner" />
+      </div>
+  
+      <!-- Menu chính -->
+      <nav class="menu">
+        <ul>
+          <li><a href="/home">TRANG CHỦ</a></li>
+          <li><a href="#">TÀI LIỆU SỐ</a></li>
+          <li><a href="#">BỘ SƯU TẬP</a></li>
+          <li><a href="#">TRA CỨU</a></li>
+          <li class="user-menu">
+            <!-- Hiển thị last_name của người dùng -->
+            <a href="#">{{ userLastName }}</a>
+            <ul class="user-dropdown">
+              <li><a href="#">Thông tin</a></li>
+              <li><a (click)="onLogout()">Đăng xuất</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+</div>
+  

@@ -9,13 +9,20 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginComponent } from './component/backet/login/login.component';
 import { FormsModule } from '@angular/forms';
-
+import { HeaderComponent } from './component/backet/header/header.component';
+import { FooterComponent } from './component/backet/footer/footer.component';
+import { HomeComponent } from './component/home/home.component';
+import { HomeAdminComponent } from './component/admin/home-admin/home-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    HomeAdminComponent
   ],
   imports: [
     BrowserModule,
