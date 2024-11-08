@@ -7,15 +7,19 @@ import { BookListComponent } from './component/book/book-list/book-list.componen
 import { BookService } from './service/book.service';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LoginComponent } from './component/backet/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookListComponent
+    BookListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     BookService,
