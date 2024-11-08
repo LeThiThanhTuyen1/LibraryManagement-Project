@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BCrypt.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -78,6 +79,9 @@ namespace LibraryManagementAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+            user.password_hash = BCrypt.Net.BCrypt.HashPassword(user.password_hash);
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -98,6 +102,37 @@ namespace LibraryManagementAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] User loginModel)
+        {
+            // Tìm người dùng theo username
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.username == loginModel.username);
+
+            // Nếu không tìm thấy người dùng, trả về Unauthorized
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng" });
+            }
+
+            // So sánh mật khẩu (so sánh mật khẩu gốc với mật khẩu đã mã hóa)
+            if (!BCrypt.Net.BCrypt.Verify(loginModel.password_hash, user.password_hash))
+            {
+                return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng" });
+            }
+
+            // Nếu đăng nhập thành công, trả về thông tin người dùng
+            return Ok(new
+            {
+                user.user_id,
+                user.username,
+                user.first_name,
+                user.last_name,
+                user.role,
+                user.email,
+                user.phone_number
+            });
         }
 
         private bool UserExists(int id)
