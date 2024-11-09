@@ -112,13 +112,13 @@ namespace LibraryManagementAPI.Controllers
 
             if (user == null)
             {
-                return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng" });
+                return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng." });
             }
 
             // So sánh mật khẩu gốc (loginModel.password) với mật khẩu đã mã hóa (user.password_hash)
             if (!BCrypt.Net.BCrypt.Verify(loginModel.password_hash, user.password_hash))  // Đảm bảo loginModel.password là mật khẩu gốc
             {
-                return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng" });
+                return Unauthorized(new { message = "Tên đăng nhập hoặc mật khẩu không đúng." });
             }
 
             // Đăng nhập thành công

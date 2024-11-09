@@ -1,5 +1,4 @@
 import { AfterViewInit, Component } from '@angular/core';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,8 +7,12 @@ import { AfterViewInit, Component } from '@angular/core';
 export class HomeComponent implements AfterViewInit {
 
   ngAfterViewInit() {
-    this.initCarousel();
-  }
+    if (typeof document !== 'undefined') {
+      this.initCarousel();
+    } else {
+      console.warn('document is not available');
+    }
+  }  
 
   initCarousel() {
     const images = document.querySelectorAll('.carousel img');
