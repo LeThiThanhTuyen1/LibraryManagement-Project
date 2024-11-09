@@ -20,10 +20,14 @@ export class HeaderComponent {
     }
   }
 
-  onLogout(): void {
-    // Xóa thông tin người dùng khỏi localStorage khi đăng xuất
-    localStorage.removeItem('user');
-    // Điều hướng về trang đăng nhập
-    this.router.navigate(['/login']);
-  }
+  onLogout() {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      // Xóa thông tin người dùng khỏi localStorage
+      localStorage.removeItem('user');
+      // Điều hướng đến trang login
+      this.router.navigate(['/login']);
+    } else {
+      console.warn('localStorage is not available');
+    }
+  }  
 }
