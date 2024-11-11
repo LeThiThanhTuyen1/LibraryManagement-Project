@@ -1,0 +1,61 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.content {
+  flex: 1;
+  border-left: 1px solid #000; 
+  border-right: 1px solid #000;
+}
+
+.teacher-quote {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #555;
+}
+
+.image-carousel {
+  margin-bottom: 40px;
+  position: relative;
+  max-width: 100%;
+  height: 600px; 
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.carousel img.active {
+  opacity: 1;
+}
+
+app-footer {
+  margin-top: auto;
+  z-index: 1; 
+}

@@ -1,0 +1,67 @@
+/* Định dạng container bao quanh form */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+  
+  /* Định dạng form đăng nhập */
+  .login-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+  }
+  
+  /* Tiêu đề */
+  .login-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* Đường phân cách */
+  .divider {
+    font-size: 20px;
+    color: #0f0e0e;
+    margin: 15px 0;
+  }
+  
+  /* Các trường nhập liệu */
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Nút đăng nhập */
+  .login-form button {
+    width: 40%;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #07773f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  .login-form button:hover {
+    background-color: #065826;
+  }
+  
+  /* Logo */
+  .login-logo img {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .error-message {
+    color: red;
+    padding-top: 10px;
+  }

@@ -9,7 +9,7 @@ namespace LibraryManagementAPI.Models
         public int book_id { get; set; }
         public int iser_id { get; set; }
         public int rating { get; set; }
-        public string review_text { get; set; }
+        public string? review_text { get; set; }
         public DateTime review_date { get; set; }
     }
 

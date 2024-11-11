@@ -8,7 +8,7 @@ namespace LibraryManagementAPI.Models
         public int lecturer_id { get; set; }
         public int user_id { get; set; }
         public int major_id { get; set; }
-        public string position { get; set; }
+        public string? position { get; set; }
         public int ttart_year { get; set; }
 
     }
