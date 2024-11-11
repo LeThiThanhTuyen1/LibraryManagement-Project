@@ -21,8 +21,14 @@ export class LoginComponent {
         // Lưu trữ thông tin người dùng
         localStorage.setItem('user', JSON.stringify(user));
         console.log('Đăng nhập thành công.');
-        // Điều hướng đến trang chính
-        this.router.navigate(['/home']);
+        
+        if (user.role === 'admin') {
+          // Nếu là admin, điều hướng đến trang /admin-home
+          this.router.navigate(['/home-admin']);
+        } else {
+          // Nếu không phải admin, điều hướng đến trang /home
+          this.router.navigate(['/home']);
+        }
       }, 
       error: (err) => {
         // Hiển thị thông báo lỗi khi đăng nhập thất bại
