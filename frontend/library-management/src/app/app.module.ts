@@ -7,27 +7,28 @@ import { BookListComponent } from './component/book/book-list/book-list.componen
 import { BookService } from './service/book.service';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { LoginComponent } from './component/login/login.component';
-import { HeaderComponent } from './component/backet/header/header.component';
+import { LoginComponent } from './component/backet/login/login.component';
+import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './component/backet/footer/footer.component';
-import { SidebarComponent } from './component/backet/sidebar/sidebar.component';
-import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
-import { UserInformationComponent } from './component/backet/user-information/user-information.component';
+import { HomeComponent } from './component/home/home.component';
+import { HomeAdminComponent } from './component/admin/home-admin/home-admin.component';
+import { HeaderComponent } from './component/backet/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
     LoginComponent,
-    HeaderComponent,
     FooterComponent,
-    SidebarComponent,
-    LinkLibraryComponent,
-    UserInformationComponent
+    HeaderComponent,
+    HomeComponent,
+    HomeAdminComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     BookService,
