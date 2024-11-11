@@ -23,6 +23,7 @@ import { HeaderComponent } from './component/backet/header/header.component';
     HeaderComponent,
     HomeComponent,
     HomeAdminComponent
+
   ],
   imports: [
     BrowserModule,
