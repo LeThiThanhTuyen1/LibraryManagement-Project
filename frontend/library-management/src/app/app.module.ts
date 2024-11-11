@@ -11,6 +11,8 @@ import { LoginComponent } from './component/login/login.component';
 import { HeaderComponent } from './component/backet/header/header.component';
 import { FooterComponent } from './component/backet/footer/footer.component';
 import { SidebarComponent } from './component/backet/sidebar/sidebar.component';
+import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
+import { UserInformationComponent } from './component/backet/user-information/user-information.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SidebarComponent } from './component/backet/sidebar/sidebar.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    LinkLibraryComponent,
+    UserInformationComponent
   ],
   imports: [
     BrowserModule,
