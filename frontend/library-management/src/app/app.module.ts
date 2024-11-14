@@ -25,6 +25,7 @@ import { BookDetailComponent } from './component/book/book-detail/book-detail.co
     HomeComponent,
     HomeAdminComponent,
     BookDetailComponent
+
   ],
   imports: [
     BrowserModule,

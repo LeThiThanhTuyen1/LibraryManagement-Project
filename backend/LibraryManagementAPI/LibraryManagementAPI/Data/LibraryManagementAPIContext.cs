@@ -23,7 +23,7 @@ namespace LibraryManagementAPI.Data
         public DbSet<Major> Majors { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
-
+        public DbSet<LinkLibrary> LinkLibraries { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Cấu hình khóa chính cho bảng BookAuthor (bảng liên kết nhiều-nhiều)
