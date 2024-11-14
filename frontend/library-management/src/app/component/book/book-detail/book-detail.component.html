@@ -1,0 +1,22 @@
+<div *ngIf="book" class="book-detail-card">
+    <div class="book-content">
+        <div class="book-image-container">
+            <img src="https://th.bing.com/th/id/OIF.sWYGhvpKLQRpQA3j53zioA?w=176&h=180&c=7&r=0&o=5&pid=1.7"
+                class="book-image" />
+            <h2>{{ book.title }}</h2>
+            <p>
+                <strong>Tải tài liệu:</strong>
+                <a [href]="book.file_path" target="_blank"> Download</a>
+            </p>
+        </div>
+        <div class="book-details">
+            <p class="book-info-item"><strong>ISBN:</strong> {{ book.isbn }}</p>
+            <p><strong>Năm xuất bản:</strong> {{ book.publication_year }}</p>
+            <p class="book-info-item"><strong>Nhà xuất bản:</strong> {{ book.publisher?.name || 'N/A' }}</p>
+            <p class="book-info-item"><strong>Thể loại:</strong> {{ book.genre }}</p>
+            <p class="book-info-item"><strong>Ngôn ngữ:</strong> {{ book.language }}</p>
+            <p><strong>Tóm tắt:</strong> {{ book.summary }}</p>
+
+        </div>
+    </div>
+</div>

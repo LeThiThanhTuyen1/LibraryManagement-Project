@@ -25,14 +25,14 @@ namespace LibraryManagementAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Include(b => b.Publisher).ToListAsync();
         }
 
         // GET: api/Books/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
-            var book = await _context.Books.FindAsync(id);
+            var book = await _context.Books.Include(b => b.Publisher).FirstOrDefaultAsync(b => b.book_id == id);
 
             if (book == null)
             {

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryManagementAPI.Models
 {
@@ -11,9 +12,13 @@ namespace LibraryManagementAPI.Models
         public int publication_year { get; set; }
         public string? genre { get; set; }
         public string? summary { get; set; }
-        public int publisher_id { get; set; }
+        [Column("publisher_id")]
+        public int PublisherId { get; set; }
+
         public string? language { get; set; }
         public string? file_path { get; set; }
+
+        public required Publisher Publisher { get; set; }
 
     }
 }

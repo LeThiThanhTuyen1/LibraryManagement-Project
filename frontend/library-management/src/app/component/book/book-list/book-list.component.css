@@ -1,0 +1,21 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.header, .footer {
+  padding: 10px;
+}
+
+.table {
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.table th, .table td {
+  text-align: center;
+}
+
+.btn-primary {
+  margin-top: 15px;
+}
