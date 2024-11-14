@@ -15,6 +15,7 @@ export class BookService {
     return this.http.get<Book[]>(this.apiUrl);
   }
 
+
   // Hàm lấy chi tiết một cuốn sách từ API
   getBookById(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/${id}`);

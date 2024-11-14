@@ -1,32 +1,22 @@
 <div class="container">
-    <h2>Danh sách sách</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Mã sách</th>
-          <th>Tên sách</th>
-          <th>ISBN</th>
-          <th>Năm xuất bản</th>
-          <th>Thể loại</th>
-          <th>Nhà xuất bản</th>
-          <th>Ngôn ngữ</th>
-          <th>Tóm tắt</th>
-          <th>Đường dẫn tài liệu</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of books">
-          <td>{{ book.book_id }}</td>
-          <td>{{ book.title }}</td>
-          <td>{{ book.isbn }}</td>
-          <td>{{ book.publication_year }}</td>
-          <td>{{ book.genre }}</td>
-          <td>{{ book.publisher_id }}</td>
-          <td>{{ book.language }}</td>
-          <td>{{ book.summary }}</td>
-          <td><a [href]="book.file_path" target="_blank">Tải tài liệu</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tên tài liệu</th>
+        <th>Năm xuất bản</th>
+        <th>Thể loại</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.publication_year }}</td>
+        <td>{{ book.genre }}</td>
+        <td>
+          <button class="btn btn-info" (click)="viewBook(book.book_id)">Xem</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
