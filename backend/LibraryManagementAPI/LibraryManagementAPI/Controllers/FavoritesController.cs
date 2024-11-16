@@ -21,56 +21,25 @@ namespace LibraryManagementAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Favorites
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Favorite>>> GetFavorites()
+        [HttpGet("GetFavoritesByUser/{userId}")]
+        public async Task<IActionResult> GetFavoritesByUser(int userId)
         {
-            return await _context.Favorites.ToListAsync();
-        }
+            var favorites = await _context.Favorites
+                .Where(f => f.user_id == userId)
+                .Join(_context.Books,
+                      fav => fav.book_id,
+                      book => book.book_id,
+                      (fav, book) => new
+                      {
+                          fav.favorite_id,
+                          fav.book_id,
+                          fav.user_id,
+                          fav.added_date,
+                          book.title,
+                          book.Publisher.name
+                      }).ToListAsync();
 
-        // GET: api/Favorites/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Favorite>> GetFavorite(int id)
-        {
-            var favorite = await _context.Favorites.FindAsync(id);
-
-            if (favorite == null)
-            {
-                return NotFound();
-            }
-
-            return favorite;
-        }
-
-        // PUT: api/Favorites/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFavorite(int id, Favorite favorite)
-        {
-            if (id != favorite.favorite_id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(favorite).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FavoriteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(favorites);
         }
 
         // POST: api/Favorites

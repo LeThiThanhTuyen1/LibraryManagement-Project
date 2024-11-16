@@ -53,7 +53,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();  // This should be present for API controllers
+    endpoints.MapControllers();  
 });
 
 app.Run();
