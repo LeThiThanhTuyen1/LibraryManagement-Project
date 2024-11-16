@@ -14,6 +14,7 @@ import { HomeComponent } from './component/home/home.component';
 import { HomeAdminComponent } from './component/admin/home-admin/home-admin.component';
 import { HeaderComponent } from './component/backet/header/header.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
+import { FavoriteListComponent } from './component/favorite/favorite-list/favorite-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BookDetailComponent } from './component/book/book-detail/book-detail.co
     HeaderComponent,
     HomeComponent,
     HomeAdminComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    FavoriteListComponent
 
   ],
   imports: [

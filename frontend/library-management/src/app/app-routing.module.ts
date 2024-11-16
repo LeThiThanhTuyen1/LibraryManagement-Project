@@ -7,6 +7,7 @@ import { FooterComponent } from './component/backet/footer/footer.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeAdminComponent } from './component/admin/home-admin/home-admin.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
+import { FavoriteListComponent } from './component/favorite/favorite-list/favorite-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'book-list', component: BookListComponent },
   { path: 'book-detail/:id', component: BookDetailComponent },
+  { path: 'favorite-list', component: FavoriteListComponent},
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
