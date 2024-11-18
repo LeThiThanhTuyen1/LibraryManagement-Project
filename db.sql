@@ -75,17 +75,6 @@ CREATE TABLE Downloads (
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
-
-CREATE TABLE Students (
-    student_id INT PRIMARY KEY IDENTITY(1,1),
-    user_id INT,
-    major_id INT,
-    course NVARCHAR(50),
-    enrollment_year INT,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (major_id) REFERENCES Majors(major_id)
-);
-
 CREATE TABLE Departments (
     department_id INT PRIMARY KEY IDENTITY(1,1),
     department_name NVARCHAR(100)
@@ -96,6 +85,15 @@ CREATE TABLE Majors (
     major_name NVARCHAR(100),
     department_id INT,
     FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+);
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY IDENTITY(1,1),
+    user_id INT,
+    major_id INT,
+    course NVARCHAR(50),
+    enrollment_year INT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (major_id) REFERENCES Majors(major_id)
 );
 
 CREATE TABLE Lecturers (
