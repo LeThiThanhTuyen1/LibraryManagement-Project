@@ -11,9 +11,10 @@
             </p>
         </div>
         <div class="book-details">
+            <p class="book-info-item"><strong>Tác giả:</strong> {{ book.AuthorName }}</p>
             <p class="book-info-item"><strong>ISBN:</strong> {{ book.isbn }}</p>
             <p><strong>Năm xuất bản:</strong> {{ book.publication_year }}</p>
-            <p class="book-info-item"><strong>Nhà xuất bản:</strong> {{ book.publisher?.name || 'N/A' }}</p>
+            <p class="book-info-item"><strong>Nhà xuất bản:</strong> {{ book.PublisherName }}</p>
             <p class="book-info-item"><strong>Thể loại:</strong> {{ book.genre }}</p>
             <p class="book-info-item"><strong>Ngôn ngữ:</strong> {{ book.language }}</p>
             <p><strong>Tóm tắt:</strong> {{ book.summary }}</p>
@@ -21,3 +22,4 @@
     </div>
 </div>
 <button (click)="goBack()">Quay lại</button>
+<button>Xem</button>

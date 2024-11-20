@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class BookDetailComponent implements OnInit {
   book!: Book;
+  bookId!: number;
   isLoading = true;
 
   constructor(
@@ -21,24 +22,20 @@ export class BookDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const bookId = +this.route.snapshot.paramMap.get('id')!;
-    this.loadBookDetails(bookId);
+    this.route.params.subscribe((params) => {
+      this.bookId = params['id'];
+      this.loadBookDetails(this.bookId);
+    });
   }
+
 
   loadBookDetails(id: number): void {
     this.bookService.getBookById(id).subscribe((data: Book) => {
       this.book = data;
-      if (this.book.publisher && this.book.publisher.publisher_id) {
-        this.loadPublisherDetails(this.book.publisher.publisher_id);
-      }
       this.isLoading = false;
     });
   }
-  loadPublisherDetails(publisherId: number): void {
-    this.bookService.getPublisherById(publisherId).subscribe((publisher: Publisher) => {
-      this.book.publisher = publisher;
-    });
-  }
+
   goBack(): void {
     this.location.back();
   }

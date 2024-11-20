@@ -11,16 +11,14 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.apiUrl);
+  getAllBooks(): Observable<Book[]> {
+    const url = `${this.apiUrl}/GetAllBooks`;
+    return this.http.get<Book[]>(url);
   }
-
-
-  // Hàm lấy chi tiết một cuốn sách từ API
-  getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.apiUrl}/${id}`);
+  getBookById(bookId: number): Observable<Book> {
+    const url = `${this.apiUrl}/GetBookById/${bookId}`;
+    return this.http.get<Book>(url);
   }
-
   // Hàm thêm sách mới
   addBook(book: Book): Observable<Book> {
     return this.http.post<Book>(this.apiUrl, book);

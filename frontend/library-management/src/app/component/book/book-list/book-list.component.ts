@@ -19,7 +19,7 @@ export class BookListComponent implements OnInit {
 
   // Lấy danh sách sách từ API
   loadBooks(): void {
-    this.bookService.getBooks().subscribe((data: Book[]) => {
+    this.bookService.getAllBooks().subscribe((data: Book[]) => {
       this.books = data;
     });
   }

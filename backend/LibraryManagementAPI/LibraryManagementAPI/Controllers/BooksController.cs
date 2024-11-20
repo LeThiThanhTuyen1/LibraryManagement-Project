@@ -27,19 +27,73 @@ namespace LibraryManagementAPI.Controllers
         {
             return await _context.Books.Include(b => b.Publisher).ToListAsync();
         }
-
-        // GET: api/Books/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(int id)
+        [HttpGet("GetAllBooks")]
+        public async Task<IActionResult> GetAllBooks()
         {
-            var book = await _context.Books.Include(b => b.Publisher).FirstOrDefaultAsync(b => b.book_id == id);
+            var books = await _context.Books
+                .Include(b => b.Publisher)
+                .Join(_context.Book_Authors,
+                      book => book.book_id,
+                      bookAuthor => bookAuthor.book_id,
+                      (book, bookAuthor) => new { book, bookAuthor.author_id })
+                .Join(_context.Authors,
+                      combined => combined.author_id,
+                      author => author.author_id,
+                      (combined, author) => new
+                      {
+                          combined.book.book_id,
+                          combined.book.title,
+                          combined.book.isbn,
+                          combined.book.publication_year,
+                          combined.book.genre,
+                          combined.book.summary,
+                          combined.book.language,
+                          combined.book.file_path,
+                          PublisherName = combined.book.Publisher.name,
+                          AuthorName = author.first_name + " " + author.last_name,
+                          AuthorNationality = author.nationality,
+                          AuthorBirthdate = author.birthdate
+                      })
+                .ToListAsync();
+
+            return Ok(books);
+        }
+        // GET: api/Books/5
+        [HttpGet("GetBookById/{bookId}")]
+        public async Task<IActionResult> GetBookById(int bookId)
+        {
+            var book = await _context.Books
+                .Include(b => b.Publisher) // Bao gồm thông tin nhà xuất bản
+                .Join(_context.Book_Authors,
+                      b => b.book_id,
+                      ba => ba.book_id,
+                      (b, ba) => new { b, ba.author_id })
+                .Join(_context.Authors,
+                      combined => combined.author_id,
+                      a => a.author_id,
+                      (combined, a) => new
+                      {
+                          combined.b.book_id,
+                          combined.b.title,
+                          combined.b.isbn,
+                          combined.b.publication_year,
+                          combined.b.genre,
+                          combined.b.summary,
+                          combined.b.language,
+                          combined.b.file_path,
+                          PublisherName = combined.b.Publisher.name,
+                          AuthorName = a.first_name + " " + a.last_name,
+                          AuthorNationality = a.nationality,
+                          AuthorBirthdate = a.birthdate
+                      })
+                .FirstOrDefaultAsync(b => b.book_id == bookId); // Lọc theo book_id
 
             if (book == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Book not found." });
             }
 
-            return book;
+            return Ok(book);
         }
 
         // PUT: api/Books/5
