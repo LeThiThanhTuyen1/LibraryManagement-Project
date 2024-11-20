@@ -1,0 +1,178 @@
+/* Tổng thể container */
+.container {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Tiêu đề từng phần */
+h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #007bff;
+}
+
+/* Phần form tìm kiếm */
+.search-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.search-form label {
+    flex: 1 1 200px;
+    font-size: 14px;
+    color: #444;
+}
+
+.search-form input {
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.search-form .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.search-form button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Danh sách sách */
+.book-list {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.book-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.book-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.book-list li:last-child {
+    border-bottom: none;
+}
+
+.book-list li strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.book-list li button {
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.book-list li button:hover {
+    background-color: #218838;
+}
+
+/* Chi tiết sách */
+.book-details {
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.book-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.book-details a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.book-details a:hover {
+    text-decoration: underline;
+}
+
+/* Logo và tiêu đề trường */
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+}
+
+header h1 {
+    font-size: 20px;
+    color: #007bff;
+    margin: 0;
+}
+
+/* Thống kê */
+.statistics {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.statistics p {
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+}
