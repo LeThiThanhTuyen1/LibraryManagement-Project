@@ -46,21 +46,24 @@ export class SearchDocumentsComponent implements OnInit {
   }
 
   // Lọc danh sách sách theo tiêu chí tìm kiếm
-  searchBooks(): void {
-    const filteredBooks = this.books.filter(book => {
-      return (
-        (!this.searchCriteria.title || book.title.toLowerCase().includes(this.searchCriteria.title.toLowerCase())) &&
-        (!this.searchCriteria.genre || book.genre.toLowerCase().includes(this.searchCriteria.genre.toLowerCase())) &&
-        (!this.searchCriteria.AuthorName || book.AuthorName.toLowerCase().includes(this.searchCriteria.AuthorName.toLowerCase())) &&
-        (!this.searchCriteria.language || book.language.toLowerCase().includes(this.searchCriteria.language.toLowerCase())) &&
-        (!this.searchCriteria.publication_year || book.publication_year === this.searchCriteria.publication_year)
-      );
-    });
+  // Lọc danh sách sách theo tiêu chí tìm kiếm
+searchBooks(): void {
+  const filteredBooks = this.books.filter(book => {
+    return (
+      (!this.searchCriteria.title || book.title.toLowerCase().includes(this.searchCriteria.title.toLowerCase())) &&
+      (!this.searchCriteria.genre || book.genre.toLowerCase().includes(this.searchCriteria.genre.toLowerCase())) &&
+      (!this.searchCriteria.AuthorName || book.AuthorName.toLowerCase().includes(this.searchCriteria.AuthorName.toLowerCase())) &&
+      (!this.searchCriteria.language || book.language.toLowerCase().includes(this.searchCriteria.language.toLowerCase())) &&
+      (!this.searchCriteria.publication_year || book.publication_year === this.searchCriteria.publication_year) &&
+      (!this.searchCriteria.isbn || book.isbn.toLowerCase().includes(this.searchCriteria.isbn.toLowerCase()))
+    );
+  });
 
-    console.log('Kết quả tìm kiếm:', filteredBooks);
-    this.books = filteredBooks;
-  }
+  console.log('Kết quả tìm kiếm:', filteredBooks);
+  this.books = filteredBooks;
+}
 
+  
   // Reset tiêu chí tìm kiếm
   resetSearch(): void {
     this.searchCriteria = {};

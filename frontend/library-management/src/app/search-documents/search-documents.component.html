@@ -3,16 +3,19 @@
     <section class="search-form">
       <h2>Tìm Kiếm</h2>
       <form>
+        <!-- Các trường tìm kiếm khác -->
         <label>Tiêu đề: <input type="text" [(ngModel)]="searchCriteria.title" name="title" /></label>
         <label>Thể loại: <input type="text" [(ngModel)]="searchCriteria.genre" name="genre" /></label>
         <label>Tác giả: <input type="text" [(ngModel)]="searchCriteria.AuthorName" name="AuthorName" /></label>
         <label>Ngôn ngữ: <input type="text" [(ngModel)]="searchCriteria.language" name="language" /></label>
         <label>Năm xuất bản: <input type="number" [(ngModel)]="searchCriteria.publication_year" name="publication_year" /></label>
+        <label>Mã ISBN: <input type="text" [(ngModel)]="searchCriteria.isbn" name="isbn" /></label>
         <div class="button-group">
           <button type="button" (click)="searchBooks()">Tìm Kiếm</button>
           <button type="button" (click)="resetSearch()">Nhập Lại</button>
         </div>
       </form>
+      
     </section>
   
     <!-- Danh sách sách -->
@@ -21,23 +24,13 @@
       <ul>
         <li *ngFor="let book of books" class="book-item">
           <strong>{{ book.title }}</strong> - {{ book.AuthorName }} ({{ book.publication_year }})
-          <button (click)="getBookById(book.book_id)">Xem Chi Tiết</button>
+          <button [routerLink]="['/book-detail', book.book_id]">Xem Chi Tiết</button>
+
         </li>
       </ul>
     </section>
   
-    <!-- Chi tiết sách -->
-    <section *ngIf="selectedBook" class="book-details">
-      <h2>Chi Tiết Sách</h2>
-      <p><strong>Tiêu đề:</strong> {{ selectedBook.title }}</p>
-      <p><strong>Thể loại:</strong> {{ selectedBook.genre }}</p>
-      <p><strong>Tác giả:</strong> {{ selectedBook.AuthorName }}</p>
-      <p><strong>Nhà xuất bản:</strong> {{ selectedBook.PublisherName }}</p>
-      <p><strong>Năm xuất bản:</strong> {{ selectedBook.publication_year }}</p>
-      <p><strong>Ngôn ngữ:</strong> {{ selectedBook.language }}</p>
-      <p><strong>Mô tả:</strong> {{ selectedBook.summary }}</p>
-      <p><strong>Đường dẫn file:</strong> <a [href]="selectedBook.file_path" target="_blank">Xem Tài Liệu</a></p>
-    </section>
+   
   </div>
   
 
