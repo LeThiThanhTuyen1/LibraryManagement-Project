@@ -15,6 +15,7 @@ import { HomeAdminComponent } from './component/admin/home-admin/home-admin.comp
 import { HeaderComponent } from './component/backet/header/header.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { FavoriteListComponent } from './component/favorite/favorite-list/favorite-list.component';
+import { SearchDocumentsComponent } from './search-documents/search-documents.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FavoriteListComponent } from './component/favorite/favorite-list/favori
     HomeComponent,
     HomeAdminComponent,
     BookDetailComponent,
-    FavoriteListComponent
+    FavoriteListComponent,
+    SearchDocumentsComponent
 
   ],
   imports: [
