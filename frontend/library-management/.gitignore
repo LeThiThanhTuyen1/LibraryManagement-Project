@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Ignore Visual Studio specific files and folders
+backend/LibraryManagementAPI/.vs/
+backend/LibraryManagementAPI/LibraryManagementAPI/bin/
+backend/LibraryManagementAPI/LibraryManagementAPI/obj/

@@ -11,6 +11,7 @@ import { FavoriteListComponent } from './component/favorite/favorite-list/favori
 import { SearchDocumentsComponent } from './search-documents/search-documents.component';
 import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
 import { UserInformationComponent } from './component/backet/user-information/user-information.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'header', component: HeaderComponent},
