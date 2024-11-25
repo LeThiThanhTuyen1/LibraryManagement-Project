@@ -1,1 +1,52 @@
-<p>user-information works!</p>
+<!-- Display user information -->
+<div class="info-container" *ngIf="user && !isEditing">
+  <h2>Thông tin cá nhân</h2>
+  <table>
+    <tr>
+      <th>Tên</th>
+      <td>{{ user.first_name }} {{ user.last_name }}</td>
+    </tr>
+    <tr>
+      <th>Tên người dùng</th>
+      <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+      <th>Vai trò</th>
+      <td>{{ user.role }}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+      <th>Số điện thoại</th>
+      <td>{{ user.phone_number }}</td>
+    </tr>
+    <tr>
+      <th>Đã đăng ký vào</th>
+      <td>{{ user.user_id }}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+    <button class="edit-info" (click)="editUserInfo()">Thay đổi thông tin</button>
+    <button class="edit-password" (click)="editPassword()">Thay đổi mật khẩu</button>
+  </div>
+</div>
+
+<!-- Edit form -->
+<div *ngIf="isEditing && user">
+  <h2>Chỉnh sửa thông tin cá nhân</h2>
+  <form (ngSubmit)="saveUserInfo()">
+    <label for="email">Email</label>
+    <input type="email" [(ngModel)]="user.email" name="email" required>
+
+    <label for="phone_number">Số điện thoại</label>
+    <input type="text" [(ngModel)]="user.phone_number" name="phone_number" required>
+
+    <div class="button-container">
+      <button type="submit">Lưu</button>
+      <button type="button" (click)="cancelEdit()">Hủy</button>
+    </div>
+  </form>
+</div>
