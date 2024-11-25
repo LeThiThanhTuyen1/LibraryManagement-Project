@@ -1,0 +1,28 @@
+/* Container for the library list */
+.library-list {
+    width: 100%; /* Stretch the container across the full width */
+    max-width: 1200px; /* Set maximum width to 1200px to prevent it from becoming too large */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content towards the right end of the container */
+    align-items: flex-end; /* Align content vertically towards the right */
+    position: relative;
+    border: 2px solid #ccc; /* Border around the entire section */
+    background-color: #fff; /* Background color of the container */
+    box-sizing: border-box; /* Make sure padding doesn't affect the width */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  /* Dropdown select box */
+  .library-select {
+    margin-bottom: 20px; /* Space between the dropdown and the panel */
+    padding: 8px 12px; /* Add padding to make the dropdown look better */
+    font-size: 1rem;
+    width: 200px; /* Adjust width of the dropdown */
+    max-width: 100%; /* Ensure it doesn't go beyond the container */
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  }
+  

@@ -13,7 +13,8 @@ import { FooterComponent } from './component/backet/footer/footer.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeAdminComponent } from './component/admin/home-admin/home-admin.component';
 import { HeaderComponent } from './component/backet/header/header.component';
-
+import { LinkLibraryComponent} from './component/backet/link-library/link-library.component';
+import { UserInformationComponent } from './component/backet/user-information/user-information.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,8 +23,9 @@ import { HeaderComponent } from './component/backet/header/header.component';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    HomeAdminComponent
-
+    HomeAdminComponent,
+    LinkLibraryComponent,
+    UserInformationComponent
   ],
   imports: [
     BrowserModule,
