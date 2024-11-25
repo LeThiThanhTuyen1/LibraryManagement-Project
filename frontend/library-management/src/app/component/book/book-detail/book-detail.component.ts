@@ -14,6 +14,7 @@ export class BookDetailComponent implements OnInit {
   book!: Book;
   bookId!: number;
   isLoading = true;
+  isFavorite = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,15 +29,19 @@ export class BookDetailComponent implements OnInit {
     });
   }
 
-
   loadBookDetails(id: number): void {
     this.bookService.getBookById(id).subscribe((data: Book) => {
       this.book = data;
+      console.log('Chi tiết sách:', this.book); // Debug kiểm tra
       this.isLoading = false;
     });
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  toggleFavorite(): void {
+    this.isFavorite = !this.isFavorite;
   }
 }
