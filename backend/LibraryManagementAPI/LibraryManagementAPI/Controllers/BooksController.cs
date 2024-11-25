@@ -84,7 +84,10 @@ namespace LibraryManagementAPI.Controllers
                           PublisherName = combined.b.Publisher.name,
                           AuthorName = a.first_name + " " + a.last_name,
                           AuthorNationality = a.nationality,
-                          AuthorBirthdate = a.birthdate
+                          AuthorBirthdate = a.birthdate,
+                          AverageRating = _context.Book_Reviews
+                        .Where(r => r.book_id == bookId )
+                        .Average(r => (double?)r.rating) ?? 0
                       })
                 .FirstOrDefaultAsync(b => b.book_id == bookId); // Lọc theo book_id
 
