@@ -29,7 +29,7 @@ import { SearchDocumentsComponent } from './component/user/search-documents/sear
     HomeComponent,
     HomeAdminComponent,
     LinkLibraryComponent,
-    UserInformationComponent
+    UserInformationComponent,
     BookDetailComponent,
     FavoriteListComponent,
     SearchDocumentsComponent
