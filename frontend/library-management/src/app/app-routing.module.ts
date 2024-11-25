@@ -21,10 +21,9 @@ const routes: Routes = [
   { path: 'book-list', component: BookListComponent},
   { path: 'link-library', component: LinkLibraryComponent},
   { path: 'user-information', component: UserInformationComponent }, 
-  { path: '**', redirectTo: '/login', pathMatch: 'full'},
   { path: 'favorite-list', component: FavoriteListComponent},
-  {path: 'search-documents', component: SearchDocumentsComponent},
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: 'search-documents', component: SearchDocumentsComponent},
+  { path: '*', redirectTo: '/login'}
 ];
 
 @NgModule({
