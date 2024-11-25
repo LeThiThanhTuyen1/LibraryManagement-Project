@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using LibraryManagementAPI.Data;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<LibraryManagementAPIContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+// Thêm cấu hình từ user-secrets
+builder.Configuration.AddUserSecrets<Program>();
 // Enable CORS
 builder.Services.AddCors(options =>
 {
@@ -52,7 +53,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();  // This should be present for API controllers
+    endpoints.MapControllers();  
 });
 
 app.Run();

@@ -1,0 +1,33 @@
+.favorite-list {
+    margin: 60px;
+  }
+  
+  .table img {
+    border-radius: 5px;
+  }
+  /* CSS cho nút hành động */
+.btn-action {
+  padding: 6px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-action.delete {
+  color: #ee081f;
+}
+
+.btn-action.view {
+  color: #0074f0; 
+}
+
+.btn-action:hover {
+  opacity: 0.8;
+}
+
+.btn-action:active {
+  transform: scale(0.98);
+}

@@ -1,0 +1,166 @@
+/* Tổng thể container */
+.container {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 2px solid #007bff;
+}
+
+header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #007bff;
+    margin: 0;
+    text-align: center;
+    flex: 1;
+}
+
+
+/* Danh sách sách */
+.book-list {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.book-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.book-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.book-list li:last-child {
+    border-bottom: none;
+}
+
+.book-list li strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.book-list li button {
+    padding: 8px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.book-list li button:hover {
+    background-color: #218838;
+}
+
+/* Chi tiết sách */
+.book-details {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.book-details p {
+    font-size: 14px;
+    color: #444;
+    margin: 5px 0;
+}
+
+.book-details a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.book-details a:hover {
+    text-decoration: underline;
+}
+.search-form {
+    width: 500px; /* Độ rộng toàn khung */
+    border: 1px solid #ccc; /* Viền bao quanh */
+    padding: 15px; /* Khoảng cách giữa nội dung và viền */
+    border-radius: 5px; /* Góc bo tròn */
+    font-family: Arial, sans-serif; /* Font chữ */
+  }
+  
+  .search-form h2 {
+    text-align: left; /* Căn trái tiêu đề */
+    font-size: 18px; /* Cỡ chữ tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+  }
+  
+  .search-form form {
+    display: flex;
+    flex-direction: column; /* Hiển thị các nhãn và ô input theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa các trường */
+  }
+  
+  .search-form label {
+    display: flex;
+    justify-content: space-between; /* Chia đều khoảng cách giữa nhãn và input */
+    align-items: center; /* Căn giữa nội dung nhãn và input */
+  }
+  
+  .search-form label input {
+    width: 70%; /* Độ rộng của input */
+    padding: 5px; /* Khoảng cách trong input */
+    border: 1px solid #ccc; /* Viền input */
+    border-radius: 3px; /* Góc bo tròn của input */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between; /* Chia đều khoảng cách giữa các nút */
+    margin-top: 15px; /* Khoảng cách trên nhóm nút */
+  }
+  
+  .button-group button {
+    padding: 8px 12px; /* Khoảng cách trong nút */
+    border: none; /* Loại bỏ viền */
+    border-radius: 3px; /* Góc bo tròn của nút */
+    cursor: pointer; /* Thay đổi con trỏ chuột khi rê vào */
+  }
+  
+  .button-group button:first-child {
+    background-color: #5cb85c; /* Màu xanh cho nút "Tìm Kiếm" */
+    color: #fff; /* Màu chữ trắng */
+  }
+  
+  .button-group button:last-child {
+    background-color: #d9534f; /* Màu đỏ cho nút "Nhập Lại" */
+    color: #fff; /* Màu chữ trắng */
+  }
+  
+  .button-group button:hover {
+    opacity: 0.9; /* Hiệu ứng mờ nhẹ khi rê chuột */
+  }
+  
