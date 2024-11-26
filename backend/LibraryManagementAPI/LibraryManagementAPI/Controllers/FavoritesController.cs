@@ -69,6 +69,26 @@ namespace LibraryManagementAPI.Controllers
             return NoContent();
         }
 
+        [HttpDelete("RemoveFavoriteByBookId/{bookId}")]
+        public async Task<IActionResult> RemoveFavoriteByBookId(int bookId)
+        {
+            // Tìm tất cả các mục yêu thích có book_id tương ứng
+            var favoritesToRemove = await _context.Favorites
+                                                .Where(f => f.book_id == bookId)
+                                                .ToListAsync();
+            
+            if (favoritesToRemove == null || favoritesToRemove.Count == 0)
+            {
+                return NotFound("Không tìm thấy mục yêu thích nào cho sách này.");
+            }
+
+            // Xóa tất cả các mục yêu thích liên quan đến book_id
+            _context.Favorites.RemoveRange(favoritesToRemove);
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // Trả về NoContent khi xóa thành công
+        }
+
         private bool FavoriteExists(int id)
         {
             return _context.Favorites.Any(e => e.favorite_id == id);
