@@ -1,12 +1,14 @@
-
 <div class="library-list">
-    <h2>Liên Kết Website</h2>
-    
-    <!-- Dropdown for selecting a library -->
-    <select (change)="onLibrarySelect($event)" class="library-select">
-      <option value="" disabled selected>Chọn Thư Viện</option>
-      <option *ngFor="let library of libraries" [value]="library.link_text">
-        {{ library.ten_thuvien }}
-      </option>
-    </select>
-    </div>
+  <h2>Liên Kết Website</h2>
+
+  <div class="option">
+     <!-- Dropdown for selecting a library -->
+  <select (change)="onLibrarySelect($event)" class="library-select">
+    <option value="" disabled selected>-- Chọn --</option>
+    <option *ngFor="let library of libraries" [value]="library.link_text">
+      {{ library.ten_thuvien }}
+    </option>
+  </select>
+  </div>
+
+</div>
