@@ -18,6 +18,9 @@ import { UserInformationComponent } from './component/backet/user-information/us
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { FavoriteListComponent } from './component/user/favorite-list/favorite-list.component';
 import { SearchDocumentsComponent } from './component/user/search-documents/search-documents.component';
+import { LecturerInfoComponent } from './lecturer-info/lecturer-info.component';
+import { StudentInforComponent } from './student-infor/student-infor.component';
+import { StudentInfoComponent } from './student-info/student-info.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { SearchDocumentsComponent } from './component/user/search-documents/sear
     UserInformationComponent,
     BookDetailComponent,
     FavoriteListComponent,
-    SearchDocumentsComponent
+    SearchDocumentsComponent,
+    LecturerInfoComponent,
+    StudentInforComponent,
+    StudentInfoComponent
   ],
   imports: [
     BrowserModule,
