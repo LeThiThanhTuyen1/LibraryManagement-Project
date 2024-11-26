@@ -1,3 +1,5 @@
+<div *ngIf="isLoading">Đang tải danh sách yêu thích...</div>
+
 <div class="favorite-list">
   <div *ngIf="favorites.length > 0">
     <table class="table table-striped">
@@ -15,8 +17,8 @@
           <td>{{ favorite.title }}</td> 
           <td>{{ favorite.name }}</td>   
           <td>
-            <a href="javascript:void(0);" class="btn-action delete" (click)="removeFavorite(favorite.favorite_id)">Bỏ yêu thích</a>
-            <a href="" class="btn-action view">Xem</a>
+            <a href="javascript:void(0);" class="btn-action delete" (click)="removeFavorite(favorite.book_id)">Bỏ yêu thích</a>
+            <a href="javascript:void(0);" (click)="viewBook(favorite.book_id)" class="btn-action view">Xem</a>
           </td>
         </tr>
       </tbody>

@@ -97,16 +97,7 @@
     color: #302e2e;
     font-size: 24px;
   }
-  /*tym*/
-  .favorite-btn {
-    background: none;          /* Loại bỏ nền */
-    border: none;              /* Loại bỏ viền */
-    color: red;                /* Màu trái tim */
-    font-size: 20px;           /* Kích thước biểu tượng */
-    cursor: pointer;           /* Con trỏ dạng tay khi hover */
-    margin-left: 10px;         /* Khoảng cách với tên tác giả */
-  }
-  
+
   .favorite-btn .fas,
   .favorite-btn .far {
     transition: color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
@@ -118,5 +109,30 @@
   
   .favorite-btn:hover .far {
     color: #ff6666;            /* Màu nhạt hơn khi hover */
+  }
+  
+  .favorite-btn .far.fa-heart {
+    color: grey; /* Màu trái tim rỗng */
+  }
+  .favorite-btn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    outline: none;
+  }
+
+  .favorite-btn:focus {
+    outline: none;
+  }
+  
+  .favorite {
+    color: red;
+  }
+  
+  .far.fa-heart {
+    color: #ccc;
   }
   

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class FavoriteListComponent {
   favorites: Favorite[] = [];
   userId: number | null = null;
+  isLoading = true; // Thêm biến để hiển thị loading khi dữ liệu đang được tải
 
   constructor(private favoriteService: FavoriteService, private router: Router) { }
 
@@ -18,39 +19,65 @@ export class FavoriteListComponent {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      this.userId = user.user_id; 
+      this.userId = user.user_id;
     }
 
     if (this.userId) {
-      // Gọi service để lấy danh sách yêu thích theo userId
       this.favoriteService.getFavoritesByUserId(this.userId).subscribe({
         next: (data) => {
-          this.favorites = data; // Nhận dữ liệu tài liệu yêu thích bao gồm tên sách và tác giả
+          console.log('Danh sách yêu thích:', data);
+          this.favorites = data;
+          this.isLoading = false; // Ẩn loading sau khi dữ liệu đã được tải
         },
         error: (err) => {
           console.error('Lỗi khi lấy danh sách yêu thích', err);
+          this.isLoading = false; // Ẩn loading ngay cả khi có lỗi
         }
       });
     }
   }
 
-  removeFavorite(favoriteId: number) {
-    // Hiển thị thông báo xác nhận trước khi xóa
-    const isConfirmed = window.confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi danh sách yêu thích không?');
+  viewBook(id: number): void {
+    this.router.navigate([`/book-detail/${id}`]); // Điều hướng đến trang chi tiết
+  }
   
+  // Hàm xóa yêu thích
+  removeFavorite(bookId: number): void {
+    console.log('Xóa sách có bookId:', bookId); // Kiểm tra bookId đã được truyền vào
+    
+    const isConfirmed = window.confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi danh sách yêu thích không?');
+    
     if (isConfirmed) {
-      // Nếu người dùng xác nhận, tiến hành xóa tài liệu
-      this.favoriteService.deleteFavorite(favoriteId).subscribe({
+      // Xóa từ API trước (nếu có)
+      this.favoriteService.deleteFavoriteByBookId(bookId).subscribe({
         next: () => {
-          this.favorites = this.favorites.filter(f => f.favorite_id !== favoriteId);
-          console.log('Đã xóa khỏi danh sách yêu thích');
+          // Cập nhật danh sách trong component sau khi xóa từ API
+          this.favorites = this.favorites.filter(f => f.book_id !== bookId);
+          console.log('Đã xóa khỏi danh sách yêu thích từ API');
+          
+          // Xóa khỏi localStorage
+          const storedUser = localStorage.getItem('user');
+          if (storedUser) {
+            const user = JSON.parse(storedUser);
+            const userId = user.user_id;
+    
+            // Lấy danh sách yêu thích từ localStorage
+            const favoriteBooksData = JSON.parse(localStorage.getItem('favoriteBooks') || '{}');
+            let favoriteBooks = favoriteBooksData[userId] || [];
+    
+            // Lọc sách cần xóa khỏi danh sách yêu thích trong localStorage
+            favoriteBooks = favoriteBooks.filter((f: Favorite) => f.book_id !== bookId);
+    
+            // Lưu lại danh sách yêu thích đã cập nhật vào localStorage
+            favoriteBooksData[userId] = favoriteBooks;
+            localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooksData));
+            
+            console.log('Đã xóa khỏi danh sách yêu thích trong localStorage');
+          }
         },
-        error: (err) => {
-          console.error('Lỗi khi xóa mục yêu thích:', err);
-        }
+        error: (err) => console.error('Lỗi khi xóa mục yêu thích từ API:', err)
       });
-    } else {
-      console.log('Hủy bỏ thao tác xóa');
     }
   }
+  
 }

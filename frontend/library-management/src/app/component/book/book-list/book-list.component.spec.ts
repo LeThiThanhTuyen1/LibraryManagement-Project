@@ -20,10 +20,12 @@ describe('BookListComponent', () => {
       isbn: '9781234567890',
       publication_year: 2020,
       genre: 'Giáo trình',
-      summary: 'Sách lập trình Java co bản',
+      summary: 'Sách lập trình Java cơ bản',
+      PublisherName: 'NXB Kim Đồng',
+      AuthorName: 'Nguyễn Văn A',
       language: 'Tiếng Việt',
       file_path: '/path/java.pdf',
-      publisher: { publisher_id: 1, name: 'NXB Kim Đồng', address: 'Hà Nội' }
+      AverageRating: 4.5
     },
     {
       book_id: 2,
@@ -31,10 +33,12 @@ describe('BookListComponent', () => {
       isbn: '9785678901234',
       publication_year: 2021,
       genre: 'Văn học',
-      summary: 'Tuyển tập van học Việt Nam hiện đại',
+      summary: 'Tuyển tập văn học Việt Nam hiện đại',
+      PublisherName: 'NXB Khoa Học',
+      AuthorName: 'Trần Văn B',
       language: 'Tiếng Việt',
       file_path: '/path/vanhoc.pdf',
-      publisher: { publisher_id: 5, name: 'NXB Khoa Học', address: 'Huế' }
+      AverageRating: 4.0
     }
   ];
 
@@ -61,12 +65,12 @@ describe('BookListComponent', () => {
   });
 
   it('should load books on initialization', () => {
-    spyOn(bookService, 'getBooks').and.returnValue(of(mockBooks));
+    spyOn(bookService, 'getAllBooks').and.returnValue(of(mockBooks));
 
     component.ngOnInit();
     fixture.detectChanges();
 
-    expect(bookService.getBooks).toHaveBeenCalled();
+    expect(bookService.getAllBooks).toHaveBeenCalled();
     expect(component.books.length).toBe(2);
     expect(component.books).toEqual(mockBooks);
   });
