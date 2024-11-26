@@ -3,7 +3,7 @@
     <div class="book-content">
         <div class="book-image-container">
             <img src="https://th.bing.com/th/id/OIF.sWYGhvpKLQRpQA3j53zioA?w=176&h=180&c=7&r=0&o=5&pid=1.7"
-                class="book-image" />
+                class="book-image" alt="Book cover image" title="Book cover of {{ book.title }}" />
             <h2>{{ book.title }}</h2>
             <p>
                 <strong>Tải tài liệu:</strong>
@@ -12,10 +12,10 @@
         </div>
         <div class="book-details">
             <p class="book-info-item"><strong>Tác giả:</strong> {{ book.AuthorName }}
-                <button class="favorite-btn" (click)="toggleFavorite()">
-                    <i [class]="isFavorite ? 'fas fa-heart favorite' : 'far fa-heart'"></i>
-                </button>
-            </p>
+                <button class="favorite-btn" (click)="toggleFavorite()" aria-label="Thêm vào yêu thích" title="Thêm vào yêu thích">
+                  <i [class]="isFavorite ? 'fas fa-heart favorite' : 'far fa-heart'"></i>
+                </button>                  
+              </p>              
             <p class="book-info-item"><strong>ISBN:</strong> {{ book.isbn }}</p>
             <p><strong>Năm xuất bản:</strong> {{ book.publication_year }}</p>
             <p class="book-info-item"><strong>Nhà xuất bản:</strong> {{ book.PublisherName }}</p>
@@ -32,8 +32,9 @@
         </div>
     </div>
 </div>
+
 <div class="button-group">
     <button class=" btn btn-goback" (click)="goBack()">Quay lại</button>
-    <button class="btn btn-view">xem tài liệu</button>
+    <button class="btn btn-view">Xem tài liệu</button>
     <button class="btn btn-feedback">Thảo luận và đánh giá</button>
 </div>
