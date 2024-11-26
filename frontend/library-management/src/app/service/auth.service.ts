@@ -14,7 +14,7 @@ export class AuthService {
 
   // Login method with error handling
   login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/login`, { username, password_hash: password });
+    return this.http.post<any>(`${this.apiUrl}/login`, { username, password_hash: password });
     
   }
 
