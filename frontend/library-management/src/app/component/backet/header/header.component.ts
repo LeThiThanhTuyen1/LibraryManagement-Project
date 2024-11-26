@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   userLastName: string | null = '';
-
+  userRole: string | null = '';
+  
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -16,6 +17,7 @@ export class HeaderComponent {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
+      this.userRole = user.role;
       this.userLastName = user.last_name; // Lấy last_name từ thông tin user
     }
   }
