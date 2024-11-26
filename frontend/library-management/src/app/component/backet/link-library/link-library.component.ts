@@ -5,7 +5,7 @@ import { LinkLibraryService } from '../../../service/link-library.service';
 @Component({
   selector: 'app-link-library',
   templateUrl: './link-library.component.html',
-  styleUrl: './link-library.component.css'
+  styleUrls: ['./link-library.component.css']
 })
 export class LinkLibraryComponent implements OnInit {
 

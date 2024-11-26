@@ -17,6 +17,9 @@ import { LoginComponent } from './component/backet/login/login.component';
 import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
 import { UserInformationComponent } from './component/backet/user-information/user-information.component';
 import { SearchDocumentsComponent } from './component/user/search-documents/search-documents.component';
+import { HomeComponent } from './component/home/home.component';
+import { LecturerInfoComponent } from './lecturer-info/lecturer-info.component';
+import { StudentInfoComponent } from './student-info/student-info.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,15 @@ import { SearchDocumentsComponent } from './component/user/search-documents/sear
     BookListComponent,
     BookDetailComponent,
     FavoriteListComponent,
-    HomeAdminComponent,
-    HomeAdminComponent,
-    FooterComponent,
-    HeaderComponent,
-    LoginComponent,
     LinkLibraryComponent,
     UserInformationComponent,
+    LecturerInfoComponent,
+    StudentInfoComponent,
+    HomeAdminComponent,
+    HomeComponent,
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent,
     SearchDocumentsComponent
   ],
   imports: [
