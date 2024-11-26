@@ -23,7 +23,6 @@ const routes: Routes = [
   { path: 'user-information', component: UserInformationComponent }, 
   { path: 'favorite-list', component: FavoriteListComponent},
   { path: 'search-documents', component: SearchDocumentsComponent},
-  { path: 'book-detail/:id', component: BookDetailComponent},
   { path: '*', redirectTo: '/login'}
 ];
 
