@@ -16,6 +16,8 @@ import { HeaderComponent } from './component/backet/header/header.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { FavoriteListComponent } from './component/favorite/favorite-list/favorite-list.component';
 import { SearchDocumentsComponent } from './search-documents/search-documents.component';
+import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +30,9 @@ import { SearchDocumentsComponent } from './search-documents/search-documents.co
     HomeAdminComponent,
     BookDetailComponent,
     FavoriteListComponent,
-    SearchDocumentsComponent
-
+    SearchDocumentsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
