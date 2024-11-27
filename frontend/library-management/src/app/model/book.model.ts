@@ -10,4 +10,5 @@ export interface Book {
   AuthorName: string;
   language: string;
   file_path: string;
+  AverageRating: number;
 }

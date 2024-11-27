@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\PTMNCN\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {}
+    "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {}
   },
   "projects": {
-    "E:\\PTMNCN\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {
+    "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\PTMNCN\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
+        "projectUniqueName": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
         "projectName": "LibraryManagementAPI",
-        "projectPath": "E:\\PTMNCN\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
-        "packagesPath": "C:\\Users\\FPT\\.nuget\\packages\\",
-        "outputPath": "E:\\PTMNCN\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\obj\\",
+        "projectPath": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\FPT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,6 +62,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.6, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

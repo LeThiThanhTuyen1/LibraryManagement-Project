@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { User } from '../model/user.model';
 
 @Injectable({
@@ -11,10 +12,22 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  // Login method with error handling
   login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/login`, { username, password_hash: password });
-  }   
+    return this.http.post<any>(`${this.apiUrl}/login`, { username, password_hash: password });
+    
+  }
 
+  // Get user information by user_id with error handling
+  getUserInformation(user_id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/${user_id}`);
+  }
+
+  // Update user information
+  updateUserInformation(user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${user.user_id}`, user);
+  }
+  
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
@@ -26,5 +39,5 @@ export class AuthService {
       newPassword
     });
   }
-
 }
+

@@ -11,20 +11,26 @@ import { FavoriteListComponent } from './component/favorite/favorite-list/favori
 import { SearchDocumentsComponent } from './search-documents/search-documents.component';
 import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
+import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
+import { UserInformationComponent } from './component/backet/user-information/user-information.component';
+
+
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'header', component: HeaderComponent },
-  { path: 'footer', component: FooterComponent },
-  { path: 'home-admin', component: HomeAdminComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'book-list', component: BookListComponent },
-  { path: 'book-detail/:id', component: BookDetailComponent },
+  { path: 'login', component: LoginComponent},
+  { path: 'header', component: HeaderComponent},
+  { path: 'footer', component: FooterComponent},
+  { path: 'home-admin', component: HomeAdminComponent},
+  { path: 'home', component: HomeComponent},
+  { path: 'book-list', component: BookListComponent},
+  { path: 'link-library', component: LinkLibraryComponent},
+  { path: 'user-information', component: UserInformationComponent }, 
   { path: 'favorite-list', component: FavoriteListComponent},
-  {path: 'search-documents', component: SearchDocumentsComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent},
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: 'search-documents', component: SearchDocumentsComponent},
+  { path: 'book-detail/:id', component: BookDetailComponent},
+  { path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({

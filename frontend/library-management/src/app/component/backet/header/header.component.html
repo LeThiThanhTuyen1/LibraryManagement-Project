@@ -8,15 +8,24 @@
     <!-- Menu chính -->
     <nav class="menu">
       <ul>
-        <li><a href="/home">TRANG CHỦ</a></li>
-        <li><a href="/book-list">TÀI LIỆU SỐ</a></li>
-        <li><a href="/favorite-list">BỘ SƯU TẬP</a></li>
-        <li><a href="/search-documents">TRA CỨU</a></li>
+        <!-- Các mục menu cho người dùng bình thường -->
+        <li *ngIf="userRole != 'admin'"><a routerLink="/home">TRANG CHỦ</a></li>
+        <li *ngIf="userRole != 'admin'"><a routerLink="/book-list">TÀI LIỆU SỐ</a></li>
+        <li *ngIf="userRole != 'admin'"><a routerLink="/favorite-list">BỘ SƯU TẬP</a></li>
+        <li *ngIf="userRole != 'admin'"><a routerLink="/search-documents">TRA CỨU</a></li>
+
+        <!-- Các mục menu cho admin -->
+        <li *ngIf="userRole === 'admin'"><a routerLink="/admin-home">TRANG CHỦ ADMIN</a></li>
+        <li *ngIf="userRole === 'admin'"><a routerLink="/documents-list">QUẢN LÝ TÀI LIỆU</a></li>
+        <li *ngIf="userRole === 'admin'"><a routerLink="/statistics">THỐNG KÊ</a></li>
+
         <li class="user-menu">
           <!-- Hiển thị last_name của người dùng -->
-          <a href="#">{{ userLastName }}</a>
+          <a href="">{{ userLastName }}</a>
           <ul class="user-dropdown">
-            <li><a href="ú">Thông tin</a></li>
+            <li><a *ngIf="userRole === 'student'" routerLink="/user-information">Thông tin</a>
+            <a *ngIf="userRole === 'lecturer'" routerLink="/lecturer-info">Thông tin</a>
+            <a *ngIf="userRole === 'admin'" routerLink="/lecturer-info">Thông tin</a></li>
             <li><a (click)="onLogout()">Đăng xuất</a></li>
           </ul>
         </li>

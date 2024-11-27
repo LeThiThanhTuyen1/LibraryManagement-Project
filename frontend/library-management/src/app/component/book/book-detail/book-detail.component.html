@@ -3,7 +3,7 @@
     <div class="book-content">
         <div class="book-image-container">
             <img src="https://th.bing.com/th/id/OIF.sWYGhvpKLQRpQA3j53zioA?w=176&h=180&c=7&r=0&o=5&pid=1.7"
-                class="book-image" />
+                class="book-image" alt="Book cover image" title="Book cover of {{ book.title }}" />
             <h2>{{ book.title }}</h2>
             <p>
                 <strong>Tải tài liệu:</strong>
@@ -11,15 +11,30 @@
             </p>
         </div>
         <div class="book-details">
-            <p class="book-info-item"><strong>Tác giả:</strong> {{ book.AuthorName }}</p>
+            <p class="book-info-item"><strong>Tác giả:</strong> {{ book.AuthorName }}
+                <button class="favorite-btn" (click)="toggleFavorite()" aria-label="Thêm vào yêu thích" title="Thêm vào yêu thích">
+                  <i [class]="isFavorite ? 'fas fa-heart favorite' : 'far fa-heart'"></i>
+                </button>                  
+              </p>              
             <p class="book-info-item"><strong>ISBN:</strong> {{ book.isbn }}</p>
             <p><strong>Năm xuất bản:</strong> {{ book.publication_year }}</p>
             <p class="book-info-item"><strong>Nhà xuất bản:</strong> {{ book.PublisherName }}</p>
             <p class="book-info-item"><strong>Thể loại:</strong> {{ book.genre }}</p>
             <p class="book-info-item"><strong>Ngôn ngữ:</strong> {{ book.language }}</p>
             <p><strong>Tóm tắt:</strong> {{ book.summary }}</p>
+            <p><strong>Đánh giá:</strong></p>
+            <div>
+                <span *ngFor="let star of [].constructor(5); let i = index"
+                    [class]="i < book.AverageRating? 'star' : 'star-empty'">
+                    ★
+                </span>
+            </div>
         </div>
     </div>
 </div>
-<button (click)="goBack()">Quay lại</button>
-<button>Xem</button>
+
+<div class="button-group">
+    <button class=" btn btn-goback" (click)="goBack()">Quay lại</button>
+    <button class="btn btn-view">Xem tài liệu</button>
+    <button class="btn btn-feedback">Thảo luận và đánh giá</button>
+</div>

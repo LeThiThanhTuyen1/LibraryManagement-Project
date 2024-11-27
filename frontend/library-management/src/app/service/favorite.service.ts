@@ -20,8 +20,14 @@ export class FavoriteService {
   addFavorite(favorite: Favorite): Observable<Favorite> {
     return this.http.post<Favorite>(this.apiUrl, favorite);
   }
-
+  
   deleteFavorite(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  
+  deleteFavoriteByBookId(bookId: number): Observable<void> {
+    const url = `${this.apiUrl}/RemoveFavoriteByBookId/${bookId}`;
+    return this.http.delete<void>(url);
+  }
+
 }

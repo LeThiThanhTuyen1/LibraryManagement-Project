@@ -39,6 +39,7 @@
               }
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -106,6 +107,7 @@
               }
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -113,5 +115,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "336a4042-fa0f-4c60-9e85-ae684d776de2"
   }
 }

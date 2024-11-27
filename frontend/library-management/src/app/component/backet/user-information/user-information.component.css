@@ -1,0 +1,100 @@
+/* Khung chứa thông tin cá nhân */
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    width: 80%;
+    margin: 20px auto;
+  }
+  
+  /* Định dạng tiêu đề */
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Định dạng bảng */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  /* Định dạng tiêu đề của bảng */
+  th {
+    text-align: left;
+    padding: 12px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Định dạng dữ liệu của bảng */
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Khung chứa các nút để canh giữa */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Khoảng cách giữa các nút */
+    margin-top: 20px;
+  }
+  
+  /* Định dạng chung cho các nút */
+  button {
+    padding: 15px 25px;
+    background-color: #1160b4;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  /* Hiệu ứng khi di chuột qua nút */
+  button:hover {
+    background-color: red;
+  }
+  
+  /* Định dạng cho nút "Thay đổi thông tin" */
+  button.edit-info {
+    font-size: 14px;
+  }
+  
+  /* Định dạng cho nút "Thay đổi mật khẩu" */
+  button.edit-password {
+    font-size: 14px;
+  }
+  /* Định dạng form chỉnh sửa */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  input {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  h3 {
+    color: #333;
+    text-align: center;
+  }
