@@ -27,4 +27,17 @@ export class AuthService {
   updateUserInformation(user: User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${user.user_id}`, user);
   }
+  
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  resetPassword(email: string, verificationCode: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, {
+      email,
+      verificationCode,
+      newPassword
+    });
+  }
 }
+

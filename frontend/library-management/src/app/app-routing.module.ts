@@ -7,10 +7,14 @@ import { FooterComponent } from './component/backet/footer/footer.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeAdminComponent } from './component/admin/home-admin/home-admin.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
-import { FavoriteListComponent } from './component/user/favorite-list/favorite-list.component';
-import { SearchDocumentsComponent } from './component/user/search-documents/search-documents.component';
+import { FavoriteListComponent } from './component/favorite/favorite-list/favorite-list.component';
+import { SearchDocumentsComponent } from './search-documents/search-documents.component';
+import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
 import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
 import { UserInformationComponent } from './component/backet/user-information/user-information.component';
+
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -22,6 +26,8 @@ const routes: Routes = [
   { path: 'link-library', component: LinkLibraryComponent},
   { path: 'user-information', component: UserInformationComponent }, 
   { path: 'favorite-list', component: FavoriteListComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'search-documents', component: SearchDocumentsComponent},
   { path: 'book-detail/:id', component: BookDetailComponent},
   { path: '**', redirectTo: '/login', pathMatch: 'full'}
