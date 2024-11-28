@@ -45,3 +45,5 @@ Thumbs.db
 backend/LibraryManagementAPI/.vs/
 backend/LibraryManagementAPI/LibraryManagementAPI/bin/
 backend/LibraryManagementAPI/LibraryManagementAPI/obj/
+/backend/
+
