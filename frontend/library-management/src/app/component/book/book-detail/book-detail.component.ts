@@ -6,6 +6,8 @@ import { Publisher } from '../../../model/publisher.model';
 import { Location } from '@angular/common';
 import { FavoriteService } from '../../../service/favorite.service';
 import { Favorite } from '../../../model/favorite.model';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-book-detail',
@@ -18,12 +20,15 @@ export class BookDetailComponent implements OnInit {
   isLoading = true;
   isFavorite: boolean = false;
   favorites: Favorite[] = [];
+  documentUrl!: SafeResourceUrl;
+
   
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
     private location: Location,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -135,4 +140,18 @@ export class BookDetailComponent implements OnInit {
   get locationService() {
     return this.location;
   }  
+
+  viewDocument(): void {
+    if (this.book && this.book.file_path) {
+      this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.book.file_path);
+    } else {
+      console.error('File path is missing or invalid.');
+    }
+  }
+  
+  
+  closeDocumentViewer(): void {
+    this.documentUrl = ''; // Ẩn viewer
+  }
+  
 }

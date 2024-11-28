@@ -20,5 +20,7 @@ namespace LibraryManagementAPI.Models
 
         public required Publisher Publisher { get; set; }
 
+        public string? accessLevel { get; set; }
+
     }
 }
