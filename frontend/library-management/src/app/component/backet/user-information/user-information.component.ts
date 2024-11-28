@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import { User } from '../../../model/user.model';
+import { StudentService } from '../../../service/student.service';
 
 @Component({
   selector: 'app-user-information',
@@ -8,60 +9,53 @@ import { User } from '../../../model/user.model';
   styleUrls: ['./user-information.component.css']
 })
 export class UserInformationComponent implements OnInit {
-  user: User | null = null;
-  originalUser: User | null = null;  // To store original data
-  isEditing: boolean = false;
+  student: any = null;
+  isEditing = false;
+  userId: number = 0;
 
-  constructor(private authService: AuthService) {}
+  constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-    const userId = 1; // Replace with logic for fetching the actual user ID
-    this.getUserInfo(userId);
+    // Retrieve user info from localStorage
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.userId = user.user_id; // Assuming user_id is in the stored user object
+
+    // If user info exists, load the student info
+    if (this.userId) {
+      this.loadStudentInfo();
+    }
   }
 
-  // Fetch user information
-  getUserInfo(userId: number): void {
-    this.authService.getUserInformation(userId).subscribe(
-      (userData: User) => {
-        this.user = { ...userData };  // Make a copy of the data
-        this.originalUser = { ...userData };  // Store original data for reverting
+  // Call the service to load student data
+  loadStudentInfo() {
+    this.studentService.getStudentByUserId(this.userId).subscribe(
+      (response: any) => {
+        this.student = response;
       },
-      error => {
-        console.error('Error fetching user information:', error);
+      (error) => {
+        console.error('Error fetching student data:', error);
       }
     );
   }
 
-  // Enable editing mode
-  editUserInfo(): void {
+  editStudentInfo() {
     this.isEditing = true;
   }
 
-  // Cancel editing and revert to original data
-  cancelEdit(): void {
-    if (this.originalUser) {
-      this.user = { ...this.originalUser };  // Revert to original data
-    }
+  saveStudentInfo() {
+    this.studentService.updateStudentInfo(this.student.studentId, this.student).subscribe(
+      () => {
+        alert('Cập nhật thông tin thành công!');
+        this.isEditing = false;
+      },
+      (error) => {
+        console.error('Error updating student data:', error);
+      }
+    );
+  }
+
+  cancelEdit() {
     this.isEditing = false;
-  }
-
-  // Save updated user information
-  saveUserInfo(): void {
-    if (this.user) {
-      this.authService.updateUserInformation(this.user).subscribe(
-        (updatedUser: User) => {
-          this.user = updatedUser;  // Update the local user object with saved data
-          this.isEditing = false;  // Exit editing mode
-        },
-        error => {
-          console.error('Error updating user information:', error);
-        }
-      );
-    }
-  }
-
-  // Handle password change
-  editPassword(): void {
-    console.log('Edit Password button clicked');
+    this.loadStudentInfo(); // Reload data to discard changes
   }
 }
