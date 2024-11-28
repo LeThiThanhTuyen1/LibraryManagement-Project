@@ -176,7 +176,7 @@ namespace LibraryManagementAPI.Controllers
             // Trả về URL đường dẫn
             return Ok(new { fileUrl = book.file_path });
         }
-
+        
         [HttpPut("UpdateAccessLevel/{bookId}")]
         public async Task<IActionResult> UpdateAccessLevel(int bookId, [FromBody] dynamic requestBody)
         {
@@ -198,6 +198,8 @@ namespace LibraryManagementAPI.Controllers
                 return StatusCode(500, new { message = "Failed to update access level.", error = ex.Message });
             }
         }
+
+    
 
         [HttpGet("GetGenres")]
          public async Task<IActionResult> GetGenres()

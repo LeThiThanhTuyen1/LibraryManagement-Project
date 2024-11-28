@@ -169,5 +169,5 @@ export class BookDetailComponent implements OnInit {
   closeDocumentViewer(): void {
     this.documentUrl = ''; // Ẩn viewer
   }
-  
+
 }

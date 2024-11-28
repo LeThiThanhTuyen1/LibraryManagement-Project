@@ -12,7 +12,6 @@ export class BookListComponent implements OnInit {
   books: Book[] = []; // Mảng sách
   userRole: string = ''; // Vai trò của người dùng
 
-
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
@@ -64,7 +63,6 @@ export class BookListComponent implements OnInit {
       console.error('New access level is null or undefined.');
       return;
     }
-
     this.bookService.updateBookAccessLevel(bookId, newAccessLevel).subscribe(
       () => {
         console.log('Access level updated successfully.');
@@ -76,3 +74,4 @@ export class BookListComponent implements OnInit {
     );
   }
 }
+
