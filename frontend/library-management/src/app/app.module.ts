@@ -18,8 +18,7 @@ import { LinkLibraryComponent } from './component/backet/link-library/link-libra
 import { UserInformationComponent } from './component/backet/user-information/user-information.component';
 import { SearchDocumentsComponent } from './component/user/search-documents/search-documents.component';
 import { HomeComponent } from './component/home/home.component';
-import { LecturerInfoComponent } from './lecturer-info/lecturer-info.component';
-import { StudentInfoComponent } from './student-info/student-info.component';
+import { LecturerInfoComponent } from './component/lecturer-info/lecturer-info.component';
 import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
 import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
@@ -33,7 +32,6 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
     LinkLibraryComponent,
     UserInformationComponent,
     LecturerInfoComponent,
-    StudentInfoComponent,
     HomeAdminComponent,
     HomeComponent,
     LoginComponent,
@@ -43,11 +41,13 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ShareDocumentsComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgModule
   ],
   providers: [
     BookService,

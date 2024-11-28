@@ -6,6 +6,8 @@ import { Publisher } from '../../../model/publisher.model';
 import { Location } from '@angular/common';
 import { FavoriteService } from '../../../service/favorite.service';
 import { Favorite } from '../../../model/favorite.model';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-book-detail',
@@ -18,12 +20,15 @@ export class BookDetailComponent implements OnInit {
   isLoading = true;
   isFavorite: boolean = false;
   favorites: Favorite[] = [];
+  documentUrl!: SafeResourceUrl;
+
   
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
     private location: Location,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -135,4 +140,34 @@ export class BookDetailComponent implements OnInit {
   get locationService() {
     return this.location;
   }  
+
+  viewDocument(): void {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser && this.book) {
+      const user = JSON.parse(storedUser);
+      const userRole = user.role; // Lấy role của người dùng từ localStorage
+  
+      console.log('User Role:', userRole);
+      console.log('Book Access Level:', this.book.accessLevel);
+  
+      if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
+        // Cho phép xem tài liệu
+        if (this.book.file_path) {
+          this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.book.file_path);
+        } else {
+          console.error('Đường dẫn tài liệu không hợp lệ.');
+        }
+      } else {
+        // Hiển thị thông báo lỗi
+        alert('Bạn không có quyền truy cập tài liệu này.');
+      }
+    } else {
+      console.error('Thông tin người dùng hoặc sách không khả dụng.');
+    }
+  }  
+  
+  closeDocumentViewer(): void {
+    this.documentUrl = ''; // Ẩn viewer
+  }
+
 }

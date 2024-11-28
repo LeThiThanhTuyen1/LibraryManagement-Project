@@ -52,7 +52,8 @@ namespace LibraryManagementAPI.Controllers
                           PublisherName = combined.book.Publisher.name,
                           AuthorName = author.first_name + " " + author.last_name,
                           AuthorNationality = author.nationality,
-                          AuthorBirthdate = author.birthdate
+                          AuthorBirthdate = author.birthdate,
+                          combined.book.accessLevel
                       })
                 .ToListAsync();
 
@@ -81,6 +82,7 @@ namespace LibraryManagementAPI.Controllers
                           combined.b.summary,
                           combined.b.language,
                           combined.b.file_path,
+                          combined.b.accessLevel,
                           PublisherName = combined.b.Publisher.name,
                           AuthorName = a.first_name + " " + a.last_name,
                           AuthorNationality = a.nationality,
@@ -161,5 +163,53 @@ namespace LibraryManagementAPI.Controllers
         {
             return _context.Books.Any(e => e.book_id == id);
         }
+
+        [HttpGet("GetBookFile/{bookId}")]
+        public IActionResult GetBookFile(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.book_id == bookId);
+            if (book == null || string.IsNullOrEmpty(book.file_path))
+            {
+                return NotFound(new { message = "File URL not found." });
+            }
+
+            // Trả về URL đường dẫn
+            return Ok(new { fileUrl = book.file_path });
+        }
+        
+        [HttpPut("UpdateAccessLevel/{bookId}")]
+        public async Task<IActionResult> UpdateAccessLevel(int bookId, [FromBody] dynamic requestBody)
+        {
+            string newAccessLevel = requestBody?.accessLevel;
+            var book = await _context.Books.FindAsync(bookId);
+            if (book == null)
+            {
+                return NotFound(new { message = "Book not found." });
+            }
+
+            book.accessLevel = newAccessLevel;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Access level updated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Failed to update access level.", error = ex.Message });
+            }
+        }
+
+    
+
+        [HttpGet("GetGenres")]
+         public async Task<IActionResult> GetGenres()
+         {
+             var genres = await _context.Books
+                 .Select(b => b.genre)
+                 .Distinct()
+                 .ToListAsync();
+        
+             return Ok(genres);
+         }
     }
 }

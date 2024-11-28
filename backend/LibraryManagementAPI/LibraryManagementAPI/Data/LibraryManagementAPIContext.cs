@@ -15,7 +15,7 @@ namespace LibraryManagementAPI.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<BookAuthor> Book_Authors { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Publisher> Publishers { get; set; }  // Không cần chỉ định lại namespace nếu đã import đúng
+        public DbSet<Publisher> Publishers { get; set; } 
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<BookReview> Book_Reviews { get; set; }
         public DbSet<Download> Downloads { get; set; }

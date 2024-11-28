@@ -11,4 +11,5 @@ export interface Book {
   language: string;
   file_path: string;
   AverageRating: number;
+  accessLevel: string;
 }

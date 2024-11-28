@@ -2,7 +2,7 @@
 <div *ngIf="!isLoading && book" class="book-detail-card">
     <div class="book-content">
         <div class="book-image-container">
-            <img src="https://th.bing.com/th/id/OIF.sWYGhvpKLQRpQA3j53zioA?w=176&h=180&c=7&r=0&o=5&pid=1.7"
+            <img src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-document-flat-icon-png-image_9150671.png"
                 class="book-image" alt="Book cover image" title="Book cover of {{ book.title }}" />
             <h2>{{ book.title }}</h2>
             <p>
@@ -35,6 +35,20 @@
 
 <div class="button-group">
     <button class=" btn btn-goback" (click)="goBack()">Quay lại</button>
-    <button class="btn btn-view">Xem tài liệu</button>
+    <button class="btn btn-view" (click)="viewDocument()">Xem tài liệu</button>
     <button class="btn btn-feedback">Thảo luận và đánh giá</button>
 </div>
+
+<div class="document-viewer" *ngIf="documentUrl">
+    <div class="overlay">
+      <div class="modal-content">
+        <button class="close-btn" (click)="closeDocumentViewer()">X</button>
+        <iframe 
+          [src]="documentUrl " 
+          width="100%" 
+          height="500px" 
+          frameborder="0">
+        </iframe>
+      </div>
+    </div>
+  </div>
