@@ -1,0 +1,134 @@
+/* Bảng thông tin */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Bo góc bảng */
+  overflow: hidden; /* Đảm bảo bo góc đẹp */
+}
+
+th {
+  background-color: #f5f5f5;
+  color: #333;
+  text-align: left;
+  font-weight: bold;
+  padding: 15px;
+}
+
+td {
+  padding: 15px;
+  background-color: #fff;
+  color: #555;
+  border-bottom: 1px solid #ddd; /* Đường ngăn cách giữa các hàng */
+}
+
+td:first-child {
+  font-weight: bold; /* Nổi bật các tiêu đề cột bên trái */
+  background-color: #f8f9fa; /* Màu nhạt cho cột đầu tiên */
+}
+
+/* Tiêu đề chính */
+h1 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Nút bấm */
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:active {
+  transform: scale(0.97); /* Nhỏ lại một chút khi nhấn */
+}
+
+/* Bo góc cho toàn bộ container */
+.container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+/* Căn chỉnh bố cục */
+form {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: space-between; /* Dãn đều các phần tử */
+  gap: 15px; /* Khoảng cách giữa các phần tử */
+  margin: 20px 0; /* Khoảng cách với phần tử trên/dưới */
+}
+
+/* Ô nhập liệu */
+input[type="text"] {
+  padding: 10px 12px;
+  width: 200px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Bo góc */
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff; /* Viền xanh khi focus */
+  outline: none; /* Loại bỏ đường viền mặc định */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ánh sáng xanh nhạt */
+}
+
+/* Nút bấm */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px; /* Bo góc */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Đổi màu khi hover */
+}
+
+button:active {
+  transform: scale(0.97); /* Nhấn nút nhỏ lại một chút */
+}
+
+/* Label căn chỉnh */
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+}
+
+/* Container để căn chỉnh */
+.container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  width: fit-content;
+  margin: auto; /* Căn giữa form */
+}
+
