@@ -21,7 +21,7 @@
 
         <li class="user-menu">
           <!-- Hiển thị last_name của người dùng -->
-          <a href="">{{ userLastName }}</a>
+          <a href="javascript:void(0);" (click)="$event.preventDefault()">{{ userLastName }}</a>
           <ul class="user-dropdown">
             <li><a *ngIf="userRole === 'student'" routerLink="/user-information">Thông tin</a>
             <a *ngIf="userRole === 'lecturer'" routerLink="/lecturer-info">Thông tin</a>
