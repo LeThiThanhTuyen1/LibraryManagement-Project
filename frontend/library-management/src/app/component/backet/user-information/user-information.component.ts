@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import { User } from '../../../model/user.model';
+import { StudentService } from '../../../service/student.service';
 
 @Component({
   selector: 'app-user-information',
@@ -8,100 +9,53 @@ import { User } from '../../../model/user.model';
   styleUrls: ['./user-information.component.css']
 })
 export class UserInformationComponent implements OnInit {
-  user: User | null = null;
-  originalUser: User | null = null;
-  isEditing: boolean = false;
-  isChangingPassword: boolean = false;
 
-  // Object to store password change form data
-  passwordChange = {
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  };
+  student: any = null;
+  isEditing = false;
+  userId: number = 0;
 
-  constructor(private authService: AuthService) {}
+  constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-    const userId = 8; // Replace with logic for fetching the actual user ID
-    this.getUserInfo(userId);
+    // Retrieve user info from localStorage
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.userId = user.user_id; // Assuming user_id is in the stored user object
+
+    // If user info exists, load the student info
+    if (this.userId) {
+      this.loadStudentInfo();
+    }
   }
 
-  // Fetch user information
-  getUserInfo(userId: number): void {
-    this.authService.getUserInformation(userId).subscribe(
-      (userData: User) => {
-        this.user = { ...userData };
-        this.originalUser = { ...userData };
+  // Call the service to load student data
+  loadStudentInfo() {
+    this.studentService.getStudentByUserId(this.userId).subscribe(
+      (response: any) => {
+        this.student = response;
       },
       (error) => {
-        console.error('Error fetching user information:', error);
+        console.error('Error fetching student data:', error);
       }
     );
   }
 
-  // Enable editing mode
-  editUserInfo(): void {
+  editStudentInfo() {
     this.isEditing = true;
   }
-
-  // Cancel editing and revert changes
-  cancelEdit(): void {
-    if (this.originalUser) {
-      this.user = { ...this.originalUser };
-    }
-    this.isEditing = false;
-  }
-
-  // Save updated user information
-  saveUserInfo(): void {
-    if (this.user) {
-      this.authService.updateUserInformation(this.user).subscribe(
-        (updatedUser: User) => {
-          this.user = updatedUser;
-          this.isEditing = false;
-          alert('Thông tin cá nhân đã được cập nhật thành công.');
-        },
-        (error) => {
-          console.error('Error updating user information:', error);
-          alert('Cập nhật thông tin thất bại.');
-        }
-      );
-    }
-  }
-
-  // Enable password change mode
-  editPassword(): void {
-    this.isChangingPassword = true;
-  }
-
-  // Cancel password change
-  cancelPasswordChange(): void {
-    this.isChangingPassword = false;
-    this.passwordChange = { oldPassword: '', newPassword: '', confirmPassword: '' };
-  }
-
-  // Handle password change form submission
-  changePassword(): void {
-    if (this.user) {
-      const userId = this.user.user_id;
-      const { oldPassword, newPassword, confirmPassword } = this.passwordChange;
-
-      if (newPassword !== confirmPassword) {
-        alert('Mật khẩu xác nhận không khớp.');
-        return;
+  saveStudentInfo() {
+    this.studentService.updateStudentInfo(this.student.studentId, this.student).subscribe(
+      () => {
+        alert('Cập nhật thông tin thành công!');
+        this.isEditing = false;
+      },
+      (error) => {
+        console.error('Error updating student data:', error);
       }
+    );
+  }
 
-      this.authService.changePassword(userId, oldPassword, newPassword, confirmPassword).subscribe(
-        (response) => {
-          alert('Đổi mật khẩu thành công.');
-          this.isChangingPassword = false;
-        },
-        (error) => {
-          console.error('Error changing password:', error);
-          alert(error.error.message || 'Đổi mật khẩu thất bại.');
-        }
-      );
-    }
+  cancelEdit() {
+    this.isEditing = false;
+    this.loadStudentInfo(); // Reload data to discard changes
   }
 }
