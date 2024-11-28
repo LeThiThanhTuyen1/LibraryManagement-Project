@@ -175,6 +175,15 @@ namespace LibraryManagementAPI.Controllers
             // Trả về URL đường dẫn
             return Ok(new { fileUrl = book.file_path });
         }
-
+        [HttpGet("GetGenres")]
+         public async Task<IActionResult> GetGenres()
+         {
+             var genres = await _context.Books
+                 .Select(b => b.genre)
+                 .Distinct()
+                 .ToListAsync();
+        
+             return Ok(genres);
+         }
     }
 }
