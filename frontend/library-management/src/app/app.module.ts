@@ -20,6 +20,8 @@ import { SearchDocumentsComponent } from './component/user/search-documents/sear
 import { HomeComponent } from './component/home/home.component';
 import { LecturerInfoComponent } from './lecturer-info/lecturer-info.component';
 import { StudentInfoComponent } from './student-info/student-info.component';
+import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { StudentInfoComponent } from './student-info/student-info.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    SearchDocumentsComponent
+    SearchDocumentsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

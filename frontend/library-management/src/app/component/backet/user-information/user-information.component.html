@@ -1,5 +1,5 @@
 <!-- Display user information -->
-<div class="info-container" *ngIf="user && !isEditing">
+<div class="info-container" *ngIf="user && !isEditing && !isChangingPassword">
   <h2>Thông tin cá nhân</h2>
   <table>
     <tr>
@@ -50,3 +50,43 @@
     </div>
   </form>
 </div>
+
+
+<!-- Change Password Form -->
+<div *ngIf="isChangingPassword && user">
+  <h2>Đổi mật khẩu</h2>
+  <form (ngSubmit)="changePassword()">
+    <label for="oldPassword">Mật khẩu cũ</label>
+    <input
+      type="password"
+      id="oldPassword"
+      [(ngModel)]="passwordChange.oldPassword"
+      name="oldPassword"
+      required
+    />
+
+    <label for="newPassword">Mật khẩu mới</label>
+    <input
+      type="password"
+      id="newPassword"
+      [(ngModel)]="passwordChange.newPassword"
+      name="newPassword"
+      required
+    />
+
+    <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      [(ngModel)]="passwordChange.confirmPassword"
+      name="confirmPassword"
+      required
+    />
+
+    <div class="button-container">
+      <button type="submit">Đổi mật khẩu</button>
+      <button type="button" (click)="cancelPasswordChange()">Hủy</button>
+    </div>
+  </form>
+</div>
+
