@@ -142,16 +142,32 @@ export class BookDetailComponent implements OnInit {
   }  
 
   viewDocument(): void {
-    if (this.book && this.book.file_path) {
-      this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.book.file_path);
+    const storedUser = localStorage.getItem('user');
+    if (storedUser && this.book) {
+      const user = JSON.parse(storedUser);
+      const userRole = user.role; // Lấy role của người dùng từ localStorage
+  
+      console.log('User Role:', userRole);
+      console.log('Book Access Level:', this.book.accessLevel);
+  
+      if (this.book.accessLevel === 'public' || this.book.accessLevel === userRole) {
+        // Cho phép xem tài liệu
+        if (this.book.file_path) {
+          this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.book.file_path);
+        } else {
+          console.error('Đường dẫn tài liệu không hợp lệ.');
+        }
+      } else {
+        // Hiển thị thông báo lỗi
+        alert('Bạn không có quyền truy cập tài liệu này.');
+      }
     } else {
-      console.error('File path is missing or invalid.');
+      console.error('Thông tin người dùng hoặc sách không khả dụng.');
     }
   }
-  
   
   closeDocumentViewer(): void {
     this.documentUrl = ''; // Ẩn viewer
   }
-  
+
 }

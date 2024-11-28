@@ -82,6 +82,7 @@ namespace LibraryManagementAPI.Controllers
                           combined.b.summary,
                           combined.b.language,
                           combined.b.file_path,
+                          combined.b.accessLevel,
                           PublisherName = combined.b.Publisher.name,
                           AuthorName = a.first_name + " " + a.last_name,
                           AuthorNationality = a.nationality,
@@ -174,6 +175,28 @@ namespace LibraryManagementAPI.Controllers
 
             // Trả về URL đường dẫn
             return Ok(new { fileUrl = book.file_path });
+        }
+        
+        [HttpPut("UpdateAccessLevel/{bookId}")]
+        public async Task<IActionResult> UpdateAccessLevel(int bookId, [FromBody] dynamic requestBody)
+        {
+            string newAccessLevel = requestBody?.accessLevel;
+            var book = await _context.Books.FindAsync(bookId);
+            if (book == null)
+            {
+                return NotFound(new { message = "Book not found." });
+            }
+
+            book.accessLevel = newAccessLevel;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Access level updated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Failed to update access level.", error = ex.Message });
+            }
         }
 
     }

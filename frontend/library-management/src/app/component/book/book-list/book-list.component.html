@@ -6,15 +6,25 @@
         <th>Tác giả</th>
         <th>Nhà xuất bản</th>
         <th>Thể loại</th>
+        <th *ngIf="userRole === 'admin'">Access Level</th> <!-- Hiển thị Access Level chỉ nếu người dùng là admin -->
         <th>Thao tác</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let book of books">
         <td>{{ book.title }}</td>
-        <td>{{ book.AuthorName}}</td>
+        <td>{{ book.AuthorName }}</td>
         <td>{{ book.PublisherName }}</td>
         <td>{{ book.genre }}</td>
+        <td *ngIf="userRole === 'admin'">
+          <select [ngModel]="book.accessLevel" 
+                  (change)="updateAccessLevel(book.book_id, $event)">
+            <option value="student">Student</option>
+            <option value="lecturer">Lecturer</option>
+            <option value="admin">Admin</option>
+            <option value="public">Public</option>
+          </select>
+        </td>
         <td>
           <button class="btn btn-info" (click)="viewBook(book.book_id)">Xem</button>
         </td>
