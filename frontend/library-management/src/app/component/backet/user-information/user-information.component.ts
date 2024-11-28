@@ -9,6 +9,7 @@ import { StudentService } from '../../../service/student.service';
   styleUrls: ['./user-information.component.css']
 })
 export class UserInformationComponent implements OnInit {
+
   student: any = null;
   isEditing = false;
   userId: number = 0;
@@ -41,7 +42,6 @@ export class UserInformationComponent implements OnInit {
   editStudentInfo() {
     this.isEditing = true;
   }
-
   saveStudentInfo() {
     this.studentService.updateStudentInfo(this.student.studentId, this.student).subscribe(
       () => {

@@ -17,6 +17,7 @@ CREATE TABLE Books (
     publisher_id INT,
     language NVARCHAR(20),
     file_path VARCHAR(255),
+    accessLevel NVARCHAR(50),  -- Thêm trường accessLevel
     FOREIGN KEY (publisher_id) REFERENCES Publishers(publisher_id)
 );
 
@@ -128,9 +129,9 @@ INSERT INTO Publishers (name, address) VALUES
 
 -- Thêm dữ liệu vào bảng Books
 INSERT INTO Books (title, isbn, publication_year, genre, summary, publisher_id, language, file_path) VALUES
-(N'Lập trình Java', '9781234567890', 2020, N'Giáo trình', N'Sách lập trình Java cơ bản', 1, N'Tiếng Việt', '/path/java.pdf'),
-(N'Giải tích Toán học', '9782345678901', 2018, N'Giáo trình', N'Sách về giải tích toán học', 2, N'Tiếng Việt', '/path/giaitich.pdf'),
-(N'Harry Potter', '9783456789012', 2001, N'Tiểu thuyết', N'Harry Potter và Hòn đá phù thủy', 3, N'Tiếng Anh', '/path/harrypotter.pdf');
+(N'Lập trình Java', '9781234567890', 2020, N'Giáo trình', N'Sách lập trình Java cơ bản', 1, N'Tiếng Việt', 'https://www.cgdev.org/sites/default/files/education-africa-what-are-we-learning.pdf'),
+(N'Giải tích Toán học', '9782345678901', 2018, N'Giáo trình', N'Sách về giải tích toán học', 2, N'Tiếng Việt', 'https://www.cgdev.org/sites/default/files/education-africa-what-are-we-learning.pdf'),
+(N'Harry Potter', '9783456789012', 2001, N'Tiểu thuyết', N'Harry Potter và Hòn đá phù thủy', 3, N'Tiếng Anh', 'https://www.cgdev.org/sites/default/files/education-africa-what-are-we-learning.pdf');
 
 -- Thêm dữ liệu vào bảng Authors
 INSERT INTO Authors (first_name, last_name, birthdate, nationality) VALUES
@@ -180,8 +181,8 @@ INSERT INTO Publishers (name, address) VALUES
 (N'NXB Khoa Học', N'Huế');
 
 INSERT INTO Books (title, isbn, publication_year, genre, summary, publisher_id, language, file_path) VALUES
-(N'Lập trình C++', '9784567890123', 2019, N'Giáo trình', N'Sách lập trình C++ nâng cao', 4, N'Tiếng Việt', '/path/cpp.pdf'),
-(N'Văn học Việt Nam', '9785678901234', 2021, N'Văn học', N'Tuyển tập văn học Việt Nam hiện đại', 5, N'Tiếng Việt', '/path/vanhoc.pdf');
+(N'Lập trình C++', '9784567890123', 2019, N'Giáo trình', N'Sách lập trình C++ nâng cao', 4, N'Tiếng Việt', 'https://www.cgdev.org/sites/default/files/education-africa-what-are-we-learning.pdf'),
+(N'Văn học Việt Nam', '9785678901234', 2021, N'Văn học', N'Tuyển tập văn học Việt Nam hiện đại', 5, N'Tiếng Việt', 'https://www.cgdev.org/sites/default/files/education-africa-what-are-we-learning.pdf');
 
 INSERT INTO Downloads (user_id, book_id, download_date) VALUES
 (1, 1, getdate()),
