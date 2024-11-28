@@ -37,5 +37,9 @@ export class BookService {
     const url = `${this.apiUrl}/GetGenres`;
     return this.http.get<string[]>(url);
   }
+
+  getDocumentPath(bookId: number): string {
+    return `${this.apiUrl}/GetBookFile/${bookId}`;
+  }
   
 }

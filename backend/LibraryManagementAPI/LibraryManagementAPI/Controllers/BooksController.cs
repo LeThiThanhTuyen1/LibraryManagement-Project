@@ -52,7 +52,8 @@ namespace LibraryManagementAPI.Controllers
                           PublisherName = combined.book.Publisher.name,
                           AuthorName = author.first_name + " " + author.last_name,
                           AuthorNationality = author.nationality,
-                          AuthorBirthdate = author.birthdate
+                          AuthorBirthdate = author.birthdate,
+                          combined.book.accessLevel
                       })
                 .ToListAsync();
 
@@ -161,5 +162,19 @@ namespace LibraryManagementAPI.Controllers
         {
             return _context.Books.Any(e => e.book_id == id);
         }
+
+        [HttpGet("GetBookFile/{bookId}")]
+        public IActionResult GetBookFile(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.book_id == bookId);
+            if (book == null || string.IsNullOrEmpty(book.file_path))
+            {
+                return NotFound(new { message = "File URL not found." });
+            }
+
+            // Trả về URL đường dẫn
+            return Ok(new { fileUrl = book.file_path });
+        }
+
     }
 }
