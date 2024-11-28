@@ -1,33 +1,35 @@
 <div *ngIf="isLoading">Đang tải danh sách yêu thích...</div>
 
-<div class="favorite-list">
-  <div *ngIf="favorites.length > 0">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Tên tài liệu</th>
-          <th>Tác giả</th>
-          <th>Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let favorite of favorites">
-          <td><img src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-document-flat-icon-png-image_9150671.png" alt="Ảnh bìa" width="50" height="40"></td>
-          <td>{{ favorite.title }}</td> 
-          <td>{{ favorite.name }}</td>   
-          <td>
-            <a href="javascript:void(0);" class="btn-action delete" (click)="removeFavorite(favorite.book_id)">Bỏ yêu thích</a>
-            <a href="javascript:void(0);" (click)="viewBook(favorite.book_id)" class="btn-action view">Xem</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div *ngIf="!isLoading">
+  <div class="favorite-list">
+    <div *ngIf="favorites.length > 0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Tên tài liệu</th>
+            <th>Tác giả</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let favorite of favorites">
+            <td>
+              <img src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-document-flat-icon-png-image_9150671.png" alt="Ảnh bìa" width="50" height="40">
+            </td>
+            <td>{{ favorite.title }}</td>
+            <td>{{ favorite.name }}</td>
+            <td>
+              <a href="javascript:void(0);" class="btn-action delete" (click)="removeFavorite(favorite.book_id)">Bỏ yêu thích</a>
+              <a href="javascript:void(0);" (click)="viewBook(favorite.book_id)" class="btn-action view">Xem</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     
     <div *ngIf="favorites.length === 0">
       <p>Bạn chưa có tài liệu yêu thích nào.</p>
     </div>
-
   </div>
-  
+</div>
