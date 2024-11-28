@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../model/user.model';
+import { Document } from '../model/document.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,20 @@ export class AuthService {
       ConfirmPassword: confirmPassword
     });
   }
+
+  // Upload document with files
+  uploadDocument(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/upload-document`, formData);
+  }
+
+  // Get list of uploaded documents
+  getDocuments(): Observable<Document[]> {
+    return this.http.get<Document[]>(`${this.apiUrl}/documents`);
+  }
+  
+
+  
+
+  
 }
 

@@ -14,6 +14,7 @@ import { LecturerInfoComponent } from './component/lecturer-info/lecturer-info.c
 import { UserInformationComponent } from './component/backet/user-information/user-information.component';
 import { FavoriteListComponent } from './component/user/favorite-list/favorite-list.component';
 import { SearchDocumentsComponent } from './component/user/search-documents/search-documents.component';
+import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'search-documents', component: SearchDocumentsComponent},
   { path: 'book-detail/:id', component: BookDetailComponent},
+  { path: 'share-documents', component: ShareDocumentsComponent},
   { path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 
