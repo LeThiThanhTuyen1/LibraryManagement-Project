@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,12 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe(() => {
-      // Kiểm tra nếu đường dẫn chứa '/login' thì ẩn header và footer
-      this.showHeaderFooter = !this.router.url.includes('/login');
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const hiddenRoutes = ['/login', '/reset-password', '/forgot-password'];
+        // Kiểm tra nếu đường dẫn hiện tại thuộc các đường dẫn cần ẩn header và footer
+        this.showHeaderFooter = !hiddenRoutes.some(route => this.router.url.includes(route));
+      }
     });
   }
 }

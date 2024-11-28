@@ -1,5 +1,5 @@
 <app-header *ngIf="showHeaderFooter"></app-header>
-
+<div [ngClass]="{'container-1': showHeaderFooter}">
     <router-outlet></router-outlet>
-    
+</div>    
 <app-footer *ngIf="showHeaderFooter"></app-footer>
