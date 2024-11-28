@@ -32,9 +32,15 @@
         </div>
     </div>
 </div>
-
 <div class="button-group">
-    <button class=" btn btn-goback" (click)="goBack()">Quay lại</button>
+    <button class="btn btn-goback" (click)="goBack()">Quay lại</button>
     <button class="btn btn-view">Xem tài liệu</button>
-    <button class="btn btn-feedback">Thảo luận và đánh giá</button>
+    <button 
+        class="btn btn-feedback" 
+        [routerLink]="['/book-review', book.book_id]"  
+        aria-label="Thảo luận và đánh giá"
+    >
+        Thảo luận và đánh giá
+    </button>
 </div>
+

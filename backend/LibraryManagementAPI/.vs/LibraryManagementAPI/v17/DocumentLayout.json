@@ -1,57 +1,65 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\",
+  "WorkspaceRootPath": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\bookreviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\bookreviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\models\\bookreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\bookreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\authorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\authorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\linklibrariescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\linklibrariescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\models\\linklibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\linklibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\data\\librarymanagementapicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\data\\librarymanagementapicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\models\\lecturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\lecturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\models\\download.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\download.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\models\\bookauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\bookauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\downloadscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\authorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\authorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\linklibrariescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\linklibrariescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\models\\linklibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\linklibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\data\\librarymanagementapicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\data\\librarymanagementapicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\models\\lecturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\lecturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\models\\download.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\download.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\models\\bookauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\models\\bookauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\downloadscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\downloadscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\majorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\majorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\majorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\kiem thu tu dong_co canh\\librarymanagement-project\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\bookauthorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|d:\\itqnu\\pt ph\u1EA7n m\u1EC1m chuy\u00EAn nghi\u1EC7p\\backend\\librarymanagementapi\\librarymanagementapi\\controllers\\bookauthorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{398FEA8E-FBF2-4386-B62B-4A6AB9EF650A}|LibraryManagementAPI\\LibraryManagementAPI.csproj|solutionrelative:librarymanagementapi\\controllers\\bookauthorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -62,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,7 +78,7 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
             },
             {
               "$type": "Bookmark",
@@ -81,177 +89,206 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LinkLibrariesController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:59:24.493Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AuthorsController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\AuthorsController.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\AuthorsController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\AuthorsController.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\AuthorsController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "BookReview.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\BookReview.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\BookReview.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\BookReview.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Models\\BookReview.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:24:10.118Z",
+              "WhenOpened": "2024-11-28T10:34:53.886Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BooksController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BooksController.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\BooksController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BooksController.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\BooksController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
+              "Title": "BookReviewsController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BookReviewsController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\BookReviewsController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BookReviewsController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\BookReviewsController.cs",
+              "ViewState": "AQIAAGUAAAAAAAAAAAAYwHQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:15:57.555Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LinkLibrary.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\LinkLibrary.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\LinkLibrary.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\LinkLibrary.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Models\\LinkLibrary.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:49:18.052Z",
+              "WhenOpened": "2024-11-28T09:32:09.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "LibraryManagementAPIContext.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:29:52.902Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Lecturer.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Lecturer.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\Lecturer.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Lecturer.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Models\\Lecturer.cs",
+              "Title": "LinkLibrariesController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\LinkLibrariesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:29:40.758Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:59:24.493Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "StudentsController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\StudentsController.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\StudentsController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\StudentsController.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\StudentsController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Title": "AuthorsController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\AuthorsController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\AuthorsController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\AuthorsController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\AuthorsController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:22:20.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:24:10.118Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Download.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Download.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\Download.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Download.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Models\\Download.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "BooksController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BooksController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\BooksController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BooksController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\BooksController.cs",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAQwGoAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:49:49.195Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:15:57.555Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LinkLibrary.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\LinkLibrary.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\LinkLibrary.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\LinkLibrary.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Models\\LinkLibrary.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T13:49:18.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\appsettings.json",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\appsettings.json",
+              "RelativeToolTip": "LibraryManagementAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-11T13:15:40.89Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "BookAuthor.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\BookAuthor.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\BookAuthor.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\BookAuthor.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Models\\BookAuthor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "LibraryManagementAPIContext.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Data\\LibraryManagementAPIContext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:49:46.438Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DownloadsController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\DownloadsController.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\DownloadsController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\DownloadsController.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\DownloadsController.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:15:54.31Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:29:52.902Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\appsettings.json",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\appsettings.json",
-              "RelativeToolTip": "LibraryManagementAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-11T13:15:40.89Z",
-              "EditorCaption": ""
+              "Title": "Lecturer.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Lecturer.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\Lecturer.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Lecturer.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Models\\Lecturer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T13:29:40.758Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StudentsController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\StudentsController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\StudentsController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\StudentsController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\StudentsController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T13:22:20.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Download.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Download.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\Download.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\Download.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Models\\Download.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T13:49:49.195Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "MajorsController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\MajorsController.cs",
-              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\MajorsController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\MajorsController.cs",
-              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\MajorsController.cs",
+              "Title": "BookAuthor.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\BookAuthor.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Models\\BookAuthor.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Models\\BookAuthor.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Models\\BookAuthor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:15:52.99Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:49:46.438Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
+              "Title": "DownloadsController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\DownloadsController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\DownloadsController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\DownloadsController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\DownloadsController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T13:15:54.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MajorsController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\MajorsController.cs",
+              "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\MajorsController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\MajorsController.cs",
+              "RelativeToolTip": "LibraryManagementAPI\\Controllers\\MajorsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T13:15:52.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "BookAuthorsController.cs",
-              "DocumentMoniker": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BookAuthorsController.cs",
+              "DocumentMoniker": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BookAuthorsController.cs",
               "RelativeDocumentMoniker": "LibraryManagementAPI\\Controllers\\BookAuthorsController.cs",
-              "ToolTip": "D:\\Kiem Thu Tu Dong_Co Canh\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BookAuthorsController.cs",
+              "ToolTip": "D:\\ITQNU\\PT Ph\u1EA7n M\u1EC1m Chuy\u00EAn Nghi\u1EC7p\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\Controllers\\BookAuthorsController.cs",
               "RelativeToolTip": "LibraryManagementAPI\\Controllers\\BookAuthorsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T13:08:43.825Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:08:43.825Z"
             }
           ]
         },

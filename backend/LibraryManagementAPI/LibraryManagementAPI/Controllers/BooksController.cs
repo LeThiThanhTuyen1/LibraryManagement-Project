@@ -157,6 +157,18 @@ namespace LibraryManagementAPI.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("GetGenres")]
+        public async Task<IActionResult> GetGenres()
+        {
+            var genres = await _context.Books
+                .Select(b => b.genre)
+                .Distinct()
+                .ToListAsync();
+
+            return Ok(genres);
+        }
+
         private bool BookExists(int id)
         {
             return _context.Books.Any(e => e.book_id == id);
