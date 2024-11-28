@@ -27,18 +27,6 @@ namespace LibraryManagementAPI.Controllers
         {
             return await _context.Books.Include(b => b.Publisher).ToListAsync();
         }
-
-        [HttpGet("GetGenres")]
-        public async Task<IActionResult> GetGenres()
-        {
-            var genres = await _context.Books
-                .Select(b => b.genre)
-                .Distinct()
-                .ToListAsync();
-
-            return Ok(genres);
-        }
-
         [HttpGet("GetAllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {
