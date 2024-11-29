@@ -17,17 +17,11 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password_hash: password });
     
   }
-
-  // Get user information by user_id with error handling
-  getUserInformation(user_id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${user_id}`);
-  }
-
-  // Update user information
-  updateUserInformation(user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${user.user_id}`, user);
-  }
   
+  updateUser(userId: number, userData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/UpdateUser`, { user_id: userId, ...userData });
+  }
+
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
@@ -40,13 +34,5 @@ export class AuthService {
     });
   }
 
-  // AuthService
-  changePassword(userId: number, oldPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/change-password/${userId}`, {
-      OldPassword: oldPassword,
-      NewPassword: newPassword,
-      ConfirmPassword: confirmPassword
-    });
-  }
 }
 

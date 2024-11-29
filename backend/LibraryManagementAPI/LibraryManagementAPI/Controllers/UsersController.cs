@@ -12,7 +12,6 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Configuration;  // Thêm namespace này để sử dụng IConfiguration
 
-
 namespace LibraryManagementAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -87,6 +86,7 @@ namespace LibraryManagementAPI.Controllers
             }
             return Ok(new { message = "Tài liệu đã được tải lên thành công", documents = documentList });
         }
+        
         [HttpGet("documents")]
         public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
         {
@@ -329,6 +329,33 @@ namespace LibraryManagementAPI.Controllers
             {
                 return Unauthorized(new { message = "Mã xác thực không hợp lệ." });
             }
+        }
+
+        [HttpGet("GetUserById/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.user_id == id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            return Ok(user);
+        }
+
+       [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] User userDto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.user_id == userDto.user_id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            user.email = userDto.email;
+            user.phone_number = userDto.phone_number;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "User updated successfully" });
         }
 
         // Phương thức gửi mã xác thực qua email sử dụng Gmail SMTP

@@ -15,14 +15,13 @@ import { FooterComponent } from './component/backet/footer/footer.component';
 import { HeaderComponent } from './component/backet/header/header.component';
 import { LoginComponent } from './component/backet/login/login.component';
 import { LinkLibraryComponent } from './component/backet/link-library/link-library.component';
-import { UserInformationComponent } from './component/backet/user-information/user-information.component';
 import { SearchDocumentsComponent } from './component/user/search-documents/search-documents.component';
-import { HomeComponent } from './component/home/home.component';
-import { LecturerInfoComponent } from './lecturer-info/lecturer-info.component';
-import { StudentInfoComponent } from './student-info/student-info.component';
 import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
-import { BookReviewComponent } from './book-review/book-review.component';
+import { BookReviewComponent } from './component/book/book-review/book-review.component';
+import { HomeComponent } from './component/home/home.component';
+import { StudentInfoComponent } from './component/user/student-info/student-info.component';
+import { LecturerInfoComponent } from './component/user/lecturer-info/lecturer-info.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +30,6 @@ import { BookReviewComponent } from './book-review/book-review.component';
     BookDetailComponent,
     FavoriteListComponent,
     LinkLibraryComponent,
-    UserInformationComponent,
-    LecturerInfoComponent,
-    StudentInfoComponent,
     HomeAdminComponent,
     HomeComponent,
     LoginComponent,
@@ -42,7 +38,9 @@ import { BookReviewComponent } from './book-review/book-review.component';
     SearchDocumentsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    BookReviewComponent
+    BookReviewComponent,
+    StudentInfoComponent,
+    LecturerInfoComponent
   ],
   imports: [
     BrowserModule,

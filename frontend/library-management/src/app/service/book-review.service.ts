@@ -34,6 +34,7 @@ export class BookReviewService {
         })
       );
   }
+  
   deleteReview(bookId: number, userId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${bookId}/${userId}`).pipe(
       catchError(this.handleError)
@@ -44,7 +45,6 @@ export class BookReviewService {
       .put<BookReview>(`${this.apiUrl}/${review.review_id}`, review)
       .pipe(catchError(this.handleError));
   }
-  
   
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('API Error:', error.message);

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BookReviewService } from '../service/book-review.service';
-import { BookReview } from '../model/book-review.model';
+import { BookReviewService } from '../../../service/book-review.service';
+import { BookReview } from '../../../model/book-review.model';
 import { switchMap, of } from 'rxjs';
-import { BookService } from '../service/book.service';
-import { Book } from '../model/book.model';
+import { BookService } from '../../../service/book.service';
+import { Book } from '../../../model/book.model';
 
 @Component({
   selector: 'app-book-review',
