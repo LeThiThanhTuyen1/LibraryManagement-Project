@@ -22,6 +22,7 @@ import { LecturerInfoComponent } from './lecturer-info/lecturer-info.component';
 import { StudentInfoComponent } from './student-info/student-info.component';
 import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
+import { BookReviewComponent } from './book-review/book-review.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ResetPasswordComponent } from './component/backet/reset-password/reset-
     FooterComponent,
     SearchDocumentsComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    BookReviewComponent
   ],
   imports: [
     BrowserModule,

@@ -28,6 +28,33 @@ namespace LibraryManagementAPI.Controllers
             return await _context.Students.ToListAsync();
         }
 
+        [HttpGet("WithDetails/{id}")]
+        public async Task<IActionResult> GetStudentWithDetails(int id)
+        {
+            var studentWithDetails = await (from student in _context.Students
+                                            join user in _context.Users on student.user_id equals user.user_id
+                                            join major in _context.Majors on student.major_id equals major.major_id
+                                            where student.student_id == id
+                                            select new
+                                            {
+                                                StudentId = student.student_id,
+                                                UserId = student.user_id,
+                                                FirstName = user.first_name,
+                                                LastName = user.last_name,
+                                                Username = user.username,
+                                                Email = user.email,
+                                                PhoneNumber = user.phone_number,
+                                                MajorName = major.major_name,
+                                                Course = student.course,
+                                                EnrollmentYear = student.enrollment_year
+                                            }).FirstOrDefaultAsync();
+            if (studentWithDetails == null)
+            {
+                return NotFound(new { message = "Student not found." });
+            }
+            return Ok(studentWithDetails);
+        }
+
         // GET: api/Students/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
@@ -47,7 +74,7 @@ namespace LibraryManagementAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
-            if (id != student.student_d)
+            if (id != student.student_id)
             {
                 return BadRequest();
             }
@@ -81,7 +108,7 @@ namespace LibraryManagementAPI.Controllers
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStudent", new { id = student.student_d }, student);
+            return CreatedAtAction("GetStudent", new { id = student.student_id }, student);
         }
 
         // DELETE: api/Students/5
@@ -102,7 +129,7 @@ namespace LibraryManagementAPI.Controllers
 
         private bool StudentExists(int id)
         {
-            return _context.Students.Any(e => e.student_d == id);
+            return _context.Students.Any(e => e.student_id == id);
         }
     }
 }

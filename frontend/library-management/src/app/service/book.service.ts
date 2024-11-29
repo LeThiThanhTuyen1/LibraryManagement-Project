@@ -33,20 +33,23 @@ export class BookService {
   deleteBook(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
   getGenres(): Observable<string[]> {
     const url = `${this.apiUrl}/GetGenres`;
     return this.http.get<string[]>(url);
+  }
+
+  getBookFile(bookId: number): Observable<Blob> {
+    const url = `${this.apiUrl}/GetBookFile/${bookId}`;
+    return this.http.get(url, { responseType: 'blob' });
   }
 
   getDocumentPath(bookId: number): string {
     return `${this.apiUrl}/GetBookFile/${bookId}`;
   }
 
-  
   updateBookAccessLevel(bookId: number, newAccessLevel: string): Observable<any> {
     const url = `${this.apiUrl}/UpdateAccessLevel/${bookId}`;
     return this.http.put(url, { accessLevel: newAccessLevel });
   }
-  
-
-}
+} 

@@ -17,7 +17,7 @@ CREATE TABLE Books (
     publisher_id INT,
     language NVARCHAR(20),
     file_path VARCHAR(255),
-    accessLevel NVARCHAR(50),  -- Thêm trường accessLevel
+    accessLevel NVARCHAR(50),  
     FOREIGN KEY (publisher_id) REFERENCES Publishers(publisher_id)
 );
 
