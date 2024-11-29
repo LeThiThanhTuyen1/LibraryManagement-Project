@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StudentInfoComponent } from './student-info.component';
+import { ShareDocumentsComponent } from './share-documents.component';
 
-describe('StudentInfoComponent', () => {
-  let component: StudentInfoComponent;
-  let fixture: ComponentFixture<StudentInfoComponent>;
+describe('ShareDocumentsComponent', () => {
+  let component: ShareDocumentsComponent;
+  let fixture: ComponentFixture<ShareDocumentsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StudentInfoComponent]
+      declarations: [ShareDocumentsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StudentInfoComponent);
+    fixture = TestBed.createComponent(ShareDocumentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

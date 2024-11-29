@@ -25,6 +25,7 @@ namespace LibraryManagementAPI.Data
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<LinkLibrary> LinkLibraries { get; set; }
         public DbSet<Document> Documents { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BookAuthor>()

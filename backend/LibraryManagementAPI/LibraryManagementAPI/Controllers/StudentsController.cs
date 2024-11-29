@@ -20,7 +20,7 @@ namespace LibraryManagementAPI.Controllers
         {
             _context = context;
         }
-
+        
         // GET: api/Students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
@@ -48,13 +48,14 @@ namespace LibraryManagementAPI.Controllers
                                                 Course = student.course,
                                                 EnrollmentYear = student.enrollment_year
                                             }).FirstOrDefaultAsync();
+
             if (studentWithDetails == null)
             {
                 return NotFound(new { message = "Student not found." });
             }
             return Ok(studentWithDetails);
         }
-
+        
         // GET: api/Students/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
