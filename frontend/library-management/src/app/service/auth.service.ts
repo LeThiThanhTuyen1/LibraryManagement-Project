@@ -48,7 +48,6 @@ export class AuthService {
   uploadDocument(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/upload-document`, formData);
   }
-
   // Get list of uploaded documents
   getDocuments(): Observable<Document[]> {
     return this.http.get<Document[]>(`${this.apiUrl}/documents`);

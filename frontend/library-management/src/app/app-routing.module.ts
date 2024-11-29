@@ -15,6 +15,7 @@ import { BookReviewComponent } from './component/book/book-review/book-review.co
 import { HomeComponent } from './component/home/home.component';
 import { StudentInfoComponent } from './component/user/student-info/student-info.component';
 import { LecturerInfoComponent } from './component/user/lecturer-info/lecturer-info.component';
+import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'book-review/:bookId', component: BookReviewComponent},
   { path: 'student-info', component: StudentInfoComponent},
   { path: 'lecturer-info', component: LecturerInfoComponent},
+  { path: 'share-documents', component: ShareDocumentsComponent},
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];

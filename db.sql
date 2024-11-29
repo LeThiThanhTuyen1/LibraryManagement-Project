@@ -115,6 +115,24 @@ CREATE TABLE LinkLibraries (
 
 );
 
+CREATE TABLE Documents (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    FileName VARCHAR(255) NOT NULL,
+    FilePath VARCHAR(255) NOT NULL,
+    SenderName VARCHAR(255) NOT NULL,
+    Role VARCHAR(50) NOT NULL,
+    Department VARCHAR(255) NOT NULL,
+    Major VARCHAR(255),
+    user_id INT NOT NULL,
+    UploadDate DATETIME NOT NULL,
+    Status VARCHAR(50) NOT NULL
+);
+
+-- Tạo khóa ngoại liên kết với bảng Users
+ALTER TABLE Documents
+ADD CONSTRAINT FK_Documents_User FOREIGN KEY (user_id) REFERENCES Users(user_id);
+
+
 -- Thêm dữ liệu vào bảng LinkLibraries
 INSERT INTO LinkLibraries (ten_thuvien,link_text,date_at) VALUES
 (N'Thư Viện Hà Nội','https://thuvienhanoi.org.vn/',GETDATE()),

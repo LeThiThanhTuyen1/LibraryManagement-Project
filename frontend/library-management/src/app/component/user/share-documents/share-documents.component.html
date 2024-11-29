@@ -1,0 +1,82 @@
+<div class="share-documents-form" *ngIf="showShareForm">
+    <form (ngSubmit)="onSubmit()" #shareForm="ngForm">
+      <div>
+        <label for="senderName">Họ và tên người gửi</label>
+        <input
+          id="senderName"
+          type="text"
+          name="senderName"
+          [(ngModel)]="senderName"
+          required
+        />
+      </div>
+      <div>
+        <label for="role">Là giảng viên/ Học sinh/ Sinh viên</label>
+        <select
+          id="role"
+          name="role"
+          [(ngModel)]="role"
+          required
+        >
+          <option value="GiangVien">Giảng viên</option>
+          <option value="HocSinh">Học sinh</option>
+          <option value="SinhVien">Sinh viên</option>
+        </select>
+      </div>
+      <div>
+        <label for="department">Khoa</label>
+        <input
+          id="department"
+          type="text"
+          name="department"
+          [(ngModel)]="department"
+          required
+        />
+      </div>
+      <div>
+        <label for="major">Ngành đào tạo</label>
+        <input
+          id="major"
+          type="text"
+          name="major"
+          [(ngModel)]="major"
+        />
+      </div>
+      <div>
+        <label for="fileUpload">Upload File đính kèm (PDF, DOCX)</label>
+        <input
+          type="file"
+          id="fileUpload"
+          (change)="onFileChange($event)"
+          accept=".pdf,.docx"
+          multiple
+          required
+        />
+      </div>
+      <button type="submit" [disabled]="!shareForm.form.valid">Chia sẻ tài liệu</button>
+    </form>
+    <button (click)="showDocumentList()">Xem tài liệu đã gửi</button>
+  </div>
+  <!-- Table to display uploaded documents -->
+  <div class="document-list" *ngIf="!showShareForm">
+    <h3>Tài liệu đã gửi</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Số thứ tự</th>
+          <th>Tên tài liệu</th>
+          <th>Ngày gửi</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <!-- <tbody>
+        <tr *ngFor="let document of documents">
+          <td>{{ document.Id }}</td>
+          <td>{{ document.FileName }}</td>
+          <td>{{ document.UploadDate | date:'dd/MM/yyyy' }}</td> 
+          <td>{{ document.Status }}</td>
+        </tr>
+      </tbody> -->
+    </table>
+    <button (click)="showShareForm = true">Quay lại chia sẻ tài liệu</button>
+  </div>

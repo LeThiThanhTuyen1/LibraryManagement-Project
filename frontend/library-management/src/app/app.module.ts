@@ -22,6 +22,7 @@ import { BookReviewComponent } from './component/book/book-review/book-review.co
 import { HomeComponent } from './component/home/home.component';
 import { StudentInfoComponent } from './component/user/student-info/student-info.component';
 import { LecturerInfoComponent } from './component/user/lecturer-info/lecturer-info.component';
+import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LecturerInfoComponent } from './component/user/lecturer-info/lecturer-i
     ResetPasswordComponent,
     BookReviewComponent,
     StudentInfoComponent,
-    LecturerInfoComponent
+    LecturerInfoComponent,
+    ShareDocumentsComponent
   ],
   imports: [
     BrowserModule,
