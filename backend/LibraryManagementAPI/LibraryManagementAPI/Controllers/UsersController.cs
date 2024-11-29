@@ -26,7 +26,7 @@ namespace LibraryManagementAPI.Controllers
         public UsersController(LibraryManagementAPIContext context, IConfiguration configuration)  // Thêm IConfiguration vào constructor
         {
             _context = context;
-            _configuration = configuration;  
+            _configuration = configuration;  // Gán IConfiguration vào biến _configuration
             _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
             if (!Directory.Exists(_uploadPath))
             {
@@ -396,6 +396,81 @@ namespace LibraryManagementAPI.Controllers
                 return false;
             }
         }
+
+        [HttpPost("upload-document")]
+        public async Task<IActionResult> UploadDocument(IFormCollection form)
+        {
+            var senderName = form["senderName"];
+            var role = form["role"];
+            var department = form["department"];
+            var major = form["major"];
+            var files = form.Files;
+
+            if (files.Count == 0)
+            {
+                return BadRequest(new { message = "Chưa có file nào được chọn." });
+            }
+
+            // Validate file format and size
+            foreach (var file in files)
+            {
+                if (file.Length > 50 * 1024 * 1024) // Maximum 50MB
+                {
+                    return BadRequest(new { message = "Tệp tin quá lớn. Kích thước tối đa là 50MB." });
+                }
+
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                if (fileExtension != ".pdf" && fileExtension != ".docx")
+                {
+                    return BadRequest(new { message = "Chỉ chấp nhận tệp PDF hoặc DOCX." });
+                }
+            }
+
+            var documentList = new List<Document>();
+
+            foreach (var file in files)
+            {
+                var fileName = $"{senderName}_{major}_{department}_{file.FileName}";
+                var filePath = Path.Combine("uploads", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                var document = new Document
+                {
+                    FileName = fileName,
+                    FilePath = filePath,
+                    SenderName = senderName,
+                    Role = role,
+                    Department = department,
+                    Major = major,
+                    UploadDate = DateTime.Now,
+                    Status = "Upload thành công"
+                };
+
+                // Save document info to database (Assuming Document is a model)
+                _context.Documents.Add(document);
+                await _context.SaveChangesAsync();
+                documentList.Add(document);
+            }
+
+            return Ok(new { message = "Tài liệu đã được tải lên thành công", documents = documentList });
+        }
+
+        [HttpGet("documents")]
+        public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
+        {
+            var documents = await _context.Documents.ToListAsync();
+            return Ok(documents);
+        }
+
+
+
+
+
+
 
     }
 
