@@ -16,7 +16,7 @@
         <li *ngIf="userRole != 'admin'"><a routerLink="/share-documents">CHIA SẺ TÀI LIỆU</a></li>
 
         <!-- Các mục menu cho admin -->
-        <li *ngIf="userRole === 'admin'"><a routerLink="/admin-home">TRANG CHỦ ADMIN</a></li>
+        <li *ngIf="userRole === 'admin'"><a routerLink="/home-admin">TRANG CHỦ ADMIN</a></li>
         <li *ngIf="userRole === 'admin'"><a routerLink="/book-list">QUẢN LÝ TÀI LIỆU</a></li>
         <li *ngIf="userRole === 'admin'"><a routerLink="/statistics">THỐNG KÊ</a></li>
 
@@ -24,9 +24,9 @@
           <!-- Hiển thị last_name của người dùng -->
           <a href="javascript:void(0);" (click)="$event.preventDefault()">{{ userLastName }}</a>
           <ul class="user-dropdown">
-            <li><a *ngIf="userRole === 'student'" routerLink="/user-information">Thông tin</a>
-            <a *ngIf="userRole === 'lecturer'" routerLink="/lecturer-info">Thông tin</a>
-            <a *ngIf="userRole === 'admin'" routerLink="/lecturer-info">Thông tin</a></li>
+            <li *ngIf="userRole === 'student' || userRole === 'lecturer'">
+              <a *ngIf="userRole === 'student'" routerLink="/student-info">Thông tin</a>
+              <a *ngIf="userRole === 'lecturer'" routerLink="/lecturer-info">Thông tin</a></li>
             <li><a (click)="onLogout()">Đăng xuất</a></li>
           </ul>
         </li>

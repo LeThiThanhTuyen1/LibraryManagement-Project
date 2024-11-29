@@ -1,14 +1,13 @@
+import { Component } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Document } from '../../../model/document.model';
 
 @Component({
   selector: 'app-share-documents',
   templateUrl: './share-documents.component.html',
-  styleUrls: ['./share-documents.component.css']
+  styleUrl: './share-documents.component.css'
 })
-export class ShareDocumentsComponent implements OnInit {
+export class ShareDocumentsComponent {
   senderName: string = '';
   role: string = 'GiangVien';
   department: string = '';
@@ -16,17 +15,13 @@ export class ShareDocumentsComponent implements OnInit {
   files: File[] = [];
   documents: Document[] = [];
   showShareForm: boolean = true;  // Biến kiểm tra form nào được hiển thị
-
   constructor(private authService: AuthService, private http: HttpClient) {}
-
   ngOnInit(): void {
     this.getDocuments();  // Load the list of uploaded documents
   }
-
   onFileChange(event: any): void {
     this.files = event.target.files;
   }
-
   onSubmit(): void {
     const formData = new FormData();
     formData.append('senderName', this.senderName);
@@ -37,7 +32,6 @@ export class ShareDocumentsComponent implements OnInit {
     Array.from(this.files).forEach(file => {
       formData.append('files', file, file.name);
     });
-
     this.authService.uploadDocument(formData).subscribe(
       (response) => {
         alert('Tài liệu đã được gửi thành công!');
@@ -58,18 +52,16 @@ export class ShareDocumentsComponent implements OnInit {
       }
     );
   }
-
   getDocuments(): void {
-    this.authService.getDocuments().subscribe(
-      (data: Document[]) => {
-        this.documents = data;
-      },
-      (error) => {
-        console.error('Lỗi khi tải tài liệu', error);
-      }
-    );
+    // this.authService.getDocuments().subscribe(
+    //   (data: Document[]) => {
+    //     this.documents = data;
+    //   },
+    //   (error) => {
+    //     console.error('Lỗi khi tải tài liệu', error);
+    //   }
+    // );
   }
-
   
   showDocumentList(): void {
     this.showShareForm = false;  // Chuyển sang hiển thị form tài liệu đã gửi

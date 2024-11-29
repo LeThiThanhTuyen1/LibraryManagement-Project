@@ -1,18 +1,37 @@
-/* Khung chứa thông tin cá nhân */
 .info-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #ddd;
-    border-radius: 10px;
+    flex-direction: row; /* Sắp xếp các phần theo chiều ngang */
+    align-items: flex-start;
     padding: 20px;
-    background-color: #f9f9f9;
     width: 80%;
-    margin: 20px auto;
+    margin: 0 20px;
+  }
+  
+  /* Phần bên trái chứa ảnh */
+  .left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Định dạng ảnh người dùng */
+  .profile-picture {
+    margin-top: 90px;
+    width: 200px; /* Chiều rộng của ảnh */
+    height: 150px; /* Chiều cao của ảnh */
+  }
+  
+  /* Phần bên phải chứa thông tin sinh viên */
+  .right-section {
+    flex: 2; /* Phần này chiếm nhiều không gian hơn */
+    margin-left: 20px; /* Khoảng cách giữa ảnh và thông tin */
   }
   
   /* Định dạng tiêu đề */
   h2 {
+    padding-top: 20px;
+    padding-bottom: 10px;
     text-align: center;
     color: #333;
     margin-bottom: 20px;
@@ -50,18 +69,19 @@
   
   /* Định dạng chung cho các nút */
   button {
-    padding: 15px 25px;
-    background-color: #1160b4;
+    padding: 10px 20px;
+    background-color: #23a05e;
     color: white;
     font-size: 16px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    margin-bottom: 20px;
   }
   
   /* Hiệu ứng khi di chuột qua nút */
   button:hover {
-    background-color: red;
+    background-color: rgb(47, 117, 62);
   }
   
   /* Định dạng cho nút "Thay đổi thông tin" */
@@ -73,8 +93,9 @@
   button.edit-password {
     font-size: 14px;
   }
+  
   /* Định dạng form chỉnh sửa */
-form {
+  form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -98,3 +119,4 @@ form {
     color: #333;
     text-align: center;
   }
+  

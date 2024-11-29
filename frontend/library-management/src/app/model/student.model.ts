@@ -10,4 +10,4 @@ export interface Student {
     email?: string;
     phone_number?: string;
     role?: string;
-  }
+}

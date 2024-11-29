@@ -12,7 +12,6 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Configuration;  // Thêm namespace này để sử dụng IConfiguration
 
-
 namespace LibraryManagementAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -33,65 +32,6 @@ namespace LibraryManagementAPI.Controllers
             {
                 Directory.CreateDirectory(_uploadPath);
             }
-        }
-
-        [HttpPost("upload-document")]
-        public async Task<IActionResult> UploadDocument(IFormCollection form)
-        {
-            var senderName = form["senderName"];
-            var role = form["role"];
-            var department = form["department"];
-            var major = form["major"];
-            var files = form.Files;
-            if (files.Count == 0)
-            {
-                return BadRequest(new { message = "Chưa có file nào được chọn." });
-            }
-            // Validate file format and size
-            foreach (var file in files)
-            {
-                if (file.Length > 50 * 1024 * 1024) // Maximum 50MB
-                {
-                    return BadRequest(new { message = "Tệp tin quá lớn. Kích thước tối đa là 50MB." });
-                }
-                var fileExtension = Path.GetExtension(file.FileName).ToLower();
-                if (fileExtension != ".pdf" && fileExtension != ".docx")
-                {
-                    return BadRequest(new { message = "Chỉ chấp nhận tệp PDF hoặc DOCX." });
-                }
-            }
-            var documentList = new List<Document>();
-            foreach (var file in files)
-            {
-                var fileName = $"{senderName}_{major}_{department}_{file.FileName}";
-                var filePath = Path.Combine("uploads", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-                var document = new Document
-                {
-                    FileName = fileName,
-                    FilePath = filePath,
-                    SenderName = senderName,
-                    Role = role,
-                    Department = department,
-                    Major = major,
-                    UploadDate = DateTime.Now,
-                    Status = "Upload thành công"
-                };
-                // Save document info to database (Assuming Document is a model)
-                _context.Documents.Add(document);
-                await _context.SaveChangesAsync();
-                documentList.Add(document);
-            }
-            return Ok(new { message = "Tài liệu đã được tải lên thành công", documents = documentList });
-        }
-        [HttpGet("documents")]
-        public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
-        {
-            var documents = await _context.Documents.ToListAsync();
-            return Ok(documents);
         }
 
         // GET: api/Users
@@ -331,6 +271,33 @@ namespace LibraryManagementAPI.Controllers
             }
         }
 
+        [HttpGet("GetUserById/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.user_id == id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            return Ok(user);
+        }
+
+       [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] User userDto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.user_id == userDto.user_id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            user.email = userDto.email;
+            user.phone_number = userDto.phone_number;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "User updated successfully" });
+        }
+
         // Phương thức gửi mã xác thực qua email sử dụng Gmail SMTP
         private async Task<bool> SendVerificationCodeEmail(string email, string verificationCode)
         {
@@ -438,13 +405,5 @@ namespace LibraryManagementAPI.Controllers
             var documents = await _context.Documents.ToListAsync();
             return Ok(documents);
         }
-
-
-
-
-
-
-
     }
-
 }

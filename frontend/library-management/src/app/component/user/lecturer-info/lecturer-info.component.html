@@ -1,0 +1,56 @@
+<div class="info-container" *ngIf="lecturer">
+    <div class="left-section">
+      <img src="https://th.bing.com/th/id/OIP.O9YF9qMWDsUuo7m60RqiqAHaFi?rs=1&pid=ImgDetMain" alt="Lecturer Profile Picture" class="profile-picture">
+    </div>
+  
+    <div class="right-section">
+      <h2>Thông Tin Giảng Viên</h2>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Hiển thị lỗi -->
+      <table>
+        <tbody>
+          <tr>
+            <th>Họ tên</th>
+            <td>{{ lecturer.FirstName }} {{ lecturer.LastName }}</td>
+          </tr>
+          <tr>
+            <th>Mã giảng viên</th>
+            <td>{{ lecturer.Username }}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>
+              <span *ngIf="!isEditing">{{ user.Email }}</span>
+              <input *ngIf="isEditing" type="email" [(ngModel)]="user.Email" />
+            </td>
+          </tr>
+          <tr>
+            <th>Số điện thoại</th>
+            <td>
+              <span *ngIf="!isEditing">{{ user.PhoneNumber }}</span>
+              <input *ngIf="isEditing" type="text" [(ngModel)]="user.PhoneNumber" />
+            </td>
+          </tr>          
+          <tr>
+            <th>Ngành học</th>
+            <td>{{ lecturer.MajorName }}</td>
+          </tr>
+          <tr>
+            <th>Chức vụ</th>
+            <td>{{ lecturer.Position }}</td>
+          </tr>
+          <tr>
+            <th>Năm bắt đầu:</th>
+            <td>{{ lecturer.StartYear }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="button-container">
+        <button *ngIf="!isEditing" class="edit-info" (click)="enableEditing()">Thay đổi thông tin</button>
+        <button *ngIf="isEditing" class="save-info" (click)="saveChanges()">Lưu thay đổi</button>
+        <button *ngIf="isEditing" class="cancel-info" (click)="cancelEditing()">Hủy</button>
+        <button *ngIf="!isEditing" class="edit-info">Thay đổi mật khẩu</button>
+      </div>
+    </div>
+  </div>
+  

@@ -28,13 +28,14 @@ namespace LibraryManagementAPI.Controllers
             return await _context.Students.ToListAsync();
         }
 
-        [HttpGet("WithDetails/{id}")]
-        public async Task<IActionResult> GetStudentWithDetails(int id)
+        [HttpGet("WithDetailsByUserId/{userId}")]
+        public async Task<IActionResult> GetStudentWithDetailsByUserId(int userId)
         {
+            // Truy xuất thông tin sinh viên dựa trên user_id
             var studentWithDetails = await (from student in _context.Students
                                             join user in _context.Users on student.user_id equals user.user_id
                                             join major in _context.Majors on student.major_id equals major.major_id
-                                            where student.student_id == id
+                                            where student.user_id == userId
                                             select new
                                             {
                                                 StudentId = student.student_id,
