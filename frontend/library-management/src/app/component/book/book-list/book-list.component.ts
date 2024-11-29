@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class BookListComponent implements OnInit {
   books: Book[] = []; // Mảng sách
-  userRole: string = ''; // Vai trò của người dùng
+  userRole: string = '';
 
   constructor(private bookService: BookService, private router: Router) { }
 
@@ -55,7 +55,7 @@ export class BookListComponent implements OnInit {
       this.books = this.books.filter(book => book.book_id !== bookId); // Xóa sách khỏi danh sách
     });
   }
-
+  
   updateAccessLevel(bookId: number, event: Event): void {
     const target = event.target as HTMLSelectElement; // Ép kiểu đúng
     const newAccessLevel = target.value; // Lấy giá trị từ dropdown
@@ -63,6 +63,7 @@ export class BookListComponent implements OnInit {
       console.error('New access level is null or undefined.');
       return;
     }
+  
     this.bookService.updateBookAccessLevel(bookId, newAccessLevel).subscribe(
       () => {
         console.log('Access level updated successfully.');
@@ -73,5 +74,5 @@ export class BookListComponent implements OnInit {
       }
     );
   }
-}
 
+}

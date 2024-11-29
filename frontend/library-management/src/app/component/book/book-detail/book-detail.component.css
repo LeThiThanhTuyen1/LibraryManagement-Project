@@ -59,18 +59,18 @@
     text-decoration: underline;
   }
   .button-group {
-    display: flex;             /* Căn các nút theo hàng ngang */
-    justify-content: space-around; /* Giãn đều khoảng cách giữa các nút */
-    margin: 20px 0;            /* Khoảng cách trên và dưới */
+    display: flex;             
+    justify-content: space-around; 
+    margin: 20px 0;            
   }
   
   .btn {
-    padding: 10px 20px;        /* Tăng kích thước nút */
-    border: none;              /* Loại bỏ viền */
-    color: white;              /* Màu chữ trắng */
-    font-size: 16px;           /* Cỡ chữ */
-    cursor: pointer;           /* Con trỏ dạng tay khi hover */
-    border-radius: 5px;        /* Bo tròn góc */
+    padding: 10px 20px;        
+    border: none;             
+    color: white;            
+    font-size: 16px;          
+    cursor: pointer;          
+    border-radius: 5px;       
   }
   
   .btn-feedback {
@@ -100,19 +100,19 @@
 
   .favorite-btn .fas,
   .favorite-btn .far {
-    transition: color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
+    transition: color 0.3s ease; 
   }
   
   .favorite-btn .fas.favorite {
-    color: red;                /* Màu đỏ khi yêu thích */
+    color: red;               
   }
   
   .favorite-btn:hover .far {
-    color: #ff6666;            /* Màu nhạt hơn khi hover */
+    color: #ff6666;            
   }
   
   .favorite-btn .far.fa-heart {
-    color: grey; /* Màu trái tim rỗng */
+    color: grey;
   }
   .favorite-btn {
     background: none;
@@ -135,7 +135,6 @@
   .far.fa-heart {
     color: #ccc;
   }
-
   .overlay {
     position: fixed;
     top: 0;
@@ -148,7 +147,7 @@
     align-items: center;
     z-index: 1000;
   }
-  
+
   .modal-content {
     background-color: white;
     padding: 20px;
@@ -158,7 +157,7 @@
     overflow: auto;
     position: relative;
   }
-  
+
   .close-btn {
     position: absolute;
     top: 10px;
@@ -170,8 +169,7 @@
     padding: 5px 10px;
     cursor: pointer;
   }
-  
+
   .close-btn:hover {
     background-color: darkred;
   }
-  

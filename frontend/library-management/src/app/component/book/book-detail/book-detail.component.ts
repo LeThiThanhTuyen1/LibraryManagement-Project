@@ -8,7 +8,6 @@ import { FavoriteService } from '../../../service/favorite.service';
 import { Favorite } from '../../../model/favorite.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
@@ -21,7 +20,6 @@ export class BookDetailComponent implements OnInit {
   isFavorite: boolean = false;
   favorites: Favorite[] = [];
   documentUrl!: SafeResourceUrl;
-
   
   constructor(
     private route: ActivatedRoute,
@@ -150,7 +148,7 @@ export class BookDetailComponent implements OnInit {
       console.log('User Role:', userRole);
       console.log('Book Access Level:', this.book.accessLevel);
   
-      if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
+      if (this.book.accessLevel === 'public' || this.book.accessLevel === userRole) {
         // Cho phép xem tài liệu
         if (this.book.file_path) {
           this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.book.file_path);
@@ -164,10 +162,10 @@ export class BookDetailComponent implements OnInit {
     } else {
       console.error('Thông tin người dùng hoặc sách không khả dụng.');
     }
-  }  
+  }
   
   closeDocumentViewer(): void {
-    this.documentUrl = ''; // Ẩn viewer
+    this.documentUrl = ''; 
   }
-
+  
 }

@@ -3,16 +3,15 @@
     padding: 20px;
   }
   
-.table img {
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.table {
-  margin: 0;
-  width: 100%;
-}
-
+  .table img {
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  .table {
+    margin: 0;
+    width: 100%;
+  }
+  /* CSS cho nút hành động */
 .btn-action {
   padding: 6px 12px;
   margin-right: 5px;

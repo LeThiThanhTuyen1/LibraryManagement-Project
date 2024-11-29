@@ -53,10 +53,9 @@ namespace LibraryManagementAPI.Controllers
             {
                 return NotFound(new { message = "Student not found." });
             }
-
             return Ok(studentWithDetails);
         }
-    
+        
         // GET: api/Students/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)

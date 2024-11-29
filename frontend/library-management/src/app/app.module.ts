@@ -21,7 +21,7 @@ import { HomeComponent } from './component/home/home.component';
 import { LecturerInfoComponent } from './component/lecturer-info/lecturer-info.component';
 import { ForgotPasswordComponent } from './component/backet/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/backet/reset-password/reset-password.component';
-import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
+import { BookReviewComponent } from './book-review/book-review.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,7 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
     SearchDocumentsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ShareDocumentsComponent
-    
+    BookReviewComponent
   ],
   imports: [
     BrowserModule,

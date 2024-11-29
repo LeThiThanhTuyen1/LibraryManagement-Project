@@ -1,0 +1,117 @@
+<div *ngIf="!isLoading && book" class="book-detail-card">
+  <div class="book-content">
+    <div class="book-image-container">
+      <img src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-document-flat-icon-png-image_9150671.png"
+        class="book-image" alt="Book cover image" title="Book cover of {{ book.title }}" />
+    </div>
+    <div class="book-info">
+      <h2>{{ book.title }}</h2>
+      <p><strong>Tác giả:</strong> {{ book.AuthorName }}</p>
+      <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+      <p><strong>Thể loại:</strong> {{ book.genre }}</p>
+      <p><strong>Ngôn ngữ:</strong> {{ book.language }}</p>
+      <p><strong>Tóm tắt:</strong></p>
+      <p>{{ book.summary }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!hasUserReviewed">
+  <h3>Đánh giá sách</h3>
+  <div class="stars">
+    <span
+      *ngFor="let star of stars"
+      (click)="setRating(star)"
+      (mouseenter)="hoverRating(star)"
+      (mouseleave)="resetHover()"
+      [class.filled]="star <= (hoveredRating ?? newReview.rating ?? 0)"
+    >
+      ★
+    </span>
+  </div>
+  
+  <textarea
+    [(ngModel)]="newReview.review_text"
+    placeholder="Viết nhận xét của bạn..."
+  ></textarea>
+  <button (click)="submitReview()">Gửi đánh giá</button>
+</div>
+
+<div *ngIf="hasUserReviewed">
+  <p>Bạn đã đánh giá sách này.</p>
+</div>
+
+
+
+<div *ngIf="reviews.length && !errorMessage; else noReviews">
+  <h2>Đánh giá sách</h2>
+  <div *ngFor="let review of reviews" class="review-item">
+    <p><strong>Người đánh giá:</strong> {{ review.user_id }}</p>
+
+    <p><strong>Đánh giá:</strong></p>
+    <div *ngIf="editingReviewId !== review.review_id" class="stars">
+      <span
+        *ngFor="let star of stars"
+        [class.filled]="star <= review.rating"
+      >
+        ★
+      </span>
+    </div>
+    <div *ngIf="editingReviewId === review.review_id" class="stars">
+      <span
+        *ngFor="let star of stars"
+        (click)="setEditableRating(star)"
+        [class.filled]="editableReview.rating ? star <= editableReview.rating : false"
+
+      >
+        ★
+      </span>
+    </div>
+
+    <p><strong>Nội dung:</strong> 
+      <span *ngIf="editingReviewId !== review.review_id">
+        {{ review.review_text }}
+      </span>
+      <span *ngIf="editingReviewId === review.review_id">
+        <textarea [(ngModel)]="editableReview.review_text"></textarea>
+      </span>
+    </p>
+    <p><strong>Ngày:</strong> {{ review.review_date | date: 'short' }}</p>
+
+    <!-- Nút chỉnh sửa -->
+    <button
+      *ngIf="review.user_id === userId && editingReviewId !== review.review_id"
+      (click)="editReview(review)"
+    >
+      Chỉnh sửa
+    </button>
+
+    <!-- Nút lưu và hủy -->
+    <div *ngIf="editingReviewId === review.review_id">
+      <button (click)="saveReview()">Lưu</button>
+      <button (click)="cancelEdit()">Hủy</button>
+    </div>
+
+    <!-- Nút xóa -->
+    <button
+      *ngIf="review.user_id === userId && editingReviewId !== review.review_id"
+      (click)="deleteReview(selectedBookId!, review.user_id)"
+    >
+      Xóa đánh giá
+    </button>
+    <hr />
+  </div>
+</div>
+
+<ng-template #noReviews>
+  <p>Không có đánh giá nào cho sách này.</p>
+</ng-template>
+<!-- Hiển thị thông báo thành công -->
+<div *ngIf="successMessage" class="success-message">
+  {{ successMessage }}
+</div>
+
+<!-- Hiển thị thông báo lỗi -->
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>

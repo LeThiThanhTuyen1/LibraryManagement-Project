@@ -27,6 +27,7 @@ namespace LibraryManagementAPI.Controllers
         {
             return await _context.Books.Include(b => b.Publisher).ToListAsync();
         }
+        
         [HttpGet("GetAllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {
@@ -59,12 +60,13 @@ namespace LibraryManagementAPI.Controllers
 
             return Ok(books);
         }
+
         // GET: api/Books/5
         [HttpGet("GetBookById/{bookId}")]
         public async Task<IActionResult> GetBookById(int bookId)
         {
             var book = await _context.Books
-                .Include(b => b.Publisher) // Bao gồm thông tin nhà xuất bản
+                .Include(b => b.Publisher) 
                 .Join(_context.Book_Authors,
                       b => b.book_id,
                       ba => ba.book_id,
@@ -142,7 +144,7 @@ namespace LibraryManagementAPI.Controllers
 
             return CreatedAtAction("GetBook", new { id = book.book_id }, book);
         }
-
+        
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
@@ -186,7 +188,6 @@ namespace LibraryManagementAPI.Controllers
             {
                 return NotFound(new { message = "Book not found." });
             }
-
             book.accessLevel = newAccessLevel;
             try
             {
@@ -198,7 +199,6 @@ namespace LibraryManagementAPI.Controllers
                 return StatusCode(500, new { message = "Failed to update access level.", error = ex.Message });
             }
         }
-
     
 
         [HttpGet("GetGenres")]
