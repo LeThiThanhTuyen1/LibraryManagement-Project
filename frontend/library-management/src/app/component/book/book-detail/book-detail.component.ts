@@ -148,15 +148,35 @@ export class BookDetailComponent implements OnInit {
       console.log('User Role:', userRole);
       console.log('Book Access Level:', this.book.accessLevel);
   
-      if (this.book.accessLevel === 'public' || this.book.accessLevel === userRole) {
+      // Kiểm tra quyền truy cập
+      if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
         // Cho phép xem tài liệu
-        if (this.book.file_path) {
-          this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.book.file_path);
-        } else {
-          console.error('Đường dẫn tài liệu không hợp lệ.');
-        }
+        this.bookService.getBookFile(this.book.book_id).subscribe(
+          (response: Blob) => {
+            const mimeType = response.type; // MIME type của file
+            const fileURL = URL.createObjectURL(response);
+            
+            // Kiểm tra loại file để hiển thị
+            if (mimeType === 'application/pdf') {
+              this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+            } else if (
+              mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+              mimeType === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+              mimeType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            ) {
+              // Dùng Google Docs Viewer để mở các file Office
+              const googleViewerUrl = `https://docs.google.com/viewer?url=${fileURL}&embedded=true`;
+              this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(googleViewerUrl);
+            } else {
+              alert('Loại tài liệu không được hỗ trợ để xem trực tiếp.');
+            }
+          },
+          (error) => {
+            console.error('Lỗi khi tải tài liệu:', error);
+          }
+        );
       } else {
-        // Hiển thị thông báo lỗi
+        // Hiển thị thông báo lỗi nếu không có quyền
         alert('Bạn không có quyền truy cập tài liệu này.');
       }
     } else {

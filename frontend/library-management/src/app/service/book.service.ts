@@ -45,10 +45,6 @@ export class BookService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-  getDocumentPath(bookId: number): string {
-    return `${this.apiUrl}/GetBookFile/${bookId}`;
-  }
-
   updateBookAccessLevel(bookId: number, newAccessLevel: string): Observable<any> {
     const url = `${this.apiUrl}/UpdateAccessLevel/${bookId}`;
     return this.http.put(url, { accessLevel: newAccessLevel });
