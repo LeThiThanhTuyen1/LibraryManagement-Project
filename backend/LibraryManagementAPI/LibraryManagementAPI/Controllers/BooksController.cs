@@ -170,13 +170,33 @@ namespace LibraryManagementAPI.Controllers
         public IActionResult GetBookFile(int bookId)
         {
             var book = _context.Books.FirstOrDefault(b => b.book_id == bookId);
+
             if (book == null || string.IsNullOrEmpty(book.file_path))
             {
-                return NotFound(new { message = "File URL not found." });
+                return NotFound(new { message = "File not found." });
             }
 
-            // Trả về URL đường dẫn
-            return Ok(new { fileUrl = book.file_path });
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", book.file_path);
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound(new { message = "File does not exist on server." });
+            }
+
+            // Lấy định dạng file
+            var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
+            string mimeType = fileExtension switch
+            {
+                ".pdf" => "application/pdf",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                ".txt" => "text/plain",
+                _ => "application/octet-stream" // MIME type mặc định
+            };
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, mimeType, $"{book.title}{fileExtension}");
         }
         
         [HttpPut("UpdateAccessLevel/{bookId}")]
