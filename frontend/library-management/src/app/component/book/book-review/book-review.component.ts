@@ -35,6 +35,8 @@ export class BookReviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    
     this.route.params
       .pipe(
         switchMap((params) => {
@@ -61,13 +63,9 @@ export class BookReviewComponent implements OnInit {
         })
       )
       .subscribe({
-        next: (review) => {
-          if (review) {
-            this.reviews = [review];
-            this.hasUserReviewed = true;
-          } else {
-            this.loadReviews();
-          }
+        next: (userReview) => {
+          this.hasUserReviewed = !!userReview;
+          this.loadReviews(userReview); // Điều chỉnh để hỗ trợ null
           this.isLoading = false;
         },
         error: (err) => {
@@ -76,11 +74,19 @@ export class BookReviewComponent implements OnInit {
         },
       });
   }
+  
+  
 
-  loadReviews(): void {
+  loadReviews(userReview?: BookReview | null): void {
     if (this.selectedBookId) {
       this.reviewService.getReviewsByBookId(this.selectedBookId).subscribe({
         next: (reviews) => {
+          if (userReview) {
+            reviews = reviews.filter(
+              (review) => review.user_id !== this.userId
+            );
+            reviews.unshift(userReview);
+          }
           this.reviews = reviews;
         },
         error: (err) => {
@@ -89,6 +95,8 @@ export class BookReviewComponent implements OnInit {
       });
     }
   }
+  
+  
 
   setRating(rating: number): void {
     this.newReview.rating = rating;
@@ -107,19 +115,13 @@ export class BookReviewComponent implements OnInit {
   }
 
   submitReview(): void {
-    if (!this.newReview.rating) {
-      this.errorMessage = 'Vui lòng chọn số sao để đánh giá.';
+    if (!this.newReview.rating || !this.newReview.review_text) {
+      this.errorMessage = 'Vui lòng hoàn thành thông tin đánh giá.';
       this.clearMessagesAfterDelay();
       return;
     }
   
-    if (!this.newReview.review_text) {
-      this.errorMessage = 'Vui lòng nhập nội dung đánh giá.';
-      this.clearMessagesAfterDelay();
-      return;
-    }
-  
-    if (this.selectedBookId && this.newReview.rating && this.newReview.review_text) {
+    if (this.selectedBookId) {
       const review: BookReview = {
         book_id: this.selectedBookId,
         user_id: this.userId,
@@ -131,11 +133,11 @@ export class BookReviewComponent implements OnInit {
   
       this.reviewService.addReview(review).subscribe({
         next: (addedReview) => {
-          this.reviews.push(addedReview);
-          this.hasUserReviewed = true;
           this.newReview = { rating: 0, review_text: '' };
+          this.hasUserReviewed = true;
           this.successMessage = 'Đánh giá đã được thêm thành công!';
           this.clearMessagesAfterDelay();
+          this.loadReviews(addedReview); // Tải lại toàn bộ danh sách đánh giá
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -143,6 +145,7 @@ export class BookReviewComponent implements OnInit {
       });
     }
   }
+  
   
 
   editReview(review: BookReview): void {
