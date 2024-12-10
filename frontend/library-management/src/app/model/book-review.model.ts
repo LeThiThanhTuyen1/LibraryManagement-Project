@@ -4,6 +4,7 @@ export interface BookReview {
     user_id: number;         
     rating: number;
     review_text: string;     
-    review_date: Date;       
+    review_date: Date;      
+    review_updated_at?: Date; 
   }
   

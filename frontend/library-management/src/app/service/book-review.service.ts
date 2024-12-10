@@ -45,7 +45,14 @@ export class BookReviewService {
       .put<BookReview>(`${this.apiUrl}/${review.review_id}`, review)
       .pipe(catchError(this.handleError));
   }
+  updateBookRating(bookId: number, averageRating: number, reviewCount: number): Observable<void> {
+    return this.http.put<void>(`/api/books/${bookId}/rating`, {
+      averageRating,
+      reviewCount,
+    });
+  }
   
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('API Error:', error.message);
     return throwError(() => new Error('Something went wrong. Please try again later.'));
