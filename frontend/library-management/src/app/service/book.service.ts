@@ -49,4 +49,10 @@ export class BookService {
     const url = `${this.apiUrl}/UpdateAccessLevel/${bookId}`;
     return this.http.put(url, { accessLevel: newAccessLevel });
   }
+  updateBookRating(bookId: number, averageRating: number, reviewCount: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${bookId}/rating`, {
+      averageRating,
+      reviewCount,
+    });
+  }
 } 
