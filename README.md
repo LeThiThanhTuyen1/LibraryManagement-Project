@@ -28,17 +28,20 @@ git clone https://github.com/LeThiThanhTuyen1/LibraryManagement-Project.git
 ```
 $ Cấu trúc thư mục
 .
-├── Database
+├── database
 │   ├── manage_library.sql
-├── Document
-│   ├── BaoCaoCKLTM.doc
-│   └── BaoCaoCKLTM.pdf
+├── document
+│   ├── ........
 ├── images
 │   ├── .........
-├── Source Code
-│   ├── QuanLyThuVien
-│   	└── src (Chứa các file servlet)
-│   	└── WebContent (Chứa các file JSP/Css/Javascrip/Bootstrap)
+├── frontend
+│   ├── model
+│   ├── service
+│   ├── component
+├── backend
+│   ├── model
+│   ├── controller
+│   ├── data
 └── README.md
 
 ```
