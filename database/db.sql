@@ -62,7 +62,7 @@ CREATE TABLE Book_Reviews (
     book_id INT,
     user_id INT,
     rating INT,
-    review_text TEXT,
+    review_text VARCHAR(225),
     review_date DATETIME,
     FOREIGN KEY (book_id) REFERENCES Books(book_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
