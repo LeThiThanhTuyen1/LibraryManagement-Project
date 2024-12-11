@@ -190,9 +190,6 @@ export class BookReviewComponent implements OnInit {
       },
     });
   }
-  
-  
-  
 
   cancelEdit(): void {
     this.editingReviewId = null;
@@ -234,10 +231,6 @@ export class BookReviewComponent implements OnInit {
       console.error('selectedBookId không hợp lệ.');
     }
   }
-  
-  
-  
-  
   
   clearMessagesAfterDelay(): void {
     setTimeout(() => {

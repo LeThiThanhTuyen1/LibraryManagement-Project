@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../../service/book.service';
 import { Book } from '../../../model/book.model';
-import { Publisher } from '../../../model/publisher.model';
 import { Location } from '@angular/common';
 import { FavoriteService } from '../../../service/favorite.service';
 import { Favorite } from '../../../model/favorite.model';
