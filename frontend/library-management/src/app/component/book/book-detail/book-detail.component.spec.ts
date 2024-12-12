@@ -27,7 +27,8 @@ describe('BookDetailComponent', () => {
     PublisherName: 'Test Publisher',
     AuthorName: 'Test Author',
     AverageRating: 4,
-    accessLevel: 'public'
+    accessLevel: 'public',
+    PublisherId: 0
   };
 
   const mockFavorite: Favorite = {
