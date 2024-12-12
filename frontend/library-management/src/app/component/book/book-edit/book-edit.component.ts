@@ -13,6 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsMod
   styleUrls: ['./book-edit.component.css'] // Đảm bảo sử dụng đúng "styleUrls"
 })
 export class BookEditComponent implements OnInit {
+  saveChanges() {
+    throw new Error('Method not implemented.');
+  }
   bookForm!: FormGroup;
   publishers: Publisher[] = [];
   bookId!: number;
