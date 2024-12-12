@@ -186,5 +186,61 @@ export class BookDetailComponent implements OnInit {
   closeDocumentViewer(): void {
     this.documentUrl = ''; 
   }
+
+  downloadDocument(): void {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser && this.book) {
+      const user = JSON.parse(storedUser);
+      const userRole = user.role; // Lấy role của người dùng từ localStorage
+  
+      console.log('User Role:', userRole);
+      console.log('Book Access Level:', this.book.accessLevel);
+  
+      // Kiểm tra quyền truy cập
+      if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
+        // Gọi API để tải file
+        this.bookService.getBookFile(this.book.book_id).subscribe(
+          (response: Blob) => {
+            const fileName = this.book.title + this.getFileExtension(response.type);
+            const fileURL = URL.createObjectURL(response);
+  
+            // Tạo một thẻ <a> để kích hoạt tải xuống
+            const anchor = document.createElement('a');
+            anchor.href = fileURL;
+            anchor.download = fileName;
+            anchor.click();
+  
+            // Thu hồi URL sau khi tải
+            URL.revokeObjectURL(fileURL);
+  
+            // Hiển thị thông báo tải thành công
+            alert('Tải tài liệu thành công!');
+          },
+          (error) => {
+            console.error('Lỗi khi tải tài liệu:', error);
+            alert('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+          }
+        );
+      } else {
+        // Hiển thị thông báo nếu không có quyền truy cập
+        alert('Bạn không có quyền tải tài liệu này.');
+      }
+    } else {
+      console.error('Thông tin người dùng hoặc sách không khả dụng.');
+      alert('Vui lòng đăng nhập để tải tài liệu.');
+    }
+  }
+  
+  // Hàm hỗ trợ để lấy phần mở rộng file từ MIME type
+  private getFileExtension(mimeType: string): string {
+    const mimeExtensions: { [key: string]: string } = {
+      'application/pdf': '.pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': '.pptx',
+    };
+    return mimeExtensions[mimeType] || '';
+  }
+  
   
 }

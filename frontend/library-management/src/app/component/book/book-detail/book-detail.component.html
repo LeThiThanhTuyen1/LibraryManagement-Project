@@ -7,9 +7,9 @@
                 class="book-image" alt="Book cover image" title="Book cover of {{ book.title }}" />
             <h2>{{ book.title }}</h2>
             <p>
-                <strong>Tải tài liệu:</strong>
-                <a [href]="book.file_path" target="_blank"> Download</a>
-            </p>
+              <strong>Tải tài liệu:</strong>
+              <button class="btn-download" (click)="downloadDocument()">Download</button>
+          </p>          
         </div>
         <div class="book-details">
             <p class="book-info-item"><strong>Tác giả:</strong> {{ book.AuthorName }}
