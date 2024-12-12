@@ -27,6 +27,7 @@
         </td>
         <td>
           <button class="btn btn-info" (click)="viewBook(book.book_id)">Xem</button>
+          <button class="btn btn-warning" *ngIf="userRole === 'admin'" (click)="editBook(book.book_id)">Sửa</button>
         </td>
       </tr>
     </tbody>

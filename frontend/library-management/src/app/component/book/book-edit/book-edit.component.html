@@ -1,0 +1,43 @@
+<div class="container">  
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="book-form">
+      <div class="form-row">
+        <label for="title">Title</label>
+        <input id="title" formControlName="title" type="text" placeholder="Enter book title">
+      </div>
+      <div class="form-row">
+        <label for="isbn">ISBN</label>
+        <input id="isbn" formControlName="isbn" type="text" placeholder="Enter book ISBN">
+      </div>
+      <div class="form-row">
+        <label for="publication_year">Publication Year</label>
+        <input id="publication_year" formControlName="publication_year" type="number" placeholder="Enter publication year">
+      </div>
+      <div class="form-row">
+        <label for="genre">Genre</label>
+        <input id="genre" formControlName="genre" type="text" placeholder="Enter book genre">
+      </div>
+      <div class="form-row">
+        <label for="summary">Summary</label>
+        <textarea id="summary" formControlName="summary" placeholder="Enter book summary"></textarea>
+      </div>
+      <div class="form-row">
+        <label for="language">Language</label>
+        <input id="language" formControlName="language" type="text" placeholder="Enter language">
+      </div>
+      <div class="form-row">
+        <label for="PublisherId">Publisher</label>
+        <select id="PublisherId" formControlName="PublisherId">
+          <option *ngFor="let publisher of publishers" [value]="publisher.publisher_id">{{ publisher.name }}</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  
+    <!-- Nút quay lại -->
+    <div class="form-row">
+      <button (click)="goBack()" class="btn-secondary">Back to Book List</button>
+    </div>
+  </div>
+  

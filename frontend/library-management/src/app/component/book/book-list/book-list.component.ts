@@ -42,6 +42,11 @@ export class BookListComponent implements OnInit {
     this.router.navigate([`/book-detail/${id}`]); // Điều hướng đến trang chi tiết
   }
 
+  editBook(bookId: number): void {
+    // Điều hướng đến trang chỉnh sửa với ID sách
+    this.router.navigate([`/book-edit/${bookId}`]);
+  }
+
   // Thêm sách
   addBook(newBook: Book): void {
     this.bookService.addBook(newBook).subscribe(book => {

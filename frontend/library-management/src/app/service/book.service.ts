@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from '../model/book.model';
 
@@ -26,9 +26,13 @@ export class BookService {
   }
 
   // Hàm cập nhật thông tin sách
-  updateBook(book: Book): Observable<Book> {
-    return this.http.put<Book>(`${this.apiUrl}/${book.book_id}`, book);
+  updateBook(id: number, bookData: any): Observable<any> {
+    return this.http.put(`http://localhost:5283/api/Books/${id}`, bookData, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json-patch+json')
+    });
   }
+  
+  
 
   // Hàm xóa sách
   deleteBook(id: number): Observable<void> {
@@ -54,5 +58,10 @@ export class BookService {
       averageRating,
       reviewCount,
     });
+  }
+
+  getBookById1(bookId: number): Observable<Book> {
+    const url = `${this.apiUrl}/GetBookById/${bookId}`;
+    return this.http.get<Book>(url);
   }
 } 

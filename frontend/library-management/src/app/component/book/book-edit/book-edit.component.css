@@ -1,0 +1,134 @@
+/* Tổng quan */
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .header, .footer {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .footer p {
+    color: #888;
+    font-size: 14px;
+  }
+  
+  /* Form */
+  .book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book-form label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .book-form input,
+  .book-form select,
+  .book-form textarea {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+  
+  .book-form input:focus,
+  .book-form select:focus,
+  .book-form textarea:focus {
+    border-color: #66afe9;
+    background-color: #fff;
+    outline: none;
+  }
+  
+  /* Dropdown (select) */
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  select:hover {
+    background-color: #f1f1f1;
+    border-color: #888;
+  }
+  
+  /* Textarea */
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Button */
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    align-self: center;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    align-self: center;
+    margin-top: 20px;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #565e64;
+  }
+  
+  /* Các lớp layout cho các phần tử */
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  

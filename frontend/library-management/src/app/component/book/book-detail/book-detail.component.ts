@@ -242,5 +242,4 @@ export class BookDetailComponent implements OnInit {
     return mimeExtensions[mimeType] || '';
   }
   
-  
 }
