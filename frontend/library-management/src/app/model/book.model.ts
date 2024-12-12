@@ -12,4 +12,6 @@ export interface Book {
   file_path: string;
   AverageRating: number;
   accessLevel: string;
+  PublisherId: number; // Thêm trường này để lưu ID của nhà xuất bản
+
 }

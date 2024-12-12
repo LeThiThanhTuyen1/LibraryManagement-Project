@@ -231,5 +231,36 @@ namespace LibraryManagementAPI.Controllers
         
              return Ok(genres);
          }
+
+         [HttpGet("GetBookById1/{bookId}")]
+        public async Task<IActionResult> GetBookById1(int bookId)
+        {
+            var book = await _context.Books
+                .Include(b => b.Publisher)
+                .Where(b => b.book_id == bookId)
+                .Select(b => new
+                {
+                    b.book_id,
+                    b.title,
+                    b.isbn,
+                    b.publication_year,
+                    b.genre,
+                    b.summary,
+                    b.language,
+                    b.file_path,
+                    b.accessLevel,
+                    PublisherId = b.Publisher.publisher_id,
+                    PublisherName = b.Publisher.name
+                })
+                .FirstOrDefaultAsync();
+
+            if (book == null)
+            {
+                return NotFound(new { message = "Book not found." });
+            }
+
+            return Ok(book);
+        }
+
     }
 }

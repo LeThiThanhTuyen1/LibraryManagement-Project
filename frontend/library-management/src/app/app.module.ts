@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BookService } from './service/book.service';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookListComponent } from './component/book/book-list/book-list.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { FavoriteListComponent } from './component/user/favorite-list/favorite-list.component';
@@ -23,6 +23,7 @@ import { HomeComponent } from './component/home/home.component';
 import { StudentInfoComponent } from './component/user/student-info/student-info.component';
 import { LecturerInfoComponent } from './component/user/lecturer-info/lecturer-info.component';
 import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
+import { BookEditComponent } from './component/book/book-edit/book-edit.component';
 
 @NgModule({
   declarations: [
@@ -42,12 +43,14 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
     BookReviewComponent,
     StudentInfoComponent,
     LecturerInfoComponent,
-    ShareDocumentsComponent
+    ShareDocumentsComponent,
+    BookEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     BookService,
