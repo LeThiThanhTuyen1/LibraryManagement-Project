@@ -65,7 +65,6 @@ describe('BookReviewComponent', () => {
       file_path: '',
       AverageRating: 4.5,
       accessLevel: 'Public',
-      PublisherId: 1
     };
     bookService.getBookById.and.returnValue(of(book));
     component.ngOnInit();
