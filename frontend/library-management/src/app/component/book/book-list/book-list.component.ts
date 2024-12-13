@@ -6,73 +6,74 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit {
-  books: Book[] = []; // Mảng sách
+  books: Book[] = [];
   userRole: string = '';
 
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
-    // Lấy vai trò người dùng từ localStorage
-    this.loadUserRole(); // Đọc vai trò người dùng khi component được khởi tạo
-    // Lấy danh sách sách từ API
+    this.loadUserRole();
     this.loadBooks();
   }
 
-  // Lấy vai trò người dùng từ localStorage
   loadUserRole(): void {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      const user = JSON.parse(storedUser);
-      this.userRole = user.role; // Lấy role của người dùng
+      try {
+        const user = JSON.parse(storedUser);
+        this.userRole = user.role;
+      } catch (error) {
+        console.error('Error parsing user role:', error);
+      }
     }
   }
 
-  // Lấy danh sách sách từ API
   loadBooks(): void {
-    this.bookService.getAllBooks().subscribe((data: Book[]) => {
-      this.books = data;
+    this.bookService.getAllBooks().subscribe({
+      next: (data) => {
+        this.books = data;
+      },
+      error: (error) => {
+        console.error('Error loading books:', error);
+        alert('Không thể tải danh sách sách.');
+      },
     });
   }
 
-  // Xem chi tiết sách khi click vào
   viewBook(id: number): void {
-    this.router.navigate([`/book-detail/${id}`]); // Điều hướng đến trang chi tiết
+    this.router.navigate([`/book-detail/${id}`]);
   }
 
-  // Thêm sách
-  addBook(newBook: Book): void {
-    this.bookService.addBook(newBook).subscribe(book => {
-      this.books.push(book); // Thêm sách vào danh sách sau khi thêm thành công
-    });
-  }
-
-  // Xóa sách
   deleteBook(bookId: number): void {
-    this.bookService.deleteBook(bookId).subscribe(() => {
-      this.books = this.books.filter(book => book.book_id !== bookId); // Xóa sách khỏi danh sách
-    });
-  }
-  
-  updateAccessLevel(bookId: number, event: Event): void {
-    const target = event.target as HTMLSelectElement; // Ép kiểu đúng
-    const newAccessLevel = target.value; // Lấy giá trị từ dropdown
-    if (!newAccessLevel) {
-      console.error('New access level is null or undefined.');
-      return;
+    if (confirm('Bạn có chắc chắn muốn xóa tài liệu này?')) {
+      this.bookService.deleteBook(bookId).subscribe({
+        next: () => {
+          alert('Xóa tài liệu thành công!');
+          this.books = this.books.filter((book) => book.book_id !== bookId);
+        },
+        error: (error) => {
+          console.error('Error deleting book:', error);
+          alert('Xóa tài liệu thất bại!');
+        },
+      });
     }
-  
-    this.bookService.updateBookAccessLevel(bookId, newAccessLevel).subscribe(
-      () => {
+  }
+
+  updateAccessLevel(bookId: number, event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const newAccessLevel = target.value;
+
+    this.bookService.updateBookAccessLevel(bookId, newAccessLevel).subscribe({
+      next: () => {
         console.log('Access level updated successfully.');
       },
-      (error) => {
-        console.error('Failed to update access level.', error);
-        alert('Failed to update access level.');
-      }
-    );
+      error: (error) => {
+        console.error('Error updating access level:', error);
+        alert('Cập nhật cấp truy cập thất bại!');
+      },
+    });
   }
-
 }

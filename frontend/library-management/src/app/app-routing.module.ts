@@ -16,26 +16,27 @@ import { HomeComponent } from './component/home/home.component';
 import { StudentInfoComponent } from './component/user/student-info/student-info.component';
 import { LecturerInfoComponent } from './component/user/lecturer-info/lecturer-info.component';
 import { ShareDocumentsComponent } from './component/user/share-documents/share-documents.component';
-
+import { AddBookAdminComponent } from './component/admin/add-book-admin/add-book-admin.component';
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'header', component: HeaderComponent},
-  { path: 'footer', component: FooterComponent},
-  { path: 'home-admin', component: HomeAdminComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'book-list', component: BookListComponent},
-  { path: 'link-library', component: LinkLibraryComponent},
-  { path: 'favorite-list', component: FavoriteListComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'header', component: HeaderComponent },
+  { path: 'footer', component: FooterComponent },
+  { path: 'home-admin', component: HomeAdminComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'book-list', component: BookListComponent },
+  { path: 'link-library', component: LinkLibraryComponent },
+  { path: 'favorite-list', component: FavoriteListComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent},
-  { path: 'search-documents', component: SearchDocumentsComponent},
-  { path: 'book-detail/:id', component: BookDetailComponent},
-  { path: 'book-review/:bookId', component: BookReviewComponent},
-  { path: 'student-info', component: StudentInfoComponent},
-  { path: 'lecturer-info', component: LecturerInfoComponent},
-  { path: 'share-documents', component: ShareDocumentsComponent},
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'search-documents', component: SearchDocumentsComponent },
+  { path: 'book-detail/:id', component: BookDetailComponent },
+  { path: 'book-review/:bookId', component: BookReviewComponent },
+  { path: 'student-info', component: StudentInfoComponent },
+  { path: 'lecturer-info', component: LecturerInfoComponent },
+  { path: 'share-documents', component: ShareDocumentsComponent },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login', pathMatch: 'full'}
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'add-book-admin', component: AddBookAdminComponent }
 ];
 
 @NgModule({

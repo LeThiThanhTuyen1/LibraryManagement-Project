@@ -36,7 +36,10 @@ builder.Services.AddControllersWithViews()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true; // Cho phép đồng bộ IO cho việc tải file
+});
 var app = builder.Build();
 
 // Use CORS
@@ -48,7 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>

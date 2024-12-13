@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="mb-3">
+    <a *ngIf="userRole === 'admin'" routerLink="/add-book-admin" class="btn btn-primary">Thêm</a>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -17,8 +20,7 @@
         <td>{{ book.PublisherName }}</td>
         <td>{{ book.genre }}</td>
         <td *ngIf="userRole === 'admin'">
-          <select [ngModel]="book.accessLevel" 
-                  (change)="updateAccessLevel(book.book_id, $event)">
+          <select [ngModel]="book.accessLevel" (change)="updateAccessLevel(book.book_id, $event)">
             <option value="student">Student</option>
             <option value="lecturer">Lecturer</option>
             <option value="admin">Admin</option>
@@ -27,6 +29,7 @@
         </td>
         <td>
           <button class="btn btn-info" (click)="viewBook(book.book_id)">Xem</button>
+          <button *ngIf="userRole === 'admin'" class="btn btn-danger" (click)="deleteBook(book.book_id)">Xóa </button>
         </td>
       </tr>
     </tbody>
