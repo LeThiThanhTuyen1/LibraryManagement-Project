@@ -1,0 +1,70 @@
+<div class="container">
+    <h2>Thêm Sách Mới</h2>
+    <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
+        <!-- Tiêu đề -->
+        <div class="form-group">
+            <label for="title">Tiêu đề</label>
+            <input type="text" id="title" formControlName="title" class="form-control"
+                placeholder="Nhập tiêu đề sách" />
+        </div>
+
+        <!-- ISBN -->
+        <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input type="text" id="isbn" formControlName="isbn" class="form-control" placeholder="Nhập mã ISBN" />
+        </div>
+
+        <!-- Nhà xuất bản -->
+        <div class="form-group">
+            <label for="publisher">Nhà xuất bản</label>
+            <input type="text" id="publisher" formControlName="publisherName" class="form-control"
+                placeholder="Tên nhà xuất bản" />
+        </div>
+
+        <!-- Tác giả -->
+        <div class="form-group">
+            <label for="author">Tác giả</label>
+            <input type="text" id="author" formControlName="authorName" class="form-control"
+                placeholder="Tên tác giả" />
+        </div>
+
+        <!-- Năm xuất bản -->
+        <div class="form-group">
+            <label for="publicationYear">Năm xuất bản</label>
+            <input type="number" id="publicationYear" formControlName="publicationYear" class="form-control"
+                placeholder="Nhập năm xuất bản" />
+        </div>
+
+        <!-- Ngôn ngữ -->
+        <div class="form-group">
+            <label for="language">Ngôn ngữ</label>
+            <input type="text" id="language" formControlName="language" class="form-control"
+                placeholder="Ngôn ngữ của sách" />
+        </div>
+
+        <!-- Tóm tắt -->
+        <div class="form-group">
+            <label for="summary">Tóm tắt</label>
+            <textarea id="summary" formControlName="summary" class="form-control" rows="4"
+                placeholder="Tóm tắt nội dung sách"></textarea>
+        </div>
+
+        <!-- Thể loại -->
+        <div class="form-group">
+            <label for="genre">Thể loại</label>
+            <input type="text" id="genre" formControlName="genre" class="form-control"
+                placeholder="Nhập thể loại sách" />
+        </div>
+
+        <!-- File tải lên -->
+        <div class="form-group">
+            <label for="file">Tệp tài liệu</label>
+            <input type="file" id="file" (change)="onFileChange($event)" class="form-control" />
+        </div>
+
+        <!-- Nút Thêm -->
+        <button type="submit" class="btn btn-primary" [disabled]="addBookForm.invalid">
+            Thêm Sách
+        </button>
+    </form>
+</div>

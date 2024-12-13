@@ -7,6 +7,7 @@ export interface Book {
   genre: string;
   summary: string;
   PublisherName: string;
+  PublisherId: number;
   AuthorName: string;
   language: string;
   file_path: string;

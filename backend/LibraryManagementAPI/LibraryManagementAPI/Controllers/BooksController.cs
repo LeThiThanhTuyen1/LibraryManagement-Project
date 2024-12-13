@@ -144,21 +144,33 @@ namespace LibraryManagementAPI.Controllers
 
             return CreatedAtAction("GetBook", new { id = book.book_id }, book);
         }
-        
-        // DELETE: api/Books/5
+
+        // DELETE: api/Books/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
+            // Tìm sách dựa trên ID
             var book = await _context.Books.FindAsync(id);
             if (book == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Book not found." });
             }
 
+            // Xóa file liên quan (nếu có)
+            if (!string.IsNullOrEmpty(book.file_path))
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", book.file_path);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+
+            // Xóa thông tin sách trong cơ sở dữ liệu
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(new { message = "Book deleted successfully." });
         }
 
         private bool BookExists(int id)
@@ -232,35 +244,6 @@ namespace LibraryManagementAPI.Controllers
              return Ok(genres);
          }
 
-         [HttpGet("GetBookById1/{bookId}")]
-        public async Task<IActionResult> GetBookById1(int bookId)
-        {
-            var book = await _context.Books
-                .Include(b => b.Publisher)
-                .Where(b => b.book_id == bookId)
-                .Select(b => new
-                {
-                    b.book_id,
-                    b.title,
-                    b.isbn,
-                    b.publication_year,
-                    b.genre,
-                    b.summary,
-                    b.language,
-                    b.file_path,
-                    b.accessLevel,
-                    PublisherId = b.Publisher.publisher_id,
-                    PublisherName = b.Publisher.name
-                })
-                .FirstOrDefaultAsync();
-
-            if (book == null)
-            {
-                return NotFound(new { message = "Book not found." });
-            }
-
-            return Ok(book);
-        }
-
     }
 }
+
