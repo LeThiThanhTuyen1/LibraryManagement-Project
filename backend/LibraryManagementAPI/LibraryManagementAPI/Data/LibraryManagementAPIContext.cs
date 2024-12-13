@@ -30,6 +30,12 @@ namespace LibraryManagementAPI.Data
         {
             modelBuilder.Entity<BookAuthor>()
                 .HasKey(ba => new { ba.book_id, ba.author_id });
+
+            modelBuilder.Entity<Book>()
+            .HasOne(b => b.Publisher)
+            .WithMany() // Nếu Publisher không có danh sách sách liên quan, để trống
+            .HasForeignKey(b => b.PublisherId)
+            .OnDelete(DeleteBehavior.Cascade); // Thiết lập hành vi xóa liên kết
         }
     }
 }

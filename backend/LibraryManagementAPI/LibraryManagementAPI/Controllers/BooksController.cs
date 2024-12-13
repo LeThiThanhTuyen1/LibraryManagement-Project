@@ -243,8 +243,7 @@ namespace LibraryManagementAPI.Controllers
         
              return Ok(genres);
          }
-        
-        
+
     }
 }
 

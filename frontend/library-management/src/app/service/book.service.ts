@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 import { Book } from '../model/book.model';
 
 @Injectable({
@@ -33,15 +34,17 @@ export class BookService {
     return this.http.post<Book>(this.apiUrl, book).pipe(catchError(this.handleError));
   }
 
-  updateBook(book: Book): Observable<Book> {
-    return this.http
-      .put<Book>(`${this.apiUrl}/${book.book_id}`, book)
-      .pipe(catchError(this.handleError));
+  // Hàm cập nhật thông tin sách
+  updateBook(id: number, bookData: any): Observable<any> {
+    return this.http.put(`http://localhost:5283/api/Books/${id}`, bookData, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json-patch+json')
+    });
   }
-  deleteBook(bookId: number): Observable<Book> {
-    return this.http
-      .delete<Book>(`${this.apiUrl}/DeleteBook/${bookId}`)
-      .pipe(catchError(this.handleError));
+  
+ 
+  // Hàm xóa sách
+  deleteBook(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   getGenres(): Observable<string[]> {
@@ -62,5 +65,16 @@ export class BookService {
       .pipe(catchError(this.handleError));
   }
 
-
 }
+  updateBookRating(bookId: number, averageRating: number, reviewCount: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${bookId}/rating`, {
+      averageRating,
+      reviewCount,
+    });
+  }
+
+  getBookById1(bookId: number): Observable<Book> {
+    const url = `${this.apiUrl}/GetBookById/${bookId}`;
+    return this.http.get<Book>(url);
+  }
+} 

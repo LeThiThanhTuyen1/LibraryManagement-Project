@@ -25,7 +25,9 @@ describe('BookListComponent', () => {
       AuthorName: 'Nguyễn Văn A',
       language: 'Tiếng Việt',
       file_path: '/path/java.pdf',
-      AverageRating: 4.5
+      AverageRating: 4.5,
+      accessLevel: 'public',
+      PublisherId: 1
     },
     {
       book_id: 2,
@@ -38,7 +40,9 @@ describe('BookListComponent', () => {
       AuthorName: 'Trần Văn B',
       language: 'Tiếng Việt',
       file_path: '/path/vanhoc.pdf',
-      AverageRating: 4.0
+      AverageRating: 4.0,
+      accessLevel: 'private',
+      PublisherId: 1
     }
   ];
 

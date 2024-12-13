@@ -14,10 +14,10 @@ export class ShareDocumentsComponent {
   major: string = '';
   files: File[] = [];
   documents: Document[] = [];
-  showShareForm: boolean = true;  // Biến kiểm tra form nào được hiển thị
+  showShareForm: boolean = true; 
   constructor(private authService: AuthService, private http: HttpClient) {}
   ngOnInit(): void {
-    this.getDocuments();  // Load the list of uploaded documents
+    this.getDocuments();  
   }
   onFileChange(event: any): void {
     this.files = event.target.files;

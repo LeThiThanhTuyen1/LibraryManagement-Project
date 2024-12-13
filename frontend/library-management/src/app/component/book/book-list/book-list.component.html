@@ -29,7 +29,8 @@
         </td>
         <td>
           <button class="btn btn-info" (click)="viewBook(book.book_id)">Xem</button>
-          <button *ngIf="userRole === 'admin'" class="btn btn-danger" (click)="deleteBook(book.book_id)">Xóa </button>
+          <button class="btn btn-danger" *ngIf="userRole === 'admin'" (click)="deleteBook(book.book_id)">Xóa </button>
+          <button class="btn btn-warning" *ngIf="userRole === 'admin'" (click)="editBook(book.book_id)">Sửa</button>
         </td>
       </tr>
     </tbody>

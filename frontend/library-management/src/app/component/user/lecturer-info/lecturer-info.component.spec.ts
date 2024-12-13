@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LecturerInfoComponent } from './lecturer-info.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LecturerService } from '../../../service/lecturer.service';
 
 describe('LecturerInfoComponent', () => {
   let component: LecturerInfoComponent;
@@ -8,7 +10,9 @@ describe('LecturerInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LecturerInfoComponent]
+      declarations: [LecturerInfoComponent],
+      imports: [HttpClientModule],
+      providers: [LecturerService] 
     })
     .compileComponents();
 

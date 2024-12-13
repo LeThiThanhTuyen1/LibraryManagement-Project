@@ -3,6 +3,7 @@ import { FooterComponent } from '../backet/footer/footer.component';
 import { HomeComponent } from './home.component';
 import { HeaderComponent } from '../backet/header/header.component';
 import { LinkLibraryComponent } from '../backet/link-library/link-library.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -10,6 +11,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [
         HomeComponent, 
         LinkLibraryComponent,
