@@ -76,4 +76,10 @@ export class BookService {
     const url = `${this.apiUrl}/GetBookById/${bookId}`;
     return this.http.get<Book>(url);
   }
+
+  viewDocument(bookId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/ViewDocument/${bookId}`, {
+      responseType: 'blob'
+    }).pipe(catchError(this.handleError));
+  }
 } 
