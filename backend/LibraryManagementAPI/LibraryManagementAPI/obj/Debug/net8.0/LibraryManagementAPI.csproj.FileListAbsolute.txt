@@ -1463,3 +1463,4 @@ C:\Users\hp\Desktop\New folder (11)\LibraryManagement-Project\backend\LibraryMan
 C:\Users\hp\Desktop\New folder (11)\LibraryManagement-Project\backend\LibraryManagementAPI\LibraryManagementAPI\obj\Debug\net8.0\LibraryManagementAPI.pdb
 C:\Users\hp\Desktop\New folder (11)\LibraryManagement-Project\backend\LibraryManagementAPI\LibraryManagementAPI\obj\Debug\net8.0\LibraryManagementAPI.genruntimeconfig.cache
 C:\Users\hp\Desktop\New folder (11)\LibraryManagement-Project\backend\LibraryManagementAPI\LibraryManagementAPI\obj\Debug\net8.0\ref\LibraryManagementAPI.dll
+C:\Users\hp\Desktop\New folder (13)\LibraryManagement-Project\backend\LibraryManagementAPI\LibraryManagementAPI\bin\Debug\net8.0\LibraryManagementAPI.staticwebassets.runtime.json
