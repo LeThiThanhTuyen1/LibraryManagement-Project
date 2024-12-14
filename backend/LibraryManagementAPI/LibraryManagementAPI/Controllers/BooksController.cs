@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementAPI.Controllers
 {
     [Route("api/[controller]")]
+
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -149,24 +151,21 @@ namespace LibraryManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            // Tìm sách dựa trên ID
             var book = await _context.Books.FindAsync(id);
             if (book == null)
             {
                 return NotFound(new { message = "Book not found." });
             }
 
-            // Xóa file liên quan (nếu có)
             if (!string.IsNullOrEmpty(book.file_path))
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", book.file_path);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", book.file_path);
                 if (System.IO.File.Exists(filePath))
                 {
                     System.IO.File.Delete(filePath);
                 }
             }
 
-            // Xóa thông tin sách trong cơ sở dữ liệu
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
 
@@ -178,7 +177,7 @@ namespace LibraryManagementAPI.Controllers
             return _context.Books.Any(e => e.book_id == id);
         }
 
-        HttpGet("GetBookFile/{bookId}")]
+        [HttpGet("GetBookFile/{bookId}")]
         public IActionResult GetBookFile(int bookId)
         {
             var book = _context.Books.FirstOrDefault(b => b.book_id == bookId);
@@ -243,7 +242,7 @@ namespace LibraryManagementAPI.Controllers
              return Ok(genres);
          }
 
-         HttpGet("ViewDocument/{bookId}")]
+        [HttpGet("ViewDocument/{bookId}")]
         [AllowAnonymous]
         public async Task<IActionResult> ViewDocument(int bookId)
         {
@@ -278,4 +277,5 @@ namespace LibraryManagementAPI.Controllers
 
     }
 }
+
 
