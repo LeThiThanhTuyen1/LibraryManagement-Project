@@ -1,47 +1,56 @@
-<div class="info-container">
-    <div class="left-section">
-      <img src="https://th.bing.com/th/id/OIP.O9YF9qMWDsUuo7m60RqiqAHaFi?rs=1&pid=ImgDetMain" alt="User Profile Picture" class="profile-picture">
-    </div>
-  
-    <div class="right-section">
-      <h2>Thông Tin Sinh Viên</h2>
-      <table>
-        <tbody> <!-- Thêm thẻ tbody -->
-          <tr>
-            <th>Tên</th>
-            <td>{{ student.FirstName }} {{ student.LastName }}</td>
-          </tr>
-          <tr>
-            <th>Mã sinh viên</th>
-            <td>{{ student.Username }}</td>
-          </tr>
-          <tr>
-            <th>Email</th>
-            <td>{{ student.Email }}</td>
-          </tr>
-          <tr>
-            <th>Số điện thoại</th>
-            <td>{{ student.PhoneNumber }}</td>
-          </tr>
-          <tr>
-            <th>Ngành học</th>
-            <td>{{ student.MajorName }}</td>
-          </tr>
-          <tr>
-            <th>Khóa</th>
-            <td>{{ student.Course }}</td>
-          </tr>
-          <tr>
-            <th>Năm học:</th>
-            <td>{{ student.EnrollmentYear }}</td>
-          </tr>
-        </tbody> <!-- Kết thúc thẻ tbody -->
-      </table>
-    
-      <div class="button-container">
-        <button class="edit-info">Thay đổi thông tin</button>
-        <button class="edit-info">Thay đổi mật khẩu</button>
-      </div>
+<div class="info-container" *ngIf="student">
+  <div class="left-section">
+    <img src="https://th.bing.com/th/id/OIP.O9YF9qMWDsUuo7m60RqiqAHaFi?rs=1&pid=ImgDetMain" alt="Student Profile Picture" class="profile-picture">
+  </div>
+
+  <div class="right-section">
+    <h2>Thông Tin Sinh Viên</h2>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Hiển thị thông báo lỗi -->
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Họ tên</th>
+          <td>{{ student.FirstName }} {{ student.LastName }}</td>
+        </tr>
+        <tr>
+          <th>Mã sinh viên</th>
+          <td>{{ student.Username }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>
+            <span *ngIf="!isEditing">{{ user.Email }}</span>
+            <input *ngIf="isEditing" type="email" [(ngModel)]="user.Email" />
+          </td>
+        </tr>
+        <tr>
+          <th>Số điện thoại</th>
+          <td>
+            <span *ngIf="!isEditing">{{ user.PhoneNumber }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="user.PhoneNumber" />
+          </td>
+        </tr>
+        <tr>
+          <th>Ngành học</th>
+          <td>{{ student.MajorName }}</td>
+        </tr>
+        <tr>
+          <th>Khóa</th>
+          <td>{{ student.Course }}</td>
+        </tr>
+        <tr>
+          <th>Năm học</th>
+          <td>{{ student.EnrollmentYear }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="button-container">
+      <button *ngIf="!isEditing" class="edit-info" (click)="enableEditing()">Thay đổi thông tin</button>
+      <button *ngIf="isEditing" class="save-info" (click)="saveChanges()">Lưu thay đổi</button>
+      <button *ngIf="isEditing" class="cancel-info" (click)="cancelEditing()">Hủy</button>
+      <button *ngIf="!isEditing" class="edit-info">Thay đổi mật khẩu</button>
     </div>
   </div>
-  
+</div>
