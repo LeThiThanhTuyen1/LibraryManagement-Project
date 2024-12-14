@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { BookDetailComponent } from './book-detail.component';
 import { BookService } from '../../../service/book.service';
 import { Book } from '../../../model/book.model';
@@ -42,7 +42,7 @@ describe('BookDetailComponent', () => {
 
   beforeEach(async () => {
     // Create spies for services
-    mockBookService = jasmine.createSpyObj('BookService', ['getBookById']);
+    mockBookService = jasmine.createSpyObj('BookService', ['getBookById', 'getBookFile']);
     mockFavoriteService = jasmine.createSpyObj('FavoriteService', ['addFavorite', 'deleteFavoriteByBookId']);
 
     mockBookService.getBookById.and.returnValue(of(mockBook));
@@ -130,4 +130,81 @@ describe('BookDetailComponent', () => {
     expect(TestBed.inject(Location).back).toHaveBeenCalled();
   });  
   
+  describe('downloadDocument', () => {
+    let localStorageGetItemSpy: jasmine.Spy;
+
+    beforeEach(() => {
+      localStorageGetItemSpy = spyOn(window.localStorage, 'getItem');
+      // Mặc định là admin user
+      localStorageGetItemSpy.and.returnValue(JSON.stringify({
+        user_id: 1,
+        role: 'admin'
+      }));
+      spyOn(window, 'alert');
+    });
+
+    it('should download document for admin user', () => {
+      const mockBlob = new Blob(['test'], { type: 'application/pdf' });
+      mockBookService.getBookFile.and.returnValue(of(mockBlob));
+      
+      component.book = {
+        ...mockBook,
+        accessLevel: 'private'
+      };
+      
+      const createObjectURLSpy = spyOn(URL, 'createObjectURL').and.returnValue('blob:url');
+      const revokeObjectURLSpy = spyOn(URL, 'revokeObjectURL');
+      
+      const mockAnchor = {
+        href: '',
+        download: '',
+        click: jasmine.createSpy('click')
+      };
+      spyOn(document, 'createElement').and.returnValue(mockAnchor as any);
+      
+      component.downloadDocument();
+      
+      expect(mockBookService.getBookFile).toHaveBeenCalledWith(mockBook.book_id);
+      expect(createObjectURLSpy).toHaveBeenCalled();
+      expect(mockAnchor.click).toHaveBeenCalled();
+      expect(revokeObjectURLSpy).toHaveBeenCalled();
+      expect(window.alert).toHaveBeenCalledWith('Tải tài liệu thành công!');
+    });
+
+    it('should show error message when user is not logged in', () => {
+      localStorageGetItemSpy.and.returnValue(null);
+      
+      component.downloadDocument();
+      
+      expect(window.alert).toHaveBeenCalledWith('Vui lòng đăng nhập để tải tài liệu.');
+      expect(mockBookService.getBookFile).not.toHaveBeenCalled();
+    });
+
+    it('should show access denied message for unauthorized users', () => {
+      localStorageGetItemSpy.and.returnValue(JSON.stringify({
+        user_id: 1,
+        role: 'user'
+      }));
+      
+      component.book = {
+        ...mockBook,
+        accessLevel: 'private'
+      };
+      
+      component.downloadDocument();
+      
+      expect(window.alert).toHaveBeenCalledWith('Bạn không có quyền tải tài liệu này.');
+      expect(mockBookService.getBookFile).not.toHaveBeenCalled();
+    });
+
+    it('should handle download error', () => {
+      mockBookService.getBookFile.and.returnValue(throwError(() => new Error('Download failed')));
+      
+      component.book = mockBook;
+      
+      component.downloadDocument();
+      
+      expect(window.alert).toHaveBeenCalledWith('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+    });
+  });
 });
