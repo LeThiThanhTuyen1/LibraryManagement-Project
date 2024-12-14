@@ -65,7 +65,6 @@ export class BookService {
       .pipe(catchError(this.handleError));
   }
 
-}
   updateBookRating(bookId: number, averageRating: number, reviewCount: number): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${bookId}/rating`, {
       averageRating,
