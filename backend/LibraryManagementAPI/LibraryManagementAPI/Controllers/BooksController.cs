@@ -35,29 +35,35 @@ namespace LibraryManagementAPI.Controllers
         {
             var books = await _context.Books
                 .Include(b => b.Publisher)
-                .Join(_context.Book_Authors,
-                      book => book.book_id,
-                      bookAuthor => bookAuthor.book_id,
-                      (book, bookAuthor) => new { book, bookAuthor.author_id })
-                .Join(_context.Authors,
-                      combined => combined.author_id,
-                      author => author.author_id,
-                      (combined, author) => new
-                      {
-                          combined.book.book_id,
-                          combined.book.title,
-                          combined.book.isbn,
-                          combined.book.publication_year,
-                          combined.book.genre,
-                          combined.book.summary,
-                          combined.book.language,
-                          combined.book.file_path,
-                          PublisherName = combined.book.Publisher.name,
-                          AuthorName = author.first_name + " " + author.last_name,
-                          AuthorNationality = author.nationality,
-                          AuthorBirthdate = author.birthdate,
-                          combined.book.accessLevel
-                      })
+                .GroupJoin(_context.Book_Authors,
+                    book => book.book_id,
+                    bookAuthor => bookAuthor.book_id,
+                    (book, bookAuthors) => new { book, bookAuthors })
+                .SelectMany(
+                    x => x.bookAuthors.DefaultIfEmpty(),
+                    (x, bookAuthor) => new { x.book, authorId = bookAuthor != null ? bookAuthor.author_id : 0 })
+                .GroupJoin(_context.Authors,
+                    combined => combined.authorId,
+                    author => author.author_id,
+                    (combined, authors) => new { combined.book, authors })
+                .SelectMany(
+                    x => x.authors.DefaultIfEmpty(),
+                    (x, author) => new
+                    {
+                        x.book.book_id,
+                        x.book.title,
+                        x.book.isbn,
+                        x.book.publication_year,
+                        x.book.genre,
+                        x.book.summary,
+                        x.book.language,
+                        x.book.file_path,
+                        PublisherName = x.book.Publisher != null ? x.book.Publisher.name : null,
+                        AuthorName = author != null ? author.first_name + " " + author.last_name : null,
+                        AuthorNationality = author != null ? author.nationality : null,
+                        AuthorBirthdate = author != null ? author.birthdate : null,
+                        x.book.accessLevel
+                    })
                 .ToListAsync();
 
             return Ok(books);
