@@ -39,9 +39,10 @@ const routes: Routes = [
   { path: 'student-info', component: StudentInfoComponent},
   { path: 'lecturer-info', component: LecturerInfoComponent},
   { path: 'share-documents', component: ShareDocumentsComponent},
+  { path: 'add-book-admin', component: AddBookAdminComponent },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'add-book-admin', component: AddBookAdminComponent }
+
 ];
 
 @NgModule({

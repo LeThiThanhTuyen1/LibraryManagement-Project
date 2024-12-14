@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {}
+    "C:\\Users\\hp\\Desktop\\New folder (13)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {
+    "C:\\Users\\hp\\Desktop\\New folder (13)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\Desktop\\New folder (13)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
         "projectName": "LibraryManagementAPI",
-        "projectPath": "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
+        "projectPath": "C:\\Users\\hp\\Desktop\\New folder (13)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\obj\\",
+        "outputPath": "C:\\Users\\hp\\Desktop\\New folder (13)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
