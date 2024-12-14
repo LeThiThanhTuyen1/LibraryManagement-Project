@@ -20,6 +20,7 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
 import { AddBookAdminComponent } from './component/admin/add-book-admin/add-book-admin.component';
 
 import { BookEditComponent } from './component/book/book-edit/book-edit.component';
+import { ApproveAdminComponent } from './component/admin/approve-admin/approve-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,9 +40,11 @@ const routes: Routes = [
   { path: 'student-info', component: StudentInfoComponent},
   { path: 'lecturer-info', component: LecturerInfoComponent},
   { path: 'share-documents', component: ShareDocumentsComponent},
+  { path: 'approve-admin', component: ApproveAdminComponent },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
   { path: 'add-book-admin', component: AddBookAdminComponent }
+
 ];
 
 @NgModule({

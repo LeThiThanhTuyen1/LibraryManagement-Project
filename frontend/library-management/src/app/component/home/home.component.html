@@ -1,5 +1,6 @@
 <div class="home-page">
-    <main class="content">
+  <main class="content">
+    <div class="the1">
       <section class="teacher-quote">
         <div class="avatar">
           <img src="/assets/images/avatar.jpg" alt="Teacher Avatar">
@@ -27,14 +28,71 @@
           <p>- Giáo sư Nguyễn Văn A</p>
         </div>
       </section>
-      <app-link-library></app-link-library>
-      <section class="image-carousel">
-        <div class="carousel">
-          <img src="/assets/images/photo1.jpg" alt="Photo 1">
-          <img src="/assets/images/photo2.jpg" alt="Photo 2">
-          <img src="/assets/images/photo3.jpg" alt="Photo 3">
-        </div>
-      </section>
-    </main>
+    </div>
+    <div class="the2">
+      <div class="statistics-container">
+        <!-- Thống kê Sách -->
+        <section class="book-stats">
+          <div class="stats-header">
+            <h3>📄 THỐNG KÊ</h3>
+          </div>
+          <ul class="stats-list">
+            <li>➤ <strong>Sách có sẵn:</strong> 40.000</li>
+            <li>
+              <strong>Tổng số sách theo</strong>
+              <select class="category-dropdown">
+                <option>Tiểu thuyết</option>
+                <option>Giáo trình</option>
+                <option>Văn học</option>
+              </select>
+              : 500
+            </li>
+            <li>➤ <strong>Sách có lượt tải nhiều nhất:</strong> 2000</li>
+          </ul>
+          <p class="highlight-text"><strong>Toán cao cấp</strong></p>
+        </section>
+      
+        <!-- Thống kê Truy cập -->
+        <section class="access-stats">
+          <div class="stats-header">
+            <h3>👥 THỐNG KÊ TRUY CẬP</h3>
+          </div>
+          <h2 class="access-total">20000</h2>
+          <div class="access-filter">
+            <select>
+              <option>Tháng 1</option>
+              <option>Tháng 2</option>
+              <option>Tháng 3</option>
+              <option>Tháng 4</option>
+              <option>Tháng 5</option>
+              <option>Tháng 6</option>
+              <option>Tháng 7</option>
+              <option>Tháng 8</option>
+              <option>Tháng 9</option>
+              <option>Tháng 10</option>
+              <option>Tháng 11</option>
+              <option>Tháng 12</option>
+            </select>
+            <select>
+              <option>2024</option>
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+              <option>2020</option>
+            </select>
+            : <strong>600</strong>
+          </div>
+        </section>
+      </div>
+    </div>
+    
+    <app-link-library></app-link-library>
+    <section class="image-carousel">
+      <div class="carousel">
+        <img src="/assets/images/photo1.jpg" alt="Photo 1">
+        <img src="/assets/images/photo2.jpg" alt="Photo 2">
+        <img src="/assets/images/photo3.jpg" alt="Photo 3">
+      </div>
+    </section>
+  </main>
 </div>
-  

@@ -1,0 +1,36 @@
+<!-- Phần bảng hiển thị danh sách tài liệu -->
+<div class="table-container" *ngIf="!isDetailVisible">
+    <table>
+      <thead>
+        <tr>
+          <th>Tài liệu</th>
+          <th>Người gửi</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of documents">
+          <td>{{ item.documentName }}</td>
+          <td>{{ item.sender }}</td>
+          <td>
+            <button class="btn-view" (click)="viewDocument(item)">Xem</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Phần chi tiết tài liệu -->
+  <div *ngIf="isDetailVisible" class="document-details">
+    <h3>Chi tiết tài liệu</h3>
+    <p><strong>Tên tài liệu:</strong> {{ selectedDocument.documentName }}</p>
+    <p><strong>Người gửi:</strong> {{ selectedDocument.sender }}</p>
+    <p><strong>Nội dung:</strong> {{ selectedDocument.content }}</p>
+  
+    <div class="action-buttons">
+      <button class="btn-approve" (click)="approveDocument()">Duyệt</button>
+      <button class="btn-reject" (click)="rejectDocument()">Từ chối</button>
+      <button class="btn-back" (click)="closeDetail()">Quay lại</button>
+    </div>
+  </div>
+  
