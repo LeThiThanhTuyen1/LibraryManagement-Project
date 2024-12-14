@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "aoUdUGKZ9X6RaKGPTW1xtNQJEw5J4B8r+4Vq6m1YEvU=",
+  "Hash": "Brdlp1pqgk9tQ2WwIcPOrPI/KhxncC6H2bMtDwwQJSw=",
   "Source": "LibraryManagementAPI",
   "BasePath": "_content/LibraryManagementAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "LibraryManagementAPI\\wwwroot",
+      "Source": "LibraryManagementAPI",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
+      "BasePath": "_content/LibraryManagementAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\WRITING.docx",
+      "SourceId": "LibraryManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (11)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
+      "BasePath": "_content/LibraryManagementAPI",
+      "RelativePath": "Uploads/WRITING.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\WRITING.docx"
+    }
+  ]
 }
