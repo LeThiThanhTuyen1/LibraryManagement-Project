@@ -6,6 +6,12 @@
     border-radius: 5px;
     background-color: #f9f9f9;
   }
+  .container h2 {
+    text-align: center;
+    color: #28a745;
+    bottom: 10px;
+
+  }
   .form-group label {
     font-weight: bold;
   }
@@ -28,4 +34,24 @@
   .btn:hover {
     background-color: #218838;
   }
-  
+  .required {
+    color: red;
+    font-weight: bold;
+}
+fieldset {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0 0.5rem;
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+}

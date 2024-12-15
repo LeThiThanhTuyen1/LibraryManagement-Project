@@ -1,95 +1,120 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AddBookAdminComponent } from './add-book-admin.component';
 import { BookAdminService } from '../../../service/bookadmin.service';
 import { of, throwError } from 'rxjs';
 
+class MockBookAdminService {
+  addBook() {
+    return of({ message: 'Success' }); // Mock response khi thành công
+  }
+}
+
 describe('AddBookAdminComponent', () => {
   let component: AddBookAdminComponent;
   let fixture: ComponentFixture<AddBookAdminComponent>;
-  let bookAdminService: jasmine.SpyObj<BookAdminService>;
+  let bookAdminService: BookAdminService;
 
   beforeEach(async () => {
-    const bookAdminSpy = jasmine.createSpyObj('BookAdminService', ['addBook', 'uploadFile']);
-    
     await TestBed.configureTestingModule({
       declarations: [AddBookAdminComponent],
-      imports: [ReactiveFormsModule, HttpClientTestingModule],
-      providers: [
-        { provide: BookAdminService, useValue: bookAdminSpy }
-      ]
+      imports: [ReactiveFormsModule],
+      providers: [{ provide: BookAdminService, useClass: MockBookAdminService }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddBookAdminComponent);
     component = fixture.componentInstance;
-    bookAdminService = TestBed.inject(BookAdminService) as jasmine.SpyObj<BookAdminService>;
-
+    bookAdminService = TestBed.inject(BookAdminService);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize form with empty values', () => {
-    expect(component.addBookForm.get('title')?.value).toBe('');
-    expect(component.addBookForm.get('isbn')?.value).toBe('');
+  it('should initialize the form with default values', () => {
+    expect(component.addBookForm.value).toEqual({
+      title: '',
+      isbn: '',
+      publicationYear: '',
+      language: '',
+      summary: '',
+      genre: '',
+      authorName: '',
+      authorNationality: '',
+      authorBirthYear: null,
+      publisherName: '',
+      publisherAddress: '',
+      publisherPhone: ''
+    });
   });
 
-  it('should validate required fields', () => {
-    const form = component.addBookForm;
-    expect(form.valid).toBeFalsy();
-
-    form.controls['title'].setValue('Test Book');
-    form.controls['isbn'].setValue('1234567890');
-
-    expect(form.valid).toBeTruthy();
+  it('should not allow form submission when invalid', () => {
+    spyOn(window, 'alert');
+    component.onSubmit();
+    expect(window.alert).toHaveBeenCalledWith('Vui lòng nhập đầy đủ thông tin hợp lệ và chọn file!');
   });
 
-  it('should handle file selection', () => {
-    const mockFile = new File([''], 'test.pdf', { type: 'application/pdf' });
-    const mockEvent = {
-      target: {
-        files: [mockFile]
-      }
-    } as unknown as Event;
+  it('should validate file type and mark it invalid if unsupported', () => {
+    const mockFile = new File(['content'], 'test.txt', { type: 'text/plain' });
+    const event = { target: { files: [mockFile] } } as unknown as Event;
 
-    component.onFileChange(mockEvent);
+    component.onFileChange(event);
+    expect(component.isFileValid).toBe(true);
     expect(component.selectedFile).toEqual(mockFile);
+
+    const invalidFile = new File(['content'], 'test.jpg', { type: 'image/jpeg' });
+    const invalidEvent = { target: { files: [invalidFile] } } as unknown as Event;
+
+    component.onFileChange(invalidEvent);
+    expect(component.isFileValid).toBe(false);
+    expect(window.alert).toHaveBeenCalledWith('File không hợp lệ.');
   });
 
-  it('should submit form successfully', () => {
-    const mockResponse = { success: true };
-    bookAdminService.addBook.and.returnValue(of(mockResponse));
+  it('should call bookAdminService.addBook() on valid form submission', () => {
+    spyOn(bookAdminService, 'addBook').and.callThrough();
+    spyOn(window, 'alert');
 
+    // Set form values
     component.addBookForm.patchValue({
       title: 'Test Book',
-      isbn: '1234567890',
-      publisherName: 'Test Publisher',
-      authorName: 'Test Author'
+      isbn: '123456789',
+      publicationYear: 2023,
+      language: 'English'
     });
 
-    spyOn(window, 'alert');
+    // Mock valid file
+    const mockFile = new File(['content'], 'test.txt', { type: 'text/plain' });
+    component.selectedFile = mockFile;
+    component.isFileValid = true;
+
     component.onSubmit();
 
     expect(bookAdminService.addBook).toHaveBeenCalled();
     expect(window.alert).toHaveBeenCalledWith('Thêm sách thành công!');
+    expect(component.addBookForm.value.title).toBe('');
   });
 
-  it('should handle submission error', () => {
-    bookAdminService.addBook.and.returnValue(throwError(() => new Error('Error')));
+  it('should handle error from bookAdminService.addBook()', () => {
+    spyOn(bookAdminService, 'addBook').and.returnValue(throwError(() => new Error('Error')));
+    spyOn(window, 'alert');
 
+    // Set form values
     component.addBookForm.patchValue({
       title: 'Test Book',
-      isbn: '1234567890'
+      isbn: '123456789',
+      publicationYear: 2023,
+      language: 'English'
     });
 
-    spyOn(window, 'alert');
-    spyOn(console, 'error');
+    // Mock valid file
+    const mockFile = new File(['content'], 'test.txt', { type: 'text/plain' });
+    component.selectedFile = mockFile;
+    component.isFileValid = true;
+
     component.onSubmit();
 
-    expect(console.error).toHaveBeenCalled();
+    expect(bookAdminService.addBook).toHaveBeenCalled();
     expect(window.alert).toHaveBeenCalledWith('Thêm sách thất bại, vui lòng thử lại!');
   });
 });

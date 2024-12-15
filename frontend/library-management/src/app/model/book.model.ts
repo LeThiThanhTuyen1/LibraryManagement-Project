@@ -5,7 +5,7 @@ export interface Book {
   isbn: string;
   publication_year: number;
   genre: string;
-  summary: string;
+  summary?: string;
   PublisherName: string;
   PublisherId: number;
   AuthorName: string;
@@ -13,4 +13,5 @@ export interface Book {
   file_path: string;
   AverageRating: number;
   accessLevel: string;
+
 }

@@ -31,10 +31,10 @@ const routes: Routes = [
   { path: 'link-library', component: LinkLibraryComponent },
   { path: 'favorite-list', component: FavoriteListComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent},
-  { path: 'search-documents', component: SearchDocumentsComponent},
-  { path: 'book-detail/:id', component: BookDetailComponent},
-  { path: 'book-review/:bookId', component: BookReviewComponent},
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'search-documents', component: SearchDocumentsComponent },
+  { path: 'book-detail/:id', component: BookDetailComponent },
+  { path: 'book-review/:bookId', component: BookReviewComponent },
   { path: 'book-edit/:id', component: BookEditComponent },
   { path: 'student-info', component: StudentInfoComponent},
   { path: 'lecturer-info', component: LecturerInfoComponent},
@@ -42,7 +42,6 @@ const routes: Routes = [
   { path: 'add-book-admin', component: AddBookAdminComponent },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
-
 ];
 
 @NgModule({
