@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { Document } from '../../../model/document.model';
 
 @Component({
   selector: 'app-share-documents',
@@ -53,14 +54,14 @@ export class ShareDocumentsComponent {
     );
   }
   getDocuments(): void {
-    // this.authService.getDocuments().subscribe(
-    //   (data: Document[]) => {
-    //     this.documents = data;
-    //   },
-    //   (error) => {
-    //     console.error('Lỗi khi tải tài liệu', error);
-    //   }
-    // );
+    this.authService.getDocuments().subscribe(
+      (data: Document[]) => {
+        this.documents = data;
+      },
+      (error) => {
+        console.error('Lỗi khi tải tài liệu', error);
+      }
+    );
   }
   
   showDocumentList(): void {
