@@ -31,20 +31,23 @@ export class BookService {
   }
 
   addBook(book: Book): Observable<Book> {
-    return this.http.post<Book>(this.apiUrl, book).pipe(catchError(this.handleError));
+    return this.http
+      .post<Book>(this.apiUrl, book)
+      .pipe(catchError(this.handleError));
   }
 
-  // Hàm cập nhật thông tin sách
   updateBook(id: number, bookData: any): Observable<any> {
-    return this.http.put(`http://localhost:5283/api/Books/${id}`, bookData, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json-patch+json')
-    });
+    return this.http
+      .put(`${this.apiUrl}/${id}`, bookData, {
+        headers: new HttpHeaders().set('Content-Type', 'application/json-patch+json'),
+      })
+      .pipe(catchError(this.handleError));
   }
-  
- 
-  // Hàm xóa sách
+
   deleteBook(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   getGenres(): Observable<string[]> {
@@ -66,15 +69,12 @@ export class BookService {
   }
 
   updateBookRating(bookId: number, averageRating: number, reviewCount: number): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${bookId}/rating`, {
-      averageRating,
-      reviewCount,
-    });
-  }
-
-  getBookById1(bookId: number): Observable<Book> {
-    const url = `${this.apiUrl}/GetBookById/${bookId}`;
-    return this.http.get<Book>(url);
+    return this.http
+      .put<void>(`${this.apiUrl}/${bookId}/rating`, {
+        averageRating,
+        reviewCount,
+      })
+      .pipe(catchError(this.handleError));
   }
 
   viewDocument(bookId: number): Observable<Blob> {
@@ -83,3 +83,4 @@ export class BookService {
     }).pipe(catchError(this.handleError));
   }
 } 
+

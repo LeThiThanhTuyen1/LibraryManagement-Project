@@ -29,81 +29,109 @@ namespace LibraryManagementAPI.Controllers
         {
             return await _context.Books.Include(b => b.Publisher).ToListAsync();
         }
-        
+
         [HttpGet("GetAllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {
             var books = await _context.Books
                 .Include(b => b.Publisher)
-                .Join(_context.Book_Authors,
-                      book => book.book_id,
-                      bookAuthor => bookAuthor.book_id,
-                      (book, bookAuthor) => new { book, bookAuthor.author_id })
-                .Join(_context.Authors,
-                      combined => combined.author_id,
-                      author => author.author_id,
-                      (combined, author) => new
-                      {
-                          combined.book.book_id,
-                          combined.book.title,
-                          combined.book.isbn,
-                          combined.book.publication_year,
-                          combined.book.genre,
-                          combined.book.summary,
-                          combined.book.language,
-                          combined.book.file_path,
-                          PublisherName = combined.book.Publisher.name,
-                          AuthorName = author.first_name + " " + author.last_name,
-                          AuthorNationality = author.nationality,
-                          AuthorBirthdate = author.birthdate,
-                          combined.book.accessLevel
-                      })
+                .GroupJoin(
+                    _context.Book_Authors,
+                    book => book.book_id,
+                    bookAuthor => bookAuthor.book_id,
+                    (book, bookAuthors) => new { book, bookAuthors }
+                )
+                .SelectMany(
+                    combined => combined.bookAuthors.DefaultIfEmpty(),
+                    (combined, bookAuthor) => new { combined.book, authorId = bookAuthor != null ? bookAuthor.author_id : (int?)null }
+                )
+                .GroupJoin(
+                    _context.Authors,
+                    combined => combined.authorId,
+                    author => author.author_id,
+                    (combined, authors) => new { combined.book, authors }
+                )
+                .SelectMany(
+                    combined => combined.authors.DefaultIfEmpty(),
+                    (combined, author) => new
+                    {
+                        combined.book.book_id,
+                        combined.book.title,
+                        combined.book.isbn,
+                        combined.book.publication_year,
+                        combined.book.genre,
+                        combined.book.summary,
+                        combined.book.language,
+                        combined.book.file_path,
+                        PublisherName = combined.book.Publisher != null ? combined.book.Publisher.name : "Chưa có thông tin",
+                        PublisherId = combined.book.Publisher != null ? combined.book.Publisher.publisher_id : (int?)null,
+                        AuthorName = author != null ? author.first_name + " " + author.last_name : "Chưa có thông tin",
+                        AuthorNationality = author != null ? author.nationality : null,
+                        AuthorBirthdate = author != null ? (DateTime?)author.birthdate : null,
+                        combined.book.accessLevel
+                    }
+                )
                 .ToListAsync();
 
             return Ok(books);
         }
 
+
         // GET: api/Books/5
         [HttpGet("GetBookById/{bookId}")]
         public async Task<IActionResult> GetBookById(int bookId)
         {
-            var book = await _context.Books
-                .Include(b => b.Publisher) 
-                .Join(_context.Book_Authors,
-                      b => b.book_id,
-                      ba => ba.book_id,
-                      (b, ba) => new { b, ba.author_id })
-                .Join(_context.Authors,
-                      combined => combined.author_id,
-                      a => a.author_id,
-                      (combined, a) => new
-                      {
-                          combined.b.book_id,
-                          combined.b.title,
-                          combined.b.isbn,
-                          combined.b.publication_year,
-                          combined.b.genre,
-                          combined.b.summary,
-                          combined.b.language,
-                          combined.b.file_path,
-                          combined.b.accessLevel,
-                          PublisherName = combined.b.Publisher.name,
-                          AuthorName = a.first_name + " " + a.last_name,
-                          AuthorNationality = a.nationality,
-                          AuthorBirthdate = a.birthdate,
-                          AverageRating = _context.Book_Reviews
-                        .Where(r => r.book_id == bookId )
-                        .Average(r => (double?)r.rating) ?? 0
-                      })
+            var bookDetails = await _context.Books
+                .Include(b => b.Publisher)
+                .GroupJoin(
+                    _context.Book_Authors,
+                    book => book.book_id,
+                    bookAuthor => bookAuthor.book_id,
+                    (book, bookAuthors) => new { book, bookAuthors }
+                )
+                .SelectMany(
+                    combined => combined.bookAuthors.DefaultIfEmpty(),
+                    (combined, bookAuthor) => new { combined.book, authorId = bookAuthor != null ? bookAuthor.author_id : (int?)null }
+                )
+                .GroupJoin(
+                    _context.Authors,
+                    combined => combined.authorId,
+                    author => author.author_id,
+                    (combined, authors) => new { combined.book, authors }
+                )
+                .SelectMany(
+                    combined => combined.authors.DefaultIfEmpty(),
+                    (combined, author) => new
+                    {
+                        combined.book.book_id,
+                        combined.book.title,
+                        combined.book.isbn,
+                        Publication_year = combined.book.publication_year,
+                        combined.book.genre,
+                        combined.book.summary,
+                        combined.book.language,
+                        combined.book.file_path,
+                        combined.book.accessLevel,
+                        PublisherName = combined.book.Publisher != null ? combined.book.Publisher.name : "Chưa có thông tin",
+                        PublisherId = combined.book.Publisher != null ? combined.book.Publisher.publisher_id : (int?)null,
+                        AuthorName = author != null ? author.first_name + " " + author.last_name : "Chưa có thông tin",
+                        AuthorNationality = author != null ? author.nationality : null,
+                        AuthorBirthdate = author != null ? (DateTime?)author.birthdate : null,
+                        AverageRating = _context.Book_Reviews
+                            .Where(r => r.book_id == combined.book.book_id)
+                            .Average(r => (double?)r.rating) ?? 0
+                    }
+                )
                 .FirstOrDefaultAsync(b => b.book_id == bookId); // Lọc theo book_id
 
-            if (book == null)
+            if (bookDetails == null)
             {
                 return NotFound(new { message = "Book not found." });
             }
 
-            return Ok(book);
+            return Ok(bookDetails);
         }
+
 
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
