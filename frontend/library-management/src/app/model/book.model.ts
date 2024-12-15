@@ -14,5 +14,4 @@ export interface Book {
   AverageRating: number;
   accessLevel: string;
 
-
 }

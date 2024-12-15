@@ -21,17 +21,20 @@ export class LecturerInfoComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     this.userId = user.user_id;
     this.user.Email = user.email;
-    this.user.PhoneNumber = user.phone_number || '';
+    this.user.PhoneNumber = user.phone_number || ''; // Ensure phone number is set initially
 
     if (this.userId) {
       this.loadLecturerInfo();
     }
   }
 
+  // Load lecturer information from the API
   loadLecturerInfo() {
     this.lecturerService.getLecturerDetailsByUserId(this.userId).subscribe(
       (response: any) => {
         this.lecturer = response;
+        // Populate user phone number with data from API response
+        this.user.PhoneNumber = this.lecturer.PhoneNumber || '';
         console.log(this.lecturer);
       },
       (error) => {
@@ -40,34 +43,35 @@ export class LecturerInfoComponent implements OnInit {
     );
   }
 
+  // Enable editing of the form
   enableEditing() {
     this.isEditing = true;
-    this.originalUser = { ...this.user }; // Lưu lại thông tin gốc của user
+    this.originalUser = { ...this.user }; // Save original user info for cancellation
   }
 
+  // Save changes to the lecturer information
   saveChanges() {
-    this.errorMessage = ''; // Reset thông báo lỗi
+    this.errorMessage = ''; // Reset error message
   
-    // Kiểm tra email ở frontend
+    // Validate email on frontend
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.user.Email)) {
       this.errorMessage = 'Email không hợp lệ. Vui lòng nhập lại.';
       return;
     }
   
-    // Kiểm tra số điện thoại trống
+    // Validate phone number
     if (!this.user.PhoneNumber) {
       this.errorMessage = 'Số điện thoại không được để trống.';
       return;
     }
   
-    // Kiểm tra số điện thoại
     if (this.user.PhoneNumber.length !== 10 || isNaN(this.user.PhoneNumber)) {
       this.errorMessage = 'Số điện thoại phải có đúng 10 chữ số.';
       return;
     }
   
-    // Gửi yêu cầu cập nhật lên server
+    // Send update request to the server
     this.userService.updateUser(this.userId, this.user).subscribe(
       response => {
         console.log('User updated successfully', response);
@@ -75,7 +79,6 @@ export class LecturerInfoComponent implements OnInit {
         this.isEditing = false;
       },
       error => {
-        // Hiển thị thông báo lỗi từ backend
         if (error.error && error.error.message) {
           this.errorMessage = error.error.message;
         } else {
@@ -83,10 +86,11 @@ export class LecturerInfoComponent implements OnInit {
         }
       }
     );
-  }  
+  }
 
+  // Cancel the editing process and restore original data
   cancelEditing() {
     this.isEditing = false;
-    this.user = { ...this.originalUser };
+    this.user = { ...this.originalUser }; // Restore original data
   }
 }

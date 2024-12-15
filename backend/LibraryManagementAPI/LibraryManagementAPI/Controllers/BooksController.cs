@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementAPI.Controllers
 {
     [Route("api/[controller]")]
+
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -177,24 +179,21 @@ namespace LibraryManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            // Tìm sách dựa trên ID
             var book = await _context.Books.FindAsync(id);
             if (book == null)
             {
                 return NotFound(new { message = "Book not found." });
             }
 
-            // Xóa file liên quan (nếu có)
             if (!string.IsNullOrEmpty(book.file_path))
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", book.file_path);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", book.file_path);
                 if (System.IO.File.Exists(filePath))
                 {
                     System.IO.File.Delete(filePath);
                 }
             }
 
-            // Xóa thông tin sách trong cơ sở dữ liệu
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
 
@@ -216,14 +215,13 @@ namespace LibraryManagementAPI.Controllers
                 return NotFound(new { message = "File not found." });
             }
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", book.file_path);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", book.file_path);
 
             if (!System.IO.File.Exists(filePath))
             {
                 return NotFound(new { message = "File does not exist on server." });
             }
 
-            // Lấy định dạng file
             var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
             string mimeType = fileExtension switch
             {
@@ -232,7 +230,7 @@ namespace LibraryManagementAPI.Controllers
                 ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
                 ".txt" => "text/plain",
-                _ => "application/octet-stream" // MIME type mặc định
+                _ => "application/octet-stream"
             };
 
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
@@ -272,6 +270,40 @@ namespace LibraryManagementAPI.Controllers
              return Ok(genres);
          }
 
+        [HttpGet("ViewDocument/{bookId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ViewDocument(int bookId)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.book_id == bookId);
+
+            if (book == null || string.IsNullOrEmpty(book.file_path))
+            {
+                return NotFound(new { message = "Document not found." });
+            }
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", book.file_path);
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound(new { message = "File does not exist on server." });
+            }
+
+            var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
+            string mimeType = fileExtension switch
+            {
+                ".pdf" => "application/pdf",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                ".txt" => "text/plain",
+                _ => "application/octet-stream"
+            };
+
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(fileBytes, mimeType);
+        }
+
     }
 }
+
 

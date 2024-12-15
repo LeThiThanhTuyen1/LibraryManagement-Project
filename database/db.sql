@@ -147,7 +147,7 @@ INSERT INTO Publishers (name, address) VALUES
 
 -- Thêm dữ liệu vào bảng Books
 INSERT INTO Books (title, isbn, publication_year, genre, summary, publisher_id, language, file_path) VALUES
-(N'Lập trình Java', '9781234567890', 2020, N'Giáo trình', N'Sách lập trình Java cơ bản', 1, N'Tiếng Việt', 'moi.pdf'),
+(N'Lập trình Java', '9781234567890', 2020, N'Giáo trình', N'Sách lập trình Java cơ bản', 1, N'Tiếng Việt', 'chap.docx'),
 (N'Giải tích Toán học', '9782345678901', 2018, N'Giáo trình', N'Sách về giải tích toán học', 2, N'Tiếng Việt', 'moi.pdf'),
 (N'Harry Potter', '9783456789012', 2001, N'Tiểu thuyết', N'Harry Potter và Hòn đá phù thủy', 3, N'Tiếng Anh', 'moi.pdf');
 

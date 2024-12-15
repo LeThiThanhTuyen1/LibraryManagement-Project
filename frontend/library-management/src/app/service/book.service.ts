@@ -76,4 +76,11 @@ export class BookService {
       })
       .pipe(catchError(this.handleError));
   }
-}
+
+  viewDocument(bookId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/ViewDocument/${bookId}`, {
+      responseType: 'blob'
+    }).pipe(catchError(this.handleError));
+  }
+} 
+
