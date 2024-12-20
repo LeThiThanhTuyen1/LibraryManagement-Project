@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookAdminService } from '../../../service/bookadmin.service';
 import { BookListComponent } from '../../book/book-list/book-list.component';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-add-book-admin',
@@ -13,7 +15,8 @@ export class AddBookAdminComponent {
   selectedFile: File | null = null;
   isFileValid: boolean = false;
 
-  constructor(private fb: FormBuilder, private bookAdminService: BookAdminService) {
+  constructor(private fb: FormBuilder, private bookAdminService: BookAdminService, private location: Location,) {
+
     this.addBookForm = this.fb.group({
       title: ['', Validators.required],
       isbn: ['', Validators.required],
@@ -40,21 +43,39 @@ export class AddBookAdminComponent {
     if (input?.files?.length) {
       const file = input.files[0];
       const allowedTypes = [
-        'application/pdf',
-        'application/doc',
-        'application/sql',
-        'application/msword',
-        'text/plain',
+        'application/pdf', // PDF
+        'application/msword', // DOC
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // DOCX
+        'text/plain', // TXT
+
       ];
+      const maxSizeInMB = 1; // Giới hạn kích thước file là 1MB
+      const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+
+      // Kiểm tra loại file
       if (!allowedTypes.includes(file.type)) {
-        alert('File không hợp lệ.');
+        alert('File không hợp lệ. Vui lòng tải lên tài liệu hợp lệ (PDF, DOC, DOCX, TXT).');
         this.isFileValid = false; // Đánh dấu file không hợp lệ
+        this.selectedFile = null; // Xóa file đã chọn
         return;
       }
+
+      // Kiểm tra kích thước file
+      if (file.size > maxSizeInBytes) {
+        alert(`File quá lớn. Kích thước tối đa cho phép là ${maxSizeInMB} MB.`);
+        this.isFileValid = false; // Đánh dấu file không hợp lệ
+        this.selectedFile = null; // Xóa file đã chọn
+        return;
+      }
+
+      // Nếu file hợp lệ
       this.selectedFile = file;
       this.isFileValid = true; // Đánh dấu file hợp lệ
     } else {
-      this.isFileValid = false; // Không có file nào được chọn
+      // Không có file nào được chọn
+      alert('Vui lòng chọn file!');
+      this.isFileValid = false;
+      this.selectedFile = null; // Xóa file đã chọn
     }
   }
 
@@ -96,5 +117,8 @@ export class AddBookAdminComponent {
         alert('Thêm sách thất bại, vui lòng thử lại!');
       },
     });
+  }
+  onCancel(): void {
+    this.location.back();
   }
 }
