@@ -1,43 +1,48 @@
+/* Container chính */
 .container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  .container h2 {
-    text-align: center;
-    color: #28a745;
-    bottom: 10px;
-
-  }
-  .form-group label {
-    font-weight: bold;
-  }
-  .form-group input {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .btn-primary {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .btn-primary:hover {
-    background-color: #218838;
-  }
-  .required {
-    color: red;
-    font-weight: bold;
+  max-width: 900px; /* Tăng chiều rộng container để phù hợp với hai cột */
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
+
+/* Tiêu đề */
+.container h2 {
+  text-align: center;
+  color: #28a745;
+  margin-bottom: 20px;
+}
+
+/* Bố cục form */
+.form-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Cột form */
+.form-column {
+  flex: 1; /* Mỗi cột chiếm 50% chiều rộng */
+  min-width: 300px; /* Đảm bảo kích thước tối thiểu */
+}
+
+/* Định dạng nhóm form */
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Fieldset */
 fieldset {
   border: 1px solid #ccc;
   padding: 1rem;
@@ -51,36 +56,56 @@ legend {
   padding: 0 0.5rem;
 }
 
-.required {
-  color: red;
-  font-weight: bold;
+/* Nút chính */
+.btn-primary {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-/* Định dạng nút Hủy */
+
+.btn-primary:hover {
+  background-color: #218838;
+}
+
+/* Nút hủy */
 .btn-secondary {
-  background-color: #f44336; /* Màu đỏ */
-  color: white;             /* Màu chữ */
-  border: none;             /* Loại bỏ viền */
-  padding: 10px 20px;       /* Khoảng cách trong */
-  font-size: 16px;          /* Kích thước chữ */
-  border-radius: 5px;       /* Bo tròn các góc */
-  cursor: pointer;          /* Con trỏ dạng bàn tay khi hover */
-  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi khi hover */
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   margin-left: 20px;
 }
 
-/* Hiệu ứng hover */
 .btn-secondary:hover {
-  background-color: #d32f2f; /* Màu đỏ đậm hơn khi hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng khi hover */
+  background-color: #d32f2f;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Hiệu ứng khi nhấn */
 .btn-secondary:active {
-  transform: scale(0.98); /* Co lại nhẹ khi nhấn */
-  box-shadow: none;       /* Loại bỏ đổ bóng khi nhấn */
+  transform: scale(0.98);
+  box-shadow: none;
 }
 
-/* Định dạng chung cho nút */
+/* Định dạng nút */
 button {
   font-family: Arial, sans-serif;
+}
+
+/* Khoảng cách giữa các cột */
+.form-layout .form-column {
+  margin-top: 0;
+}
+
+.required {
+  color: red;
+  font-weight: bold;
 }
