@@ -1,112 +1,99 @@
 <div class="container">
     <h2>Thêm Sách Mới</h2>
     <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
-        <!-- Thông tin Sách -->
+        <div class="form-layout">
+            <!-- Cột bên trái -->
+            <div class="form-column">
+                <fieldset>
+                    <legend>Thông tin Tài liệu</legend>
+                    <div class="form-group">
+                        <label for="title">Tiêu đề <span class="required">*</span></label>
+                        <input type="text" id="title" formControlName="title" class="form-control"
+                            placeholder="Nhập tiêu đề sách" />
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN <span class="required">*</span></label>
+                        <input type="text" id="isbn" formControlName="isbn" class="form-control"
+                            placeholder="Nhập mã ISBN" />
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Ngôn ngữ <span class="required">*</span></label>
+                        <input type="text" id="language" formControlName="language" class="form-control"
+                            placeholder="Ngôn ngữ của sách" />
+                    </div>
+                    <div class="form-group">
+                        <label for="publicationYear">Năm xuất bản<span class="required">*</span></label>
+                        <input type="number" id="publicationYear" formControlName="publicationYear" class="form-control"
+                            placeholder="Nhập năm xuất bản" />
+                    </div>
+                    <div class="form-group">
+                        <label for="summary">Tóm tắt</label>
+                        <textarea id="summary" formControlName="summary" class="form-control" rows="4"
+                            placeholder="Tóm tắt nội dung sách"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Thể loại</label>
+                        <input type="text" id="genre" formControlName="genre" class="form-control"
+                            placeholder="Nhập thể loại sách" />
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Cột bên phải -->
+            <div class="form-column">
+                <fieldset>
+                    <legend>Thông tin Tác giả</legend>
+                    <div class="form-group">
+                        <label for="authorName">Tên tác giả</label>
+                        <input type="text" id="authorName" formControlName="authorName" class="form-control"
+                            placeholder="Nhập tên tác giả" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Quốc tịch</label>
+                        <input type="text" id="nationality" formControlName="authorNationality" class="form-control"
+                            placeholder="Quốc tịch của tác giả" />
+                    </div>
+                    <div class="form-group">
+                        <label for="authorBirthYear">Năm sinh</label>
+                        <input type="number" id="authorBirthYear" formControlName="authorBirthYear" class="form-control"
+                            placeholder="Nhập năm sinh của tác giả" />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Thông tin Nhà xuất bản</legend>
+                    <div class="form-group">
+                        <label for="publisherName">Tên nhà xuất bản</label>
+                        <input type="text" id="publisherName" formControlName="publisherName" class="form-control"
+                            placeholder="Nhập tên nhà xuất bản" />
+                    </div>
+                    <div class="form-group">
+                        <label for="publisherAddress">Địa chỉ</label>
+                        <input type="text" id="publisherAddress" formControlName="publisherAddress" class="form-control"
+                            placeholder="Nhập địa chỉ nhà xuất bản" />
+                    </div>
+                    <div class="form-group">
+                        <label for="publisherPhone">Số điện thoại</label>
+                        <input type="text" id="publisherPhone" formControlName="publisherPhone" class="form-control"
+                            placeholder="Số điện thoại nhà xuất bản" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <!-- Thông tin tệp -->
         <fieldset>
-            <legend>Thông tin Tài liệu</legend>
-
-            <!-- Tiêu đề -->
-            <div class="form-group">
-                <label for="title">Tiêu đề <span class="required">*</span></label>
-                <input type="text" id="title" formControlName="title" class="form-control"
-                    placeholder="Nhập tiêu đề sách" />
-            </div>
-
-            <!-- ISBN -->
-            <div class="form-group">
-                <label for="isbn">ISBN <span class="required">*</span></label>
-                <input type="text" id="isbn" formControlName="isbn" class="form-control" placeholder="Nhập mã ISBN" />
-            </div>
-
-            <!-- Ngôn ngữ -->
-            <div class="form-group">
-                <label for="language">Ngôn ngữ <span class="required">*</span></label>
-                <input type="text" id="language" formControlName="language" class="form-control"
-                    placeholder="Ngôn ngữ của sách" />
-            </div>
-            <div class="form-group">
-                <label for="publicationYear">Năm xuất bản</label>
-                <input type="number" id="publicationYear" formControlName="publicationYear" class="form-control"
-                    placeholder="Nhập năm xuất bản" />
-            </div>
-            <!-- Tóm tắt -->
-            <div class="form-group">
-                <label for="summary">Tóm tắt</label>
-                <textarea id="summary" formControlName="summary" class="form-control" rows="4"
-                    placeholder="Tóm tắt nội dung sách"></textarea>
-            </div>
-
-            <!-- Thể loại -->
-            <div class="form-group">
-                <label for="genre">Thể loại</label>
-                <input type="text" id="genre" formControlName="genre" class="form-control"
-                    placeholder="Nhập thể loại sách" />
-            </div>
-        </fieldset>
-
-        <!-- Thông tin Tác giả -->
-        <fieldset>
-            <legend>Thông tin Tác giả</legend>
-
-            <!-- Tên tác giả -->
-            <div class="form-group">
-                <label for="authorName">Tên tác giả </label>
-                <input type="text" id="authorName" formControlName="authorName" class="form-control"
-                    placeholder="Nhập tên tác giả" />
-            </div>
-
-            <!-- Quốc tịch -->
-            <div class="form-group">
-                <label for="nationality">Quốc tịch</label>
-                <input type="text" id="nationality" formControlName="authorNationality" class="form-control"
-                    placeholder="Quốc tịch của tác giả" />
-            </div>
-
-            <!-- Năm sinh -->
-            <div class="form-group">
-                <label for="authorBirthYear">Năm sinh</label>
-                <input type="number" id="authorBirthYear" formControlName="authorBirthYear" class="form-control"
-                    placeholder="Nhập năm sinh của tác giả" />
-            </div>
-        </fieldset>
-
-        <!-- Thông tin Nhà xuất bản -->
-        <fieldset>
-            <legend>Thông tin Nhà xuất bản</legend>
-
-            <!-- Tên nhà xuất bản -->
-            <div class="form-group">
-                <label for="publisherName">Tên nhà xuất bản </label>
-                <input type="text" id="publisherName" formControlName="publisherName" class="form-control"
-                    placeholder="Nhập tên nhà xuất bản" />
-            </div>
-
-            <!-- Địa chỉ -->
-            <div class="form-group">
-                <label for="publisherAddress">Địa chỉ</label>
-                <input type="text" id="publisherAddress" formControlName="publisherAddress" class="form-control"
-                    placeholder="Nhập địa chỉ nhà xuất bản" />
-            </div>
-
-            <!-- Số điện thoại -->
-            <div class="form-group">
-                <label for="publisherPhone">Số điện thoại</label>
-                <input type="text" id="publisherPhone" formControlName="publisherPhone" class="form-control"
-                    placeholder="Số điện thoại nhà xuất bản" />
-            </div>
-        </fieldset>
-
-        <!-- Tệp tải lên -->
-        <fieldset>
-            <legend>Thông tin tệp </legend>
+            <legend>Thông tin tệp</legend>
             <div class="form-group">
                 <label for="file">Tệp tài liệu <span class="required">*</span></label>
                 <input type="file" id="fileUpload" (change)="onFileChange($event)"
                     accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.zip,.rar" class="form-control" />
             </div>
         </fieldset>
-        <button type="submit" class="btn btn-primary" [disabled]="!addBookForm.valid || !isFileValid"> Thêm </button>
-        <button type="button" class="btn btn-secondary" (click)="onCancel()">Hủy</button>
-    </form>
 
+        <!-- Nút -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" [disabled]="!addBookForm.valid || !isFileValid">Thêm</button>
+            <button type="button" class="btn btn-secondary" (click)="onCancel()">Hủy</button>
+        </div>
+    </form>
 </div>
