@@ -12,6 +12,9 @@ import { Book } from '../../../model/book.model';
   styleUrls: ['./book-review.component.css'],
 })
 export class BookReviewComponent implements OnInit {
+  addReview(newReview: BookReview) {
+    throw new Error('Method not implemented.');
+  }
   reviews: BookReview[] = [];
   selectedBookId: number = 0;;
   errorMessage: string | null = null;
@@ -181,7 +184,6 @@ export class BookReviewComponent implements OnInit {
         this.clearMessagesAfterDelay();
         
         this.loadReviews(); // Tải lại danh sách đánh giá
-        this.updateBookRating(); // Cập nhật điểm trung bình
       },
       error: (err) => {
         this.errorMessage = 'Chỉnh sửa đánh giá thất bại. Vui lòng thử lại.';
@@ -204,8 +206,7 @@ export class BookReviewComponent implements OnInit {
       next: () => {
         this.successMessage = 'Đánh giá đã được xóa thành công!';
         this.clearMessagesAfterDelay();
-        this.loadReviews(); // Tải lại danh sách đánh giá
-        this.updateBookRating(); // Cập nhật điểm trung bình
+        this.loadReviews(); // Tải lại danh sách đánh giá this.updateBookRating(); // Cập nhật điểm trung bình
       },
       error: (err) => {
         this.errorMessage = 'Xóa đánh giá thất bại. Vui lòng thử lại.';
@@ -214,24 +215,7 @@ export class BookReviewComponent implements OnInit {
     });
   }
   
-  updateBookRating(): void {
-    if (this.selectedBookId !== null) {
-      this.reviewService.getReviewsByBookId(this.selectedBookId).subscribe({
-        next: (reviews) => {
-          const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-          const averageRating = reviews.length ? totalRating / reviews.length : 0;
-          this.bookService.updateBookRating(this.selectedBookId, averageRating, reviews.length).subscribe({
-            next: () => console.log('Cập nhật điểm trung bình thành công.'),
-            error: (err) => console.error('Cập nhật điểm trung bình thất bại:', err),
-          });
-        },
-        error: (err) => console.error('Lấy danh sách đánh giá thất bại:', err),
-      });
-    } else {
-      console.error('selectedBookId không hợp lệ.');
-    }
-  }
-  
+ 
   clearMessagesAfterDelay(): void {
     setTimeout(() => {
       this.errorMessage = null;

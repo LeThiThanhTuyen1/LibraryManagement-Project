@@ -1,4 +1,4 @@
-export interface BookReview {
+export interface Review {
   review_id?: number;
   book_id: number;
   user_id: number;
@@ -6,6 +6,4 @@ export interface BookReview {
   review_text: string;
   review_date?: Date;
   username?: string;
-  review_updated_at?: Date;
-}
-  
+} 
