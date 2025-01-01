@@ -57,16 +57,16 @@ export class BookEditComponent implements OnInit {
     });
 
     // Lấy thông tin sách và cập nhật form
-    this.bookService.getBookById(this.bookId).subscribe((book) => {
-      this.originalBookData = { ...book }; // Lưu trữ dữ liệu ban đầu
+    this.bookService.getBookById(this.bookId).subscribe((bookData: any) => {
+      this.originalBookData = { ...bookData }; 
       this.bookForm.patchValue({
-        title: book.title,
-        isbn: book.isbn,
-        publication_year: book.publication_year,
-        genre: book.genre,
-        summary: book.summary,
-        language: book.language,
-        PublisherId: this.publishers.find(p => p.name === book.PublisherName)?.publisher_id || null
+        title: bookData.title,
+        isbn: bookData.isbn,
+        publication_year: bookData.Publication_year,
+        genre: bookData.genre,
+        summary: bookData.summary,
+        language: bookData.language,
+        PublisherId: this.publishers.find(p => p.name === bookData.PublisherName)?.publisher_id || null
       });
     });
   }
@@ -88,23 +88,22 @@ export class BookEditComponent implements OnInit {
     if (this.bookForm.valid) {
       const formData = this.bookForm.value;
       
-      // Cập nhật chỉ các trường thay đổi
       const updatedData = {
-        book_id: this.bookId,  // Sử dụng bookId thay vì id
+        book_id: this.bookId,
         title: formData.title || this.originalBookData.title,
         isbn: formData.isbn || this.originalBookData.isbn,
-        publication_year: formData.publication_year || this.originalBookData.publication_year,
+        publication_year: formData.publication_year || this.originalBookData.Publication_year,
         genre: formData.genre || this.originalBookData.genre,
         summary: formData.summary || this.originalBookData.summary,
-        publisherId: formData.PublisherId || this.originalBookData.PublisherId,  // ID của nhà xuất bản
+        publisherId: formData.PublisherId || this.originalBookData.PublisherId,
         language: formData.language || this.originalBookData.language,
-        file_path: this.originalBookData.file_path || '',  // Giữ nguyên giá trị file_path
+        file_path: this.originalBookData.file_path || '',
         publisher: {
-          publisher_id: formData.PublisherId || this.originalBookData.PublisherId,  // ID nhà xuất bản
+          publisher_id: formData.PublisherId || this.originalBookData.PublisherId,
           name: this.publishers.find(p => p.publisher_id === (formData.PublisherId || this.originalBookData.PublisherId))?.name || this.originalBookData.publisher?.name || '',
-          address: this.originalBookData.publisher?.address || '' // Kiểm tra sự tồn tại của publisher trước khi truy cập address
+          address: this.originalBookData.publisher?.address || ''
         },
-        accessLevel: this.originalBookData.accessLevel || ''  // Giữ nguyên giá trị accessLevel nếu không thay đổi
+        accessLevel: this.originalBookData.accessLevel || ''
       };
   
       console.log('Data to update:', updatedData); // Log dữ liệu để kiểm tra
