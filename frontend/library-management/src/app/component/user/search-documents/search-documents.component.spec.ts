@@ -8,11 +8,12 @@ import { of } from 'rxjs';
 
 /**
  * Test suite cho SearchDocumentsComponent
- * Tổng cộng: 11 test cases
+ * Tổng cộng: 12 test cases
  * Phân loại:
  * - 1 test khởi tạo component
  * - 1 test khởi tạo dữ liệu
  * - 7 test chức năng tìm kiếm
+ * - 1 test tìm không thấy kết quả
  * - 1 test chức năng đặt lại
  * - 1 test chức năng xem chi tiết
  */
@@ -80,7 +81,7 @@ describe('SearchDocumentsComponent', () => {
    * Test case #1: Kiểm tra khởi tạo component
    * Mục đích: Đảm bảo component được tạo thành công
    */
-  it('should create', () => {
+  it('Khởi Tạo Component ', () => {
     expect(component).toBeTruthy();
   });
 
@@ -91,7 +92,7 @@ describe('SearchDocumentsComponent', () => {
    * - Kiểm tra việc load danh sách thể loại từ service
    * - Kiểm tra dữ liệu được gán đúng vào component
    */
-  it('nên tải sách và thể loại khi khởi tạo', () => {
+  it('Kiểm tra khởi tạo dữ liệu', () => {
     bookService.getAllBooks.and.returnValue(of(mockBooks));
     bookService.getGenres.and.returnValue(of(mockGenres));
 
@@ -117,7 +118,7 @@ describe('SearchDocumentsComponent', () => {
      * Đầu vào: Tiêu đề "Angular"
      * Kết quả mong đợi: 1 sách có tiêu đề chứa từ "Angular"
      */
-    it('nên lọc sách theo tiêu đề', () => {
+    it(' lọc sách theo tiêu đề', () => {
       component.searchCriteria.title = 'Angular';
       component.searchBooks();
       expect(component.books.length).toBe(1);
@@ -129,7 +130,7 @@ describe('SearchDocumentsComponent', () => {
      * Đầu vào: Tên tác giả "John"
      * Kết quả mong đợi: 1 sách của tác giả có tên chứa "John"
      */
-    it('nên lọc sách theo tên tác giả', () => {
+    it(' lọc sách theo tên tác giả', () => {
       component.searchCriteria.AuthorName = 'John';
       component.searchBooks();
       expect(component.books.length).toBe(1);
@@ -141,7 +142,7 @@ describe('SearchDocumentsComponent', () => {
      * Đầu vào: Thể loại "Programming"
      * Kết quả mong đợi: 2 sách thuộc thể loại "Programming"
      */
-    it('nên lọc sách theo thể loại', () => {
+    it(' lọc sách theo thể loại', () => {
       component.searchCriteria.genre = 'Programming';
       component.searchBooks();
       expect(component.books.length).toBe(2);
@@ -152,7 +153,7 @@ describe('SearchDocumentsComponent', () => {
      * Đầu vào: Năm 2023
      * Kết quả mong đợi: 1 sách xuất bản năm 2023
      */
-    it('nên lọc sách theo năm xuất bản', () => {
+    it(' lọc sách theo năm xuất bản', () => {
       component.searchCriteria.publication_year = 2023;
       component.searchBooks();
       expect(component.books.length).toBe(1);
@@ -164,7 +165,7 @@ describe('SearchDocumentsComponent', () => {
      * Đầu vào: ISBN "123456789"
      * Kết quả mong đợi: 1 sách có mã ISBN tương ứng
      */
-    it('nên lọc sách theo ISBN', () => {
+    it(' lọc sách theo ISBN', () => {
       component.searchCriteria.isbn = '123456789';
       component.searchBooks();
       expect(component.books.length).toBe(1);
@@ -176,7 +177,7 @@ describe('SearchDocumentsComponent', () => {
      * Đầu vào: Ngôn ngữ "Vietnamese"
      * Kết quả mong đợi: 1 sách bằng tiếng Việt
      */
-    it('nên lọc sách theo ngôn ngữ', () => {
+    it(' lọc sách theo ngôn ngữ', () => {
       component.searchCriteria.language = 'Vietnamese';
       component.searchBooks();
       expect(component.books.length).toBe(1);
@@ -190,7 +191,7 @@ describe('SearchDocumentsComponent', () => {
      * - Ngôn ngữ: "English"
      * Kết quả mong đợi: 1 sách thỏa mãn cả 2 điều kiện
      */
-    it('nên xử lý nhiều tiêu chí tìm kiếm cùng lúc', () => {
+    it(' xử lý nhiều tiêu chí tìm kiếm cùng lúc', () => {
       component.searchCriteria = {
         genre: 'Programming',
         language: 'English',
@@ -207,7 +208,7 @@ describe('SearchDocumentsComponent', () => {
      * - Không có sách nào được tìm thấy
      * - Cờ noBooksFound được bật true
      */
-    it('nên đặt noBooksFound thành true khi không có kết quả', () => {
+    it(' Nhập sai thông tin ', () => {
       component.searchCriteria.title = 'NonexistentBook';
       component.searchBooks();
       expect(component.books.length).toBe(0);
@@ -223,7 +224,7 @@ describe('SearchDocumentsComponent', () => {
    * - Đặt lại trạng thái noBooksFound
    */
   describe('Chức năng đặt lại', () => {
-    it('nên đặt lại tiêu chí tìm kiếm và khôi phục danh sách sách ban đầu', () => {
+    it(' đặt lại tiêu chí tìm kiếm và khôi phục danh sách sách ban đầu', () => {
       component.allBooks = mockBooks;
       component.searchCriteria = {
         title: 'Test',
@@ -246,7 +247,7 @@ describe('SearchDocumentsComponent', () => {
    * - Kiểm tra việc gán dữ liệu vào selectedBook
    */
   describe('Chức năng xem chi tiết sách', () => {
-    it('nên lấy được chi tiết sách theo ID', () => {
+    it('lấy được chi tiết sách theo ID', () => {
       const testBook = mockBooks[0];
       bookService.getBookById.and.returnValue(of(testBook));
 

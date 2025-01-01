@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookReviewService } from '../../../service/book-review.service';
 import { BookReview } from '../../../model/book-review.model';
-import { switchMap, of } from 'rxjs';
+import { switchMap, of, timer } from 'rxjs';
 import { BookService } from '../../../service/book.service';
 import { Book } from '../../../model/book.model';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-book-review',
@@ -12,11 +13,12 @@ import { Book } from '../../../model/book.model';
   styleUrls: ['./book-review.component.css'],
 })
 export class BookReviewComponent implements OnInit {
+  @Input() selectedBookId!: number;
+  @Input() hideReviewButton: boolean = false;
   addReview(newReview: BookReview) {
     throw new Error('Method not implemented.');
   }
   reviews: BookReview[] = [];
-  selectedBookId: number = 0;;
   errorMessage: string | null = null;
   successMessage: string | null = null;
   hasUserReviewed = false;
@@ -31,81 +33,152 @@ export class BookReviewComponent implements OnInit {
   editingReviewId: number | null = null;
   editableReview: Partial<BookReview> = {};
 
+  // Thêm biến firstName
+  firstName!: string;
+
   constructor(
     private route: ActivatedRoute,
     private reviewService: BookReviewService,
-    private bookService: BookService
+    private bookService: BookService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    // Lấy userId từ localStorage
+    if (!this.selectedBookId) {
+      this.route.params.subscribe((params) => {
+        this.selectedBookId = +params['id'];
+        if (this.selectedBookId) {
+          this.loadBookAndReviews();
+        }
+      });
+    } else {
+      this.loadBookAndReviews();
+    }
+  }
+
+  private loadBookAndReviews(): void {
+    // Lấy thông tin user từ localStorage
     const storedUser = localStorage.getItem('user');
+    console.log('Raw stored user:', storedUser);
+
     if (storedUser) {
       try {
         const user = JSON.parse(storedUser);
-        this.userId = user.user_id; // Lấy user_id từ object
+        console.log('Parsed user data:', user);
+        this.userId = user.user_id;
+        this.firstName = user.first_name;
+
+        console.log('Extracted user info:', {
+          userId: this.userId,
+          firstName: this.firstName,
+        });
+
+        // Load book info
+        this.bookService.getBookById(this.selectedBookId).subscribe({
+          next: (book) => {
+            if (!book) {
+              this.errorMessage = 'Không tìm thấy sách.';
+              this.isLoading = false;
+              return;
+            }
+            
+            this.book = book;
+            
+            // Chỉ load reviews khi có sách
+            this.reviewService.getReviewsByBookId(this.selectedBookId).subscribe({
+              next: (reviews) => {
+                this.reviews = reviews;
+                this.isLoading = false;
+                
+                // Check if user has already reviewed
+                if (reviews.some(review => review.user_id === this.userId)) {
+                  this.hasUserReviewed = true;
+                }
+              },
+              error: (error) => {
+                console.error('Error loading reviews:', error);
+                this.errorMessage = 'Không thể tải đánh giá. Vui lòng thử lại sau.';
+                this.isLoading = false;
+              }
+            });
+          },
+          error: (error) => {
+            console.error('Error loading book:', error);
+            this.errorMessage = 'Không thể tải thông tin sách. Vui lòng thử lại sau.';
+            this.isLoading = false;
+          }
+        });
+
       } catch (error) {
+        console.error('Error parsing user data:', error);
         this.errorMessage = 'Dữ liệu người dùng không hợp lệ.';
         this.isLoading = false;
-        return;
       }
-    } else {
-      this.errorMessage = 'Không tìm thấy thông tin người dùng. Vui lòng đăng nhập.';
-      this.isLoading = false;
-      return;
     }
-
-    this.route.params
-      .pipe(
-        switchMap((params) => {
-          const bookId = +params['bookId'];
-          if (!isNaN(bookId) && bookId > 0) {
-            this.selectedBookId = bookId;
-            return this.bookService.getBookById(bookId);
-          } else {
-            this.errorMessage = 'ID sách không hợp lệ.';
-            return of(null);
-          }
-        }),
-        switchMap((book) => {
-          if (book) {
-            this.book = book;
-            return this.reviewService.checkUserReviewed(
-              this.selectedBookId!,
-              this.userId
-            );
-          } else {
-            this.errorMessage = 'Không tìm thấy sách.';
-            return of(null);
-          }
-        })
-      )
-      .subscribe({
-        next: (userReview) => {
-          this.hasUserReviewed = !!userReview;
-          this.loadReviews(userReview); // Điều chỉnh để hỗ trợ null
-          this.isLoading = false;
-        },
-        error: (err) => {
-          this.errorMessage = err.message;
-          this.isLoading = false;
-        },
-      });
   }
 
   loadReviews(userReview?: BookReview | null): void {
     if (this.selectedBookId) {
+      const storedUser = localStorage.getItem('user');
+      console.log('Stored user:', storedUser);
+
       this.reviewService.getReviewsByBookId(this.selectedBookId).subscribe({
         next: (reviews) => {
-          if (userReview) {
-            reviews = reviews.filter(
-              (review) => review.user_id !== this.userId
+          console.log('Original reviews:', reviews);
+
+          // Thêm kiểm tra Array
+          if (Array.isArray(reviews)) {
+            this.hasUserReviewed = reviews.some(
+              (review) => review.user_id === this.userId
             );
-            reviews.unshift(userReview);
+
+            const reviewPromises = reviews.map((review) =>
+              this.authService
+                .getUserById(review.user_id)
+                .toPromise()
+                .then((user) => ({
+                  ...review,
+                  username: user
+                    ? `${user.first_name} ${user.last_name}`
+                    : 'Người dùng khác',
+                }))
+                .catch(() => ({
+                  ...review,
+                  username: 'Người dùng khác',
+                }))
+            );
+
+            Promise.all(reviewPromises).then((updatedReviews) => {
+              if (userReview) {
+                updatedReviews = updatedReviews.filter(
+                  (review) => review.user_id !== this.userId
+                );
+                const user = JSON.parse(storedUser || '{}');
+                updatedReviews.unshift({
+                  ...userReview,
+                  username: `${user.first_name} ${user.last_name}`,
+                });
+              }
+
+              // Sắp xếp đánh giá theo thời gian mới nhất
+              this.reviews = updatedReviews.sort((a, b) => {
+                const dateA = a.review_updated_at
+                  ? new Date(a.review_updated_at)
+                  : new Date(a.review_date);
+                const dateB = b.review_updated_at
+                  ? new Date(b.review_updated_at)
+                  : new Date(b.review_date);
+                return dateB.getTime() - dateA.getTime();
+              });
+
+              console.log('Final reviews with usernames:', this.reviews);
+            });
+          } else {
+            this.errorMessage = 'Không thể tải đánh giá';
           }
-          this.reviews = reviews;
         },
         error: (err) => {
+          console.error('Error loading reviews:', err);
           this.errorMessage = err.message;
         },
       });
@@ -128,17 +201,33 @@ export class BookReviewComponent implements OnInit {
     this.hoveredRating = null;
   }
 
+  reloadReviewsWithDelay(): void {
+    // Delay 1 giây trước khi load lại
+    timer(1000).subscribe(() => {
+      this.loadReviews();
+    });
+  }
+
   submitReview(): void {
     if (!this.newReview.rating || !this.newReview.review_text) {
-      this.errorMessage = 'Vui lòng hoàn thành thông tin đánh giá.';
-      this.clearMessagesAfterDelay();
+      this.errorMessage = 'Vui lòng nhập đầy đủ đánh giá và nội dung bình luận';
+      setTimeout(() => this.errorMessage = '', 3000);
       return;
     }
+
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) {
+      this.errorMessage = 'Không tìm thấy thông tin người dùng';
+      return;
+    }
+
+    const user = JSON.parse(storedUser);
 
     if (this.selectedBookId) {
       const review: BookReview = {
         book_id: this.selectedBookId,
-        user_id: this.userId,
+        user_id: user.user_id,
+        username: user.username,
         rating: this.newReview.rating,
         review_text: this.newReview.review_text!,
         review_date: new Date(),
@@ -150,8 +239,9 @@ export class BookReviewComponent implements OnInit {
           this.newReview = { rating: 0, review_text: '' };
           this.hasUserReviewed = true;
           this.successMessage = 'Đánh giá đã được thêm thành công!';
-          this.clearMessagesAfterDelay();
-          this.loadReviews(addedReview); // Tải lại toàn bộ danh sách đánh giá
+          setTimeout(() => this.successMessage = '', 3000);
+          // Load chậm
+          this.reloadReviewsWithDelay();
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -166,24 +256,25 @@ export class BookReviewComponent implements OnInit {
   }
 
   saveReview(): void {
-    if (!this.editingReviewId || !this.editableReview.rating || !this.editableReview.review_text) {
+    if (
+      !this.editingReviewId ||
+      !this.editableReview.rating ||
+      !this.editableReview.review_text
+    ) {
       this.errorMessage = 'Vui lòng hoàn thành thông tin chỉnh sửa.';
       this.clearMessagesAfterDelay();
       return;
     }
-  
+
     this.editableReview.review_updated_at = new Date();
-  
+
     this.reviewService.updateReview(this.editableReview).subscribe({
       next: () => {
-        const index = this.reviews.findIndex((r) => r.review_id === this.editingReviewId);
-        if (index > -1) this.reviews[index] = { ...this.editableReview } as BookReview;
-  
         this.cancelEdit();
         this.successMessage = 'Cập nhật đánh giá thành công!';
         this.clearMessagesAfterDelay();
-        
-        this.loadReviews(); // Tải lại danh sách đánh giá
+        // Load chậm
+        this.reloadReviewsWithDelay();
       },
       error: (err) => {
         this.errorMessage = 'Chỉnh sửa đánh giá thất bại. Vui lòng thử lại.';
@@ -201,12 +292,17 @@ export class BookReviewComponent implements OnInit {
   deleteReview(bookId: number, userId: number): void {
     const confirmation = confirm('Bạn có chắc chắn muốn xóa đánh giá này?');
     if (!confirmation) return;
-  
+
     this.reviewService.deleteReview(bookId, userId).subscribe({
       next: () => {
         this.successMessage = 'Đánh giá đã được xóa thành công!';
         this.clearMessagesAfterDelay();
-        this.loadReviews(); // Tải lại danh sách đánh giá this.updateBookRating(); // Cập nhật điểm trung bình
+        // Reset trạng thái đánh giá
+        this.hasUserReviewed = false;
+        // Reset form đánh giá mới
+        this.newReview = { rating: 0, review_text: '' };
+        // Load chậm
+        this.reloadReviewsWithDelay();
       },
       error: (err) => {
         this.errorMessage = 'Xóa đánh giá thất bại. Vui lòng thử lại.';
@@ -214,8 +310,7 @@ export class BookReviewComponent implements OnInit {
       },
     });
   }
-  
- 
+
   clearMessagesAfterDelay(): void {
     setTimeout(() => {
       this.errorMessage = null;
