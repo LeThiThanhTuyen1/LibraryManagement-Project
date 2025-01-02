@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
 export class BookListComponent implements OnInit {
   books: Book[] = [];
   userRole: string = '';
+  showDialog: boolean = false;
+  dialogMessage: string = '';
+  dialogType: 'confirm' | 'message' = 'message';
+  pendingDeleteId: number | null = null;
 
   constructor(private bookService: BookService, private router: Router) { }
 
@@ -60,17 +64,36 @@ export class BookListComponent implements OnInit {
   }
 
   deleteBook(bookId: number): void {
-    if (confirm('Bạn có chắc chắn muốn xóa tài liệu này?')) {
-      this.bookService.deleteBook(bookId).subscribe({
+    this.pendingDeleteId = bookId;
+    this.dialogType = 'confirm';
+    this.showDialog = true;
+    this.dialogMessage = 'Bạn có chắc chắn muốn xóa tài liệu này?';
+  }
+
+  confirmDelete(): void {
+    if (this.pendingDeleteId) {
+      this.bookService.deleteBook(this.pendingDeleteId).subscribe({
         next: () => {
-          alert('Xóa tài liệu thành công!');
-          this.books = this.books.filter((book) => book.book_id !== bookId);
+          this.books = this.books.filter((book) => book.book_id !== this.pendingDeleteId);
+          this.dialogType = 'message';
+          this.dialogMessage = 'Xóa tài liệu thành công!';
         },
         error: (error) => {
           console.error('Error deleting book:', error);
-          alert('Xóa tài liệu thất bại!');
+          this.dialogType = 'message';
+          this.dialogMessage = 'Xóa tài liệu thất bại!';
         },
       });
+    }
+  }
+
+  closeDialog(confirmed: boolean = false): void {
+    if (this.dialogType === 'confirm' && confirmed) {
+      this.confirmDelete();
+    } else {
+      this.showDialog = false;
+      this.dialogMessage = '';
+      this.pendingDeleteId = null;
     }
   }
 

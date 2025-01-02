@@ -29,6 +29,8 @@ export class BookDetailComponent implements OnInit, OnChanges {
   favorites: Favorite[] = [];
   documentUrl!: SafeResourceUrl;
   tempFileUrl: string = '';
+  showDialog: boolean = false;
+  dialogMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -202,26 +204,12 @@ export class BookDetailComponent implements OnInit, OnChanges {
                   max-width: 100%;
                   height: auto;
                 }
-                table {
-                  border-collapse: collapse;
-                  width: 100%;
-                  margin: 15px 0;
-                }
-                th, td {
-                  border: 1px solid #ddd;
-                  padding: 8px;
-                  text-align: left;
-                }
-                th {
-                  background-color: #f2f2f2;
-                }
               </style>
             </head>
             <body>${result.value}</body>
           </html>
         `;
 
-        // Tạo Blob từ HTML content
         const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
         this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
           URL.createObjectURL(htmlBlob)
@@ -246,7 +234,6 @@ export class BookDetailComponent implements OnInit, OnChanges {
       anchor.click();
       document.body.removeChild(anchor);
     }
-    // Cleanup
     URL.revokeObjectURL(fileUrl);
   }
 
@@ -256,11 +243,7 @@ export class BookDetailComponent implements OnInit, OnChanges {
       const user = JSON.parse(storedUser);
       const userRole = user.role;
 
-      if (
-        this.book.accessLevel === 'public' ||
-        userRole === 'admin' ||
-        this.book.accessLevel === userRole
-      ) {
+      if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
         this.bookService.viewDocument(this.book.book_id).subscribe(
           (response: Blob) => {
             const mimeType = response.type;
@@ -268,77 +251,11 @@ export class BookDetailComponent implements OnInit, OnChanges {
 
             switch (mimeType) {
               case 'application/pdf':
-                this.documentUrl =
-                  this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+                this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
                 break;
 
               case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
                 this.handleDocxFile(response, fileURL);
-                break;
-
-              case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-              case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-                try {
-                  const apiUrl = `${window.location.origin}/api/Books/ViewDocument/${this.book.book_id}`;
-                  const googleDocsUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(
-                    apiUrl
-                  )}&embedded=true`;
-                  this.documentUrl =
-                    this.sanitizer.bypassSecurityTrustResourceUrl(
-                      googleDocsUrl
-                    );
-
-                  setTimeout(() => {
-                    const iframe = document.querySelector('iframe');
-                    if (iframe) {
-                      const iframeDoc =
-                        iframe.contentDocument ||
-                        iframe.contentWindow?.document;
-                      if (!iframeDoc || iframeDoc.body.innerHTML === '') {
-                        this.handleFallback(fileURL);
-                      }
-                    }
-                  }, 3000);
-                } catch (error) {
-                  console.error('Error viewing document:', error);
-                  this.handleFallback(fileURL);
-                }
-                break;
-
-              case 'image/jpeg':
-              case 'image/png':
-                this.documentUrl =
-                  this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
-                break;
-
-              case 'text/plain':
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                  const textContent = e.target?.result;
-                  const htmlContent = `
-                    <html>
-                      <head>
-                        <style>
-                          body {
-                            font-family: monospace;
-                            white-space: pre-wrap;
-                            padding: 20px;
-                            line-height: 1.5;
-                          }
-                        </style>
-                      </head>
-                      <body>${textContent}</body>
-                    </html>
-                  `;
-                  const htmlBlob = new Blob([htmlContent], {
-                    type: 'text/html',
-                  });
-                  this.documentUrl =
-                    this.sanitizer.bypassSecurityTrustResourceUrl(
-                      URL.createObjectURL(htmlBlob)
-                    );
-                };
-                reader.readAsText(response);
                 break;
 
               default:
@@ -348,14 +265,17 @@ export class BookDetailComponent implements OnInit, OnChanges {
           },
           (error) => {
             console.error('Lỗi khi tải tài liệu:', error);
-            alert('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+            this.showDialog = true;
+            this.dialogMessage = 'Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.';
           }
         );
       } else {
-        alert('Bạn không có quyền truy cập tài liệu này.');
+        this.showDialog = true;
+        this.dialogMessage = 'Bạn không có quyền truy cập tài liệu này.';
       }
     } else {
-      alert('Vui lòng đăng nhập để xem tài liệu.');
+      this.showDialog = true;
+      this.dialogMessage = 'Vui lòng đăng nhập để xem tài liệu.';
     }
   }
 
@@ -371,18 +291,9 @@ export class BookDetailComponent implements OnInit, OnChanges {
     const storedUser = localStorage.getItem('user');
     if (storedUser && this.book) {
       const user = JSON.parse(storedUser);
-      const userRole = user.role; // Lấy role của người dùng từ localStorage
+      const userRole = user.role;
 
-      console.log('User Role:', userRole);
-      console.log('Book Access Level:', this.book.accessLevel);
-
-      // Kiểm tra quyền truy cập
-      if (
-        this.book.accessLevel === 'public' ||
-        userRole === 'admin' ||
-        this.book.accessLevel === userRole
-      ) {
-        // Gọi API để tải file
+      if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
         this.bookService.getBookFile(this.book.book_id).subscribe(
           (response: Blob) => {
             const fileName =
@@ -399,20 +310,22 @@ export class BookDetailComponent implements OnInit, OnChanges {
             URL.revokeObjectURL(fileURL);
 
             // Hiển thị thông báo tải thành công
-            alert('Tải tài liệu thành công!');
+            this.showDialog = true;
+            this.dialogMessage = 'Tải tài liệu thành công!';
           },
           (error) => {
             console.error('Lỗi khi tải tài liệu:', error);
-            alert('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+            this.showDialog = true;
+            this.dialogMessage = 'Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.';
           }
         );
       } else {
-        // Hiển thị thông báo nếu không có quyền truy cập
-        alert('Bạn không có quyền tải tài liệu này.');
+        this.showDialog = true;
+        this.dialogMessage = 'Bạn không có quyền tải tài liệu này.';
       }
     } else {
-      console.error('Thông tin người dùng hoặc sách không khả dụng.');
-      alert('Vui lòng đăng nhập để tải tài liệu.');
+      this.showDialog = true;
+      this.dialogMessage = 'Vui lòng đăng nhập để tải tài liệu.';
     }
   }
 
@@ -432,5 +345,10 @@ export class BookDetailComponent implements OnInit, OnChanges {
 
   toggleReviewSection(): void {
     this.showReviewSection = !this.showReviewSection;
+  }
+
+  closeDialog(): void {
+    this.showDialog = false;
+    this.dialogMessage = '';
   }
 }
