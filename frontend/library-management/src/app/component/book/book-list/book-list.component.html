@@ -29,10 +29,24 @@
         </td>
         <td>
           <button class="btn btn-info" (click)="viewBook(book.book_id)">Xem</button>
-          <button class="btn btn-danger" *ngIf="userRole === 'admin'" (click)="deleteBook(book.book_id)">Xóa </button>
           <button class="btn btn-warning" *ngIf="userRole === 'admin'" (click)="editBook(book.book_id)">Sửa</button>
+          <button class="btn btn-danger" *ngIf="userRole === 'admin'" (click)="deleteBook(book.book_id)">Xóa </button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog-box">
+    <div class="dialog-content">
+      <p>{{ dialogMessage }}</p>
+      <div class="dialog-buttons">
+        <button *ngIf="dialogType === 'confirm'" class="btn btn-danger" (click)="closeDialog(true)">Xác nhận</button>
+        <button class="btn btn-secondary" (click)="closeDialog(false)">
+          {{ dialogType === 'confirm' ? 'Hủy' : 'Đóng' }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

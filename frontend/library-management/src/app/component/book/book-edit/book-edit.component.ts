@@ -20,6 +20,8 @@ export class BookEditComponent implements OnInit {
   publishers: Publisher[] = [];
   bookId!: number;
   originalBookData: any; // Lưu trữ dữ liệu ban đầu của sách
+  showDialog: boolean = false;
+  dialogMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -41,8 +43,11 @@ export class BookEditComponent implements OnInit {
 
       // Nếu không phải là admin, chuyển hướng về trang danh sách sách
       if (user.role !== 'admin') {
-        alert('You are not authorized to access this page. Redirecting to the book list.');
-        this.router.navigate(['/book-list']);
+        this.showDialog = true;
+        this.dialogMessage = 'Bạn không có quyền truy cập trang này.';
+        setTimeout(() => {
+          this.router.navigate(['/book-list']);
+        }, 2000);
         return;
       }
     } else {
@@ -111,21 +116,22 @@ export class BookEditComponent implements OnInit {
       this.bookService.updateBook(this.bookId, updatedData).subscribe({
         next: (response) => {
           console.log('Update successful', response);
-  
-          // Hiển thị thông báo thành công
-          alert('Cập nhật sách thành công!');
-  
-          // Sau khi thông báo thành công, chuyển hướng về trang book-list
-          this.router.navigate(['/book-list']);
+          this.showDialog = true;
+          this.dialogMessage = 'Cập nhật sách thành công!';
+          setTimeout(() => {
+            this.router.navigate(['/book-list']);
+          }, 2000);
         },
         error: (err) => {
           console.error('Error updating book', err);
-          alert('Cập nhật sách thất bại. Vui lòng thử lại!');
+          this.showDialog = true;
+          this.dialogMessage = 'Cập nhật sách thất bại. Vui lòng thử lại!';
         }
       });
     } else {
       console.error('Form is invalid', this.bookForm.errors);
-      alert('Dữ liệu không hợp lệ! Vui lòng kiểm tra lại.');
+      this.showDialog = true;
+      this.dialogMessage = 'Dữ liệu không hợp lệ! Vui lòng kiểm tra lại.';
     }
   }
   
@@ -133,4 +139,8 @@ export class BookEditComponent implements OnInit {
     this.router.navigate(['/book-list']);  // Điều hướng về trang danh sách sách
   }
   
+  closeDialog(): void {
+    this.showDialog = false;
+    this.dialogMessage = '';
+  }
 }
