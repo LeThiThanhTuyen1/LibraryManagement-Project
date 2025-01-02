@@ -62,7 +62,7 @@ CREATE TABLE Book_Reviews (
     book_id INT,
     user_id INT,
     rating INT,
-    review_text VARCHAR(225),
+    review_text NVARCHAR(225),
     review_date DATETIME,
     FOREIGN KEY (book_id) REFERENCES Books(book_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
@@ -187,6 +187,7 @@ INSERT INTO Majors (major_name, department_id) VALUES
 INSERT INTO Students (user_id, major_id, course, enrollment_year) VALUES
 (1, 2, 'K16', 2020);
 
+-- Thêm dữ liệu vào bảng Lecturers
 INSERT INTO Lecturers (user_id, major_id, position, start_year) VALUES
 (3, 2, N'Phó giáo sư', 2010),
 (4, 2, N'Tiến sĩ', 2012),
@@ -194,10 +195,12 @@ INSERT INTO Lecturers (user_id, major_id, position, start_year) VALUES
 (3, 2, N'Phó giáo sư', 2018),
 (4, 2, N'Giáo sư', 2008);
 
+-- Thêm dữ liệu vào bảng Publishers
 INSERT INTO Publishers (name, address) VALUES
 (N'NXB Văn Học', N'Đà Nẵng'),
 (N'NXB Khoa Học', N'Huế');
 
+-- Thêm dữ liệu vào bảng Books
 INSERT INTO Books (title, isbn, publication_year, genre, summary, publisher_id, language, file_path) VALUES
 (N'Lập trình C++', '9784567890123', 2019, N'Giáo trình', N'Sách lập trình C++ nâng cao', 4, N'Tiếng Việt', 'moi.pdf'),
 (N'Văn học Việt Nam', '9785678901234', 2021, N'Văn học', N'Tuyển tập văn học Việt Nam hiện đại', 5, N'Tiếng Việt', 'moi.pdf');

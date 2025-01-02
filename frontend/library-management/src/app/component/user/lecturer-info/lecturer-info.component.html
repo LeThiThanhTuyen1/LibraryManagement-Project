@@ -19,15 +19,15 @@
         <tr>
           <th>Email</th>
           <td>
-            <span *ngIf="!isEditing">{{ user.Email }}</span>
-            <input *ngIf="isEditing" type="email" [(ngModel)]="user.Email" />
+            <span *ngIf="!isEditing">{{ lecturer.Email }}</span>
+            <input *ngIf="isEditing" type="email" [(ngModel)]="lecturer.Email" />
           </td>
         </tr>
         <tr>
           <th>Số điện thoại</th>
           <td>
-            <span *ngIf="!isEditing">{{ user.PhoneNumber }}</span>
-            <input *ngIf="isEditing" type="text" [(ngModel)]="user.PhoneNumber" />
+            <span *ngIf="!isEditing">{{ lecturer.PhoneNumber }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="lecturer.PhoneNumber" />
           </td>
         </tr>          
         <tr>
