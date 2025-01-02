@@ -20,6 +20,8 @@ export class BookEditComponent implements OnInit {
   publishers: Publisher[] = [];
   bookId!: number;
   originalBookData: any; // Lưu trữ dữ liệu ban đầu của sách
+  showDialog: boolean = false;
+  dialogMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -41,8 +43,11 @@ export class BookEditComponent implements OnInit {
 
       // Nếu không phải là admin, chuyển hướng về trang danh sách sách
       if (user.role !== 'admin') {
-        alert('You are not authorized to access this page. Redirecting to the book list.');
-        this.router.navigate(['/book-list']);
+        this.showDialog = true;
+        this.dialogMessage = 'Bạn không có quyền truy cập trang này.';
+        setTimeout(() => {
+          this.router.navigate(['/book-list']);
+        }, 2000);
         return;
       }
     } else {
@@ -57,16 +62,16 @@ export class BookEditComponent implements OnInit {
     });
 
     // Lấy thông tin sách và cập nhật form
-    this.bookService.getBookById(this.bookId).subscribe((book) => {
-      this.originalBookData = { ...book }; // Lưu trữ dữ liệu ban đầu
+    this.bookService.getBookById(this.bookId).subscribe((bookData: any) => {
+      this.originalBookData = { ...bookData }; 
       this.bookForm.patchValue({
-        title: book.title,
-        isbn: book.isbn,
-        publication_year: book.publication_year,
-        genre: book.genre,
-        summary: book.summary,
-        language: book.language,
-        PublisherId: this.publishers.find(p => p.name === book.PublisherName)?.publisher_id || null
+        title: bookData.title,
+        isbn: bookData.isbn,
+        publication_year: bookData.Publication_year,
+        genre: bookData.genre,
+        summary: bookData.summary,
+        language: bookData.language,
+        PublisherId: this.publishers.find(p => p.name === bookData.PublisherName)?.publisher_id || null
       });
     });
   }
@@ -88,23 +93,22 @@ export class BookEditComponent implements OnInit {
     if (this.bookForm.valid) {
       const formData = this.bookForm.value;
       
-      // Cập nhật chỉ các trường thay đổi
       const updatedData = {
-        book_id: this.bookId,  // Sử dụng bookId thay vì id
+        book_id: this.bookId,
         title: formData.title || this.originalBookData.title,
         isbn: formData.isbn || this.originalBookData.isbn,
-        publication_year: formData.publication_year || this.originalBookData.publication_year,
+        publication_year: formData.publication_year || this.originalBookData.Publication_year,
         genre: formData.genre || this.originalBookData.genre,
         summary: formData.summary || this.originalBookData.summary,
-        publisherId: formData.PublisherId || this.originalBookData.PublisherId,  // ID của nhà xuất bản
+        publisherId: formData.PublisherId || this.originalBookData.PublisherId,
         language: formData.language || this.originalBookData.language,
-        file_path: this.originalBookData.file_path || '',  // Giữ nguyên giá trị file_path
+        file_path: this.originalBookData.file_path || '',
         publisher: {
-          publisher_id: formData.PublisherId || this.originalBookData.PublisherId,  // ID nhà xuất bản
+          publisher_id: formData.PublisherId || this.originalBookData.PublisherId,
           name: this.publishers.find(p => p.publisher_id === (formData.PublisherId || this.originalBookData.PublisherId))?.name || this.originalBookData.publisher?.name || '',
-          address: this.originalBookData.publisher?.address || '' // Kiểm tra sự tồn tại của publisher trước khi truy cập address
+          address: this.originalBookData.publisher?.address || ''
         },
-        accessLevel: this.originalBookData.accessLevel || ''  // Giữ nguyên giá trị accessLevel nếu không thay đổi
+        accessLevel: this.originalBookData.accessLevel || ''
       };
   
       console.log('Data to update:', updatedData); // Log dữ liệu để kiểm tra
@@ -112,21 +116,22 @@ export class BookEditComponent implements OnInit {
       this.bookService.updateBook(this.bookId, updatedData).subscribe({
         next: (response) => {
           console.log('Update successful', response);
-  
-          // Hiển thị thông báo thành công
-          alert('Cập nhật sách thành công!');
-  
-          // Sau khi thông báo thành công, chuyển hướng về trang book-list
-          this.router.navigate(['/book-list']);
+          this.showDialog = true;
+          this.dialogMessage = 'Cập nhật sách thành công!';
+          setTimeout(() => {
+            this.router.navigate(['/book-list']);
+          }, 2000);
         },
         error: (err) => {
           console.error('Error updating book', err);
-          alert('Cập nhật sách thất bại. Vui lòng thử lại!');
+          this.showDialog = true;
+          this.dialogMessage = 'Cập nhật sách thất bại. Vui lòng thử lại!';
         }
       });
     } else {
       console.error('Form is invalid', this.bookForm.errors);
-      alert('Dữ liệu không hợp lệ! Vui lòng kiểm tra lại.');
+      this.showDialog = true;
+      this.dialogMessage = 'Dữ liệu không hợp lệ! Vui lòng kiểm tra lại.';
     }
   }
   
@@ -134,4 +139,8 @@ export class BookEditComponent implements OnInit {
     this.router.navigate(['/book-list']);  // Điều hướng về trang danh sách sách
   }
   
+  closeDialog(): void {
+    this.showDialog = false;
+    this.dialogMessage = '';
+  }
 }

@@ -1,141 +1,323 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookReviewComponent } from './book-review.component';
-import { BookReviewService } from '../../../service/book-review.service';
-import { BookService } from '../../../service/book.service';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { BookReviewComponent } from './book-review.component';
+import { BookService } from '../../../service/book.service';
+import { BookReviewService } from '../../../service/book-review.service';
+import { Book } from '../../../model/book.model';
+import { BookReview } from '../../../model/book-review.model';
+import { FormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
 
-describe('BookReviewComponent', () => {
+describe('Kiểm thử Component Đánh giá Sách', () => {
   let component: BookReviewComponent;
   let fixture: ComponentFixture<BookReviewComponent>;
-  let bookReviewService: jasmine.SpyObj<BookReviewService>;
-  let bookService: jasmine.SpyObj<BookService>;
+  let mockBookService: jasmine.SpyObj<{
+    getBookById: (id: number) => Observable<Book | null>;
+    updateBookRating: (
+      id: number,
+      rating: number,
+      count: number
+    ) => Observable<void>;
+  }>;
+  let mockBookReviewService: jasmine.SpyObj<BookReviewService>;
+
+  // Mock dữ liệu sách để test
+  const mockSach: Book = {
+    book_id: 1,
+    title: 'Sách Test',
+    AuthorName: 'Tác giả Test',
+    publication_year: 2023,
+    isbn: '123456789',
+    genre: 'Thể loại Test',
+    language: 'Tiếng Việt',
+    summary: 'Tóm tắt Test',
+    PublisherName: 'NXB Test',
+    PublisherId: 1,
+    file_path: 'test/path',
+    AverageRating: 4,
+    accessLevel: 'public',
+  };
+
+  // Mock dữ liệu đánh giá để test
+  const mockDanhGia: BookReview[] = [
+    {
+      review_id: 1,
+      book_id: 1,
+      user_id: 1,
+      rating: 4,
+      review_text: 'Sách rất hay!',
+      review_date: new Date(),
+      username: 'nguoidung1',
+      review_updated_at: new Date(),
+    },
+  ];
 
   beforeEach(async () => {
-    const bookReviewServiceSpy = jasmine.createSpyObj('BookReviewService', [
+    mockBookService = jasmine.createSpyObj<{
+      getBookById: (id: number) => Observable<Book | null>;
+      updateBookRating: (
+        id: number,
+        rating: number,
+        count: number
+      ) => Observable<void>;
+    }>('BookService', ['getBookById', 'updateBookRating']);
+    mockBookService.getBookById.and.returnValue(of(mockSach));
+    mockBookService.updateBookRating.and.returnValue(of(void 0));
+    mockBookReviewService = jasmine.createSpyObj('BookReviewService', [
       'getReviewsByBookId',
-      'checkUserReviewed',
       'addReview',
+      'checkUserReviewed',
       'updateReview',
       'deleteReview',
     ]);
-    const bookServiceSpy = jasmine.createSpyObj('BookService', ['getBookById', 'updateBookRating']);
 
     await TestBed.configureTestingModule({
       declarations: [BookReviewComponent],
-      imports: [HttpClientTestingModule],
+      imports: [FormsModule, HttpClientTestingModule],
       providers: [
-        { provide: BookReviewService, useValue: bookReviewServiceSpy },
-        { provide: BookService, useValue: bookServiceSpy },
+        { provide: BookService, useValue: mockBookService },
+        { provide: BookReviewService, useValue: mockBookReviewService },
         {
           provide: ActivatedRoute,
-          useValue: {
-            params: of({ bookId: 1 }), // Mô phỏng URL parameter
-          },
+          useValue: { params: of({ bookId: '1' }) },
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(BookReviewComponent);
     component = fixture.componentInstance;
-    bookReviewService = TestBed.inject(BookReviewService) as jasmine.SpyObj<BookReviewService>;
-    bookService = TestBed.inject(BookService) as jasmine.SpyObj<BookService>;
 
-    fixture.detectChanges();
-  });
-
-  it('should create the component successfully', () => {
-    expect(component).toBeTruthy();
-    expect(component.isLoading).toBeTrue();
-    expect(component.book).toBeUndefined();
-  });
-
-  it('should load book details and reviews on init', () => {
-    const mockBook = { id: 1, title: 'Test Book', author: 'Author' };
-    const mockReviews = [
-      { user_id: 2, rating: 4, review_text: 'Great book!', book_id: 1 },
-    ];
-    const mockUserReview = {
+    // Mock localStorage
+    const mockNguoiDung = {
       user_id: 1,
-      rating: 5,
-      review_text: 'My review!',
-      book_id: 1,
+      username: 'nguoidung1',
+      first_name: 'Nguoi',
+      last_name: 'Dung',
     };
+    spyOn(localStorage, 'getItem').and.returnValue(
+      JSON.stringify(mockNguoiDung)
+    );
 
-    bookService.getBookById.and.returnValue(of(mockBook));
-    bookReviewService.getReviewsByBookId.and.returnValue(of(mockReviews));
-    bookReviewService.checkUserReviewed.and.returnValue(of(mockUserReview));
+    // Setup mock returns
+    mockBookService.getBookById.and.returnValue(of(mockSach));
+    mockBookReviewService.getReviewsByBookId.and.returnValue(of(mockDanhGia));
+    mockBookReviewService.checkUserReviewed.and.returnValue(of(null));
 
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    expect(bookService.getBookById).toHaveBeenCalledWith(1);
-    expect(bookReviewService.getReviewsByBookId).toHaveBeenCalledWith(1);
-    expect(component.book).toEqual(mockBook);
-    expect(component.reviews.length).toBe(2); // 1 user review + existing review
-    expect(component.isLoading).toBeFalse();
-  });
-
-  it('should handle error when book is not found', () => {
-    bookService.getBookById.and.returnValue(throwError(() => new Error('Book not found')));
+    // Thêm dòng này để set selectedBookId
+    component.selectedBookId = 1;
 
     component.ngOnInit();
     fixture.detectChanges();
-
-    expect(component.isLoading).toBeFalse();
-    expect(component.errorMessage).toBe('Book not found');
   });
 
-  it('should add a review successfully and refresh the reviews', () => {
-    const newReview = { rating: 5, review_text: 'Amazing book!' };
-    const mockReview = { ...newReview, user_id: 1, book_id: 1, review_date: new Date() };
-    const updatedReviews = [mockReview];
+  describe('Khởi tạo Component', () => {
+    // Test 1: Kiểm tra khởi tạo component
+    it('Khởi tạo component thành công', () => {
+      expect(component).toBeTruthy();
+    });
 
-    bookReviewService.addReview.and.returnValue(of(mockReview));
-    bookReviewService.getReviewsByBookId.and.returnValue(of(updatedReviews));
+    // Test 2: Sửa test load dữ liệu ban đầu
+    it('Tải thông tin sách và đánh giá khi khởi tạo', fakeAsync(() => {
+      // Setup mocks
+      mockBookService.getBookById.and.returnValue(of(mockSach));
+      mockBookReviewService.getReviewsByBookId.and.returnValue(of(mockDanhGia));
 
-    component.newReview = newReview;
-    component.submitReview();
-    fixture.detectChanges();
+      // Set selectedBookId
+      component.selectedBookId = 1;
 
-    expect(bookReviewService.addReview).toHaveBeenCalledWith(newReview);
-    expect(component.successMessage).toBe('Đánh giá đã được thêm thành công!');
-    expect(component.reviews).toEqual(updatedReviews);
-    expect(component.hasUserReviewed).toBeTrue();
+      // Call ngOnInit
+      component.ngOnInit();
+
+      // First tick for getBookById
+      tick();
+
+      // Second tick for getReviewsByBookId
+      tick();
+
+      // Verify results
+      expect(component.book).toEqual(mockSach);
+      expect(component.reviews).toEqual(mockDanhGia);
+      expect(component.isLoading).toBeFalse();
+
+      // Verify service calls
+      expect(mockBookService.getBookById).toHaveBeenCalledWith(1);
+      expect(mockBookReviewService.getReviewsByBookId).toHaveBeenCalledWith(1);
+    }));
+
+    // Test 3: Sửa test xử lý khi không tìm thấy sách
+    it('Hiển thị lỗi khi không tìm thấy sách', fakeAsync(() => {
+      // Reset các mock
+      mockBookService.getBookById.calls.reset();
+      mockBookReviewService.getReviewsByBookId.calls.reset();
+
+      // Setup mock trả về null cho sách không tìm thấy
+      mockBookService.getBookById.and.returnValue(of(null));
+      component.selectedBookId = 1;
+
+      // Gọi ngOnInit
+      component.ngOnInit();
+
+      // Đợi cho getBookById hoàn thành
+      tick();
+
+      // Kiểm tra kết quả
+      expect(component.errorMessage).toBe('Không tìm thấy sách.');
+      expect(component.isLoading).toBeFalse();
+      expect(mockBookService.getBookById).toHaveBeenCalledWith(1);
+      expect(mockBookReviewService.getReviewsByBookId).not.toHaveBeenCalled();
+    }));
   });
 
-  it('should show error when adding a review fails', () => {
-    bookReviewService.addReview.and.returnValue(throwError(() => new Error('Failed to add review')));
+  describe('Gửi đánh giá', () => {
+    beforeEach(() => {
+      component.selectedBookId = 1;
+      component.newReview = {
+        book_id: 1,
+        user_id: 1,
+        rating: 4,
+        review_text: 'Bài đánh giá test',
+      };
+      mockBookReviewService.getReviewsByBookId.and.returnValue(of(mockDanhGia));
+    });
 
-    component.newReview = { rating: 5, review_text: 'Amazing book!' };
-    component.submitReview();
-    fixture.detectChanges();
+    // Test 4: Sửa test gửi đánh giá thành công
+    it('Gửi đánh giá thành công', fakeAsync(() => {
+      const review = {
+        book_id: 1,
+        user_id: 1,
+        username: 'nguoidung1',
+        rating: 4,
+        review_text: 'Bài đánh giá test',
+        review_date: jasmine.any(Date),
+        review_id: 0,
+      };
 
-    expect(component.errorMessage).toBe('Failed to add review');
+      mockBookReviewService.addReview.and.returnValue(of(mockDanhGia[0]));
+      mockBookReviewService.getReviewsByBookId.and.returnValue(of(mockDanhGia));
+
+      component.submitReview();
+      tick();
+
+      expect(mockBookReviewService.addReview).toHaveBeenCalledWith(
+        jasmine.objectContaining(review)
+      );
+      expect(component.successMessage).toBe(
+        'Đánh giá đã được thêm thành công!'
+      );
+      tick(3000);
+    }));
+
+    // Test 5: Sửa test validation form đánh giá
+    it('Kiểm tra thông tin đánh giá trước khi gửi', fakeAsync(() => {
+      component.newReview.rating = 0;
+      component.submitReview();
+      tick();
+      expect(component.errorMessage).toBe(
+        'Vui lòng nhập đầy đủ đánh giá và nội dung bình luận'
+      );
+      tick(3000);
+    }));
   });
 
-  it('should delete a review successfully and refresh reviews', () => {
-    const mockReviews = [
-      { user_id: 1, rating: 4, review_text: 'Great book!', book_id: 1 },
-    ];
-    bookReviewService.deleteReview.and.returnValue(of());
-    bookReviewService.getReviewsByBookId.and.returnValue(of(mockReviews));
+  describe('Chỉnh sửa đánh giá', () => {
+    // Test 6: Kiểm tra bật chế độ chỉnh sửa
+    it('Bật chế độ chỉnh sửa', () => {
+      component.editReview(mockDanhGia[0]);
+      expect(component.editingReviewId).toBe(mockDanhGia[0].review_id || null);
+      expect(component.editableReview).toEqual(mockDanhGia[0]);
+    });
 
-    component.deleteReview(1, 1);
-    fixture.detectChanges();
+    // Test 7: Kiểm tra lưu đánh giá sau khi chỉnh sửa
+    it('Lưu đánh giá đã chỉnh sửa thành công', fakeAsync(() => {
+      const danhGiaDaCapNhat = {
+        ...mockDanhGia[0],
+        review_text: 'Đánh giá đã cập nhật',
+      };
+      mockBookReviewService.updateReview.and.returnValue(of(danhGiaDaCapNhat));
+      mockBookReviewService.getReviewsByBookId.and.returnValue(
+        of([danhGiaDaCapNhat])
+      );
 
-    expect(bookReviewService.deleteReview).toHaveBeenCalledWith(1, 1);
-    expect(component.successMessage).toBe('Đánh giá đã được xóa thành công!');
-    expect(component.reviews).toEqual(mockReviews);
+      component.editingReviewId = 1;
+      component.editableReview = danhGiaDaCapNhat;
+      component.saveReview();
+      tick();
+
+      expect(component.successMessage).toBe('Cập nhật đánh giá thành công!');
+      tick(3000);
+    }));
+
+    // Test 8: Kiểm tra hủy chỉnh sửa
+    it('Hủy chế độ chỉnh sửa', () => {
+      component.editingReviewId = 1;
+      component.cancelEdit();
+      expect(component.editingReviewId).toBeNull();
+      expect(component.editableReview).toEqual({});
+    });
   });
 
-  it('should show error when deleting a review fails', () => {
-    bookReviewService.deleteReview.and.returnValue(throwError(() => new Error('Failed to delete review')));
+  describe('Xóa đánh giá', () => {
+    // Test 9: Kiểm tra xóa đánh giá thành công
+    it('Xóa đánh giá thành công', fakeAsync(() => {
+      spyOn(window, 'confirm').and.returnValue(true);
+      mockBookReviewService.deleteReview.and.returnValue(of(void 0));
+      component.deleteReview(1, 1);
+      tick();
+      expect(component.successMessage).toBe('Đánh giá đã được xóa thành công!');
+      tick(3000);
+    }));
 
-    component.deleteReview(1, 1);
-    fixture.detectChanges();
+    // Test 10: Kiểm tra hủy xóa đánh giá
+    it('Không xóa khi người dùng hủy', fakeAsync(() => {
+      spyOn(window, 'confirm').and.returnValue(false);
+      component.deleteReview(1, 1);
+      tick();
+      expect(mockBookReviewService.deleteReview).not.toHaveBeenCalled();
+    }));
+  });
 
-    expect(component.errorMessage).toBe('Xóa đánh giá thất bại. Vui lòng thử lại.');
+  describe('Giao diện người dùng', () => {
+    beforeEach(() => {
+      component.book = mockSach;
+      component.reviews = mockDanhGia;
+      fixture.detectChanges();
+    });
+
+    // Test 11: Kiểm tra hiển thị form đánh giá
+    it('Hiển thị form đánh giá khi chưa đánh giá', () => {
+      component.hasUserReviewed = false;
+      fixture.detectChanges();
+      const reviewForm = fixture.debugElement.query(By.css('textarea'));
+      expect(reviewForm).toBeTruthy();
+    });
+
+    // Test 12: Sửa test hiển thị danh sách đánh giá
+    it('Hiển thị danh sách đánh giá', () => {
+      component.reviews = mockDanhGia;
+      fixture.detectChanges();
+      const reviewElements = fixture.debugElement.queryAll(
+        By.css('.review-item')
+      );
+      expect(reviewElements.length).toBe(mockDanhGia.length);
+    });
+
+    // Test 13: Kiểm tra hiển thị thông báo lỗi
+    it('Hiển thị thông báo lỗi', () => {
+      component.errorMessage = 'Lỗi test';
+      fixture.detectChanges();
+      const errorElement = fixture.debugElement.query(By.css('.error-message'));
+      expect(errorElement.nativeElement.textContent).toContain('Lỗi test');
+    });
   });
 });

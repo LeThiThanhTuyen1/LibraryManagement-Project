@@ -1,62 +1,97 @@
 <div *ngIf="isLoading" class="loading">Đang tải dữ liệu...</div>
 
 <div *ngIf="!isLoading && book" class="book-detail-card">
-    <div class="book-content">
-        <div class="book-image-container">
-            <img src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-document-flat-icon-png-image_9150671.png"
-                class="book-image" alt="Book cover image" title="Book cover of {{ book.title }}" />
-            <h2>{{ book.title }}</h2>
-            <p>
-              <strong>Tải tài liệu:</strong>
-              <button class="btn-download" (click)="downloadDocument()">Download</button>
-          </p>          
-        </div>
-        <div class="book-details">
-            <p class="book-info-item"><strong>Tác giả:</strong> {{ book.AuthorName }}
-                <button class="favorite-btn" (click)="toggleFavorite()" aria-label="Thêm vào yêu thích" title="Thêm vào yêu thích">
-                  <i [class]="isFavorite ? 'fas fa-heart favorite' : 'far fa-heart'"></i>
-                </button>                  
-              </p>              
-            <p class="book-info-item"><strong>ISBN:</strong> {{ book.isbn }}</p>
-            <p><strong>Năm xuất bản:</strong> {{ book.publication_year }}</p>
-            <p class="book-info-item"><strong>Nhà xuất bản:</strong> {{ book.PublisherName }}</p>
-            <p class="book-info-item"><strong>Thể loại:</strong> {{ book.genre }}</p>
-            <p class="book-info-item"><strong>Ngôn ngữ:</strong> {{ book.language }}</p>
-            <p><strong>Tóm tắt:</strong> {{ book.summary }}</p>
-            <p><strong>Đánh giá:</strong></p>
-            <div>
-                <span *ngFor="let star of [].constructor(5); let i = index"
-                    [class]="i < book.AverageRating? 'star' : 'star-empty'">
-                    ★
-                </span>
-            </div>
-        </div>
+  <div class="book-content">
+    <div class="book-image-container">
+      <img
+        src="https://png.pngtree.com/png-clipart/20230508/original/pngtree-document-flat-icon-png-image_9150671.png"
+        class="book-image"
+        alt="Book cover image"
+        title="Book cover of {{ book.title }}"
+      />
+      <h2>{{ book.title }}</h2>
+      <p>
+        <strong>Tải tài liệu:</strong>
+        <button class="btn-download" (click)="downloadDocument()">
+          Download
+        </button>
+      </p>
     </div>
-</div>
-<div class="button-group">
-    <button class="btn btn-goback" (click)="goBack()">Quay lại</button>
-    <button class="btn btn-view" (click)="viewDocument()">Xem tài liệu</button>
-    <button 
-        class="btn btn-feedback" 
-        [routerLink]="['/book-review', book.book_id]"  
-        aria-label="Thảo luận và đánh giá"
-    >
-        Thảo luận và đánh giá
-    </button>
+    <div class="book-details">
+      <p class="book-info-item">
+        <strong>Tác giả:</strong> {{ book.AuthorName }}
+        <button
+          class="favorite-btn"
+          (click)="toggleFavorite()"
+          aria-label="Thêm vào yêu thích"
+          title="Thêm vào yêu thích"
+        >
+          <i
+            [class]="isFavorite ? 'fas fa-heart favorite' : 'far fa-heart'"
+          ></i>
+        </button>
+      </p>
+      <p class="book-info-item"><strong>ISBN:</strong> {{ book.isbn }}</p>
+      <p><strong>Năm xuất bản:</strong> {{ book.publication_year }}</p>
+      <p class="book-info-item">
+        <strong>Nhà xuất bản:</strong> {{ book.PublisherName }}
+      </p>
+      <p class="book-info-item"><strong>Thể loại:</strong> {{ book.genre }}</p>
+      <p class="book-info-item">
+        <strong>Ngôn ngữ:</strong> {{ book.language }}
+      </p>
+      <p><strong>Tóm tắt:</strong> {{ book.summary }}</p>
+      <p><strong>Đánh giá:</strong></p>
+      <div>
+        <span
+          *ngFor="let star of [].constructor(5); let i = index"
+          [class]="i < book.AverageRating ? 'star' : 'star-empty'"
+        >
+          ★
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div *ngIf="!isLoading && !book" class="error-message">
+  Không tìm thấy sách.
+</div>
+
+<div class="button-group">
+  <button class="btn btn-goback" (click)="goBack()">Quay lại</button>
+  <button class="btn btn-view" (click)="viewDocument()">Xem tài liệu</button>
+  <button
+    *ngIf="!hideReviewButton"
+    class="btn btn-feedback"
+    (click)="toggleReviewSection()"
+    aria-label="Thảo luận và đánh giá"
+  >
+    Thảo luận và đánh giá
+  </button>
+</div>
+
+<div *ngIf="showReviewSection && book">
+  <app-book-review [selectedBookId]="bookId"></app-book-review>
+</div>
 
 <div class="document-viewer" *ngIf="documentUrl">
   <div class="overlay">
     <div class="modal-content">
       <button class="close-btn" (click)="closeDocumentViewer()">×</button>
       <div class="viewer-container">
-        <iframe 
-          *ngIf="documentUrl"
-          [src]="documentUrl" 
-          frameborder="0">
+        <iframe *ngIf="documentUrl" [src]="documentUrl" frameborder="0">
         </iframe>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog-box">
+    <div class="dialog-content">
+      <p>{{ dialogMessage }}</p>
+      <button class="btn btn-primary" (click)="closeDialog()">Đóng</button>
     </div>
   </div>
 </div>

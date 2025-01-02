@@ -35,10 +35,11 @@ const routes: Routes = [
   { path: 'search-documents', component: SearchDocumentsComponent },
   { path: 'book-detail/:id', component: BookDetailComponent },
   { path: 'book-review/:bookId', component: BookReviewComponent },
+  { path: 'book/:id', component: BookDetailComponent },
   { path: 'book-edit/:id', component: BookEditComponent },
-  { path: 'student-info', component: StudentInfoComponent},
-  { path: 'lecturer-info', component: LecturerInfoComponent},
-  { path: 'share-documents', component: ShareDocumentsComponent},
+  { path: 'student-info', component: StudentInfoComponent },
+  { path: 'lecturer-info', component: LecturerInfoComponent },
+  { path: 'share-documents', component: ShareDocumentsComponent },
   { path: 'add-book-admin', component: AddBookAdminComponent },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
@@ -46,6 +47,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

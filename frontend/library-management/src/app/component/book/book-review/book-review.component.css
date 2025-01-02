@@ -1,6 +1,6 @@
 /* Tổng thể */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
@@ -251,4 +251,70 @@ button:disabled {
   font-weight: bold;
   text-align: center;
   padding: 10px 0;
+}
+
+.review-card {
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.review-user {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.review-date {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.review-rating {
+  margin: 0.3rem 0;
+}
+
+.review-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0.5rem 0;
+}
+
+.review-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.review-actions button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.star {
+  font-size: 1rem;
+  color: #ffd700;
+}
+
+/* Form styles */
+.review-form {
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.review-form textarea {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+
+.review-form .rating {
+  margin: 0.5rem 0;
 }
