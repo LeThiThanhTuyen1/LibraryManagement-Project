@@ -4,7 +4,7 @@ import { BookService } from '../../../service/book.service';
 import { PublisherService } from '../../../service/publisher.service';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
@@ -84,11 +84,11 @@ describe('BookEditComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it('nên tạo được component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load publishers on init', fakeAsync(() => {
+  it('nên tải được danh sách nhà xuất bản khi khởi tạo', fakeAsync(() => {
     fixture.detectChanges();
     tick();
     
@@ -97,7 +97,7 @@ describe('BookEditComponent', () => {
     expect(component.publishers[0].name).toBe('Test Publisher');
   }));
 
-  it('should load the book data on init', fakeAsync(() => {
+  it('nên tải được thông tin sách khi khởi tạo', fakeAsync(() => {
     fixture.detectChanges();
     tick();
     
@@ -106,42 +106,109 @@ describe('BookEditComponent', () => {
     expect(component.bookForm.get('isbn')?.value).toBe('1234567890');
   }));
 
-  it('should save changes', fakeAsync(() => {
+  it('nên lưu được các thay đổi', fakeAsync(() => {
     fixture.detectChanges();
     tick();
 
-    const updatedBookData = {
-      title: 'Updated Title',
+    const duLieuCapNhat = {
+      title: 'Tiêu đề mới',
       isbn: '0987654321',
       publication_year: 2024,
-      genre: 'Non-Fiction',
-      summary: 'Updated summary.',
-      language: 'Spanish',
+      genre: 'Phi hư cấu',
+      summary: 'Tóm tắt mới.',
+      language: 'Tiếng Việt',
       PublisherId: 2
     };
 
-    component.bookForm.patchValue(updatedBookData);
+    component.bookForm.patchValue(duLieuCapNhat);
 
     mockBookService.updateBook.and.returnValue(of({ success: true }));
 
     component.onSubmit();
-    tick();
+    tick(2000);
 
     expect(mockBookService.updateBook).toHaveBeenCalledWith(1, jasmine.objectContaining({
-      title: 'Updated Title',
+      title: 'Tiêu đề mới',
       isbn: '0987654321',
       publication_year: 2024,
-      genre: 'Non-Fiction',
-      summary: 'Updated summary.',
-      language: 'Spanish',
+      genre: 'Phi hư cấu',
+      summary: 'Tóm tắt mới.',
+      language: 'Tiếng Việt',
       publisherId: 2,
       file_path: 'moi.pdf'
     }));
   }));
 
-  it('should navigate back to the book list on cancel', () => {
+  it('nên chuyển về trang danh sách khi nhấn hủy', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.goBack();
     expect(navigateSpy).toHaveBeenCalledWith(['/book-list']);
+  });
+
+  it('nên chuyển hướng người dùng không phải admin về trang danh sách', fakeAsync(() => {
+    (localStorage.getItem as jasmine.Spy).and.returnValue(JSON.stringify({ role: 'user' }));
+    
+    const navigateSpy = spyOn(router, 'navigate');
+    fixture.detectChanges();
+    tick(2000);
+    
+    expect(component.showDialog).toBeTrue();
+    expect(component.dialogMessage).toBe('Bạn không có quyền truy cập trang này.');
+    expect(navigateSpy).toHaveBeenCalledWith(['/book-list']);
+  }));
+
+  it('nên xử lý lỗi khi form không hợp lệ', fakeAsync(() => {
+    fixture.detectChanges();
+    tick();
+
+    // Đặt giá trị không hợp lệ cho form
+    component.bookForm.patchValue({
+      title: '', // trường bắt buộc
+      isbn: '',  // trường bắt buộc
+      publication_year: null // trường bắt buộc
+    });
+
+    component.onSubmit();
+    tick();
+
+    expect(component.showDialog).toBeTrue();
+    expect(component.dialogMessage).toBe('Dữ liệu không hợp lệ! Vui lòng kiểm tra lại.');
+    expect(mockBookService.updateBook).not.toHaveBeenCalled();
+  }));
+
+  it('nên xử lý lỗi từ máy chủ khi cập nhật', fakeAsync(() => {
+    fixture.detectChanges();
+    tick();
+
+    // Đảm bảo form hợp lệ
+    component.bookForm.patchValue({
+      title: 'Tiêu đề hợp lệ',
+      isbn: '1234567890',
+      publication_year: 2024,
+      PublisherId: 1,
+      genre: 'Văn học',
+      summary: 'Tóm tắt test',
+      language: 'Tiếng Việt'
+    });
+
+    expect(component.bookForm.valid).toBeTrue();
+
+    mockBookService.updateBook.and.returnValue(throwError(() => new Error('Lỗi máy chủ')));
+
+    component.onSubmit();
+    tick(2000);
+
+    expect(component.showDialog).toBeTrue();
+    expect(component.dialogMessage).toBe('Cập nhật sách thất bại. Vui lòng thử lại!');
+  }));
+
+  it('nên đóng được dialog khi gọi closeDialog', () => {
+    component.showDialog = true;
+    component.dialogMessage = 'Thông báo test';
+    
+    component.closeDialog();
+    
+    expect(component.showDialog).toBeFalse();
+    expect(component.dialogMessage).toBe('');
   });
 });

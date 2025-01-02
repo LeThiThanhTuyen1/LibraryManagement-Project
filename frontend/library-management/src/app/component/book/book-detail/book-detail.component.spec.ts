@@ -8,12 +8,15 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Location } from '@angular/common';
 import { Favorite } from '../../../model/favorite.model';
 import { FavoriteService } from '../../../service/favorite.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import * as mammoth from 'mammoth';
 
 describe('BookDetailComponent', () => {
   let component: BookDetailComponent;
   let fixture: ComponentFixture<BookDetailComponent>;
   let mockBookService: jasmine.SpyObj<BookService>;
   let mockFavoriteService: jasmine.SpyObj<FavoriteService>;
+  let mockSanitizer: jasmine.SpyObj<DomSanitizer>;
 
   const mockBook: Book = {
     book_id: 1,
@@ -42,8 +45,10 @@ describe('BookDetailComponent', () => {
 
   beforeEach(async () => {
     // Create spies for services
-    mockBookService = jasmine.createSpyObj('BookService', ['getBookById', 'getBookFile']);
+    mockBookService = jasmine.createSpyObj('BookService', ['getBookById', 'getBookFile', 'viewDocument']);
     mockFavoriteService = jasmine.createSpyObj('FavoriteService', ['addFavorite', 'deleteFavoriteByBookId']);
+    mockSanitizer = jasmine.createSpyObj('DomSanitizer', ['bypassSecurityTrustResourceUrl']);
+    mockSanitizer.bypassSecurityTrustResourceUrl.and.callFake(url => url);
 
     mockBookService.getBookById.and.returnValue(of(mockBook));
     mockFavoriteService.addFavorite.and.returnValue(of(mockFavorite)); 
@@ -59,7 +64,8 @@ describe('BookDetailComponent', () => {
             params: of({ id: 1 }) 
           }
         },
-        { provide: Location, useValue: { back: jasmine.createSpy('back') } }
+        { provide: Location, useValue: { back: jasmine.createSpy('back') } },
+        { provide: DomSanitizer, useValue: mockSanitizer }
       ],
       schemas: [NO_ERRORS_SCHEMA] 
     }).compileComponents();
@@ -140,10 +146,9 @@ describe('BookDetailComponent', () => {
         user_id: 1,
         role: 'admin'
       }));
-      spyOn(window, 'alert');
     });
 
-    it('should download document for admin user', () => {
+    it('nên cho phép admin tải tài liệu', () => {
       const mockBlob = new Blob(['test'], { type: 'application/pdf' });
       mockBookService.getBookFile.and.returnValue(of(mockBlob));
       
@@ -168,19 +173,21 @@ describe('BookDetailComponent', () => {
       expect(createObjectURLSpy).toHaveBeenCalled();
       expect(mockAnchor.click).toHaveBeenCalled();
       expect(revokeObjectURLSpy).toHaveBeenCalled();
-      expect(window.alert).toHaveBeenCalledWith('Tải tài liệu thành công!');
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Tải tài liệu thành công!');
     });
 
-    it('should show error message when user is not logged in', () => {
+    it('nên hiển thị thông báo khi chưa đăng nhập', () => {
       localStorageGetItemSpy.and.returnValue(null);
       
       component.downloadDocument();
       
-      expect(window.alert).toHaveBeenCalledWith('Vui lòng đăng nhập để tải tài liệu.');
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Vui lòng đăng nhập để tải tài liệu.');
       expect(mockBookService.getBookFile).not.toHaveBeenCalled();
     });
 
-    it('should show access denied message for unauthorized users', () => {
+    it('nên hiển thị thông báo từ chối quyền truy cập cho người dùng không được phép', () => {
       localStorageGetItemSpy.and.returnValue(JSON.stringify({
         user_id: 1,
         role: 'user'
@@ -193,18 +200,98 @@ describe('BookDetailComponent', () => {
       
       component.downloadDocument();
       
-      expect(window.alert).toHaveBeenCalledWith('Bạn không có quyền tải tài liệu này.');
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Bạn không có quyền tải tài liệu này.');
       expect(mockBookService.getBookFile).not.toHaveBeenCalled();
     });
 
-    it('should handle download error', () => {
+    it('nên xử lý lỗi khi tải tài liệu thất bại', () => {
       mockBookService.getBookFile.and.returnValue(throwError(() => new Error('Download failed')));
       
       component.book = mockBook;
       
       component.downloadDocument();
       
-      expect(window.alert).toHaveBeenCalledWith('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+    });
+  });
+
+  describe('viewDocument', () => {
+    let localStorageGetItemSpy: jasmine.Spy;
+    let createObjectURLSpy: jasmine.Spy;
+
+    beforeEach(() => {
+      localStorageGetItemSpy = spyOn(localStorage, 'getItem');
+      localStorageGetItemSpy.and.returnValue(JSON.stringify({
+        user_id: 1,
+        role: 'admin'
+      }));
+      createObjectURLSpy = spyOn(URL, 'createObjectURL').and.returnValue('blob:test-url');
+      component.book = mockBook;
+    });
+
+    it('nên xử lý tài liệu PDF đúng cách', () => {
+      const pdfBlob = new Blob(['fake pdf content'], { type: 'application/pdf' });
+      mockBookService.viewDocument.and.returnValue(of(pdfBlob));
+
+      component.viewDocument();
+
+      expect(mockBookService.viewDocument).toHaveBeenCalledWith(mockBook.book_id);
+      expect(createObjectURLSpy).toHaveBeenCalledWith(pdfBlob);
+      expect(mockSanitizer.bypassSecurityTrustResourceUrl).toHaveBeenCalledWith('blob:test-url');
+      expect(component.documentUrl).toBeTruthy();
+    });
+
+    it('nên hiển thị thông báo lỗi khi tải tài liệu thất bại', () => {
+      mockBookService.viewDocument.and.returnValue(
+        throwError(() => new Error('Failed to load document'))
+      );
+
+      component.viewDocument();
+
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Đã xảy ra lỗi khi tải tài liệu. Vui lòng thử lại sau.');
+    });
+
+    it('nên hiển thị thông báo từ chối quyền truy cập cho người dùng không được phép', () => {
+      localStorageGetItemSpy.and.returnValue(JSON.stringify({
+        user_id: 1,
+        role: 'user'
+      }));
+      
+      component.book = {
+        ...mockBook,
+        accessLevel: 'private'
+      };
+
+      component.viewDocument();
+
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Bạn không có quyền truy cập tài liệu này.');
+      expect(mockBookService.viewDocument).not.toHaveBeenCalled();
+    });
+
+    it('nên yêu cầu đăng nhập để xem tài liệu', () => {
+      localStorageGetItemSpy.and.returnValue(null);
+
+      component.viewDocument();
+
+      expect(component.showDialog).toBeTrue();
+      expect(component.dialogMessage).toBe('Vui lòng đăng nhập để xem tài liệu.');
+      expect(mockBookService.viewDocument).not.toHaveBeenCalled();
+    });
+
+    it('nên đóng trình xem tài liệu đúng cách', () => {
+      const revokeObjectURLSpy = spyOn(URL, 'revokeObjectURL');
+      component.tempFileUrl = 'blob:test-url';
+      component.documentUrl = 'test-url';
+
+      component.closeDocumentViewer();
+
+      expect(component.documentUrl).toBe('');
+      expect(component.tempFileUrl).toBe('');
+      expect(revokeObjectURLSpy).toHaveBeenCalledWith('blob:test-url');
     });
   });
 });
