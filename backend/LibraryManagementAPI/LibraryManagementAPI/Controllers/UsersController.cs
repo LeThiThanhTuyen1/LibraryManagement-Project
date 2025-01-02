@@ -26,7 +26,7 @@ namespace LibraryManagementAPI.Controllers
         public UsersController(LibraryManagementAPIContext context, IConfiguration configuration)  // Thêm IConfiguration vào constructor
         {
             _context = context;
-            _configuration = configuration;  // Gán IConfiguration vào biến _configuration
+            _configuration = configuration;  
             _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
             if (!Directory.Exists(_uploadPath))
             {
@@ -289,6 +289,11 @@ namespace LibraryManagementAPI.Controllers
             if (user == null)
             {
                 return NotFound(new { message = "User not found" });
+            }
+
+            if (userDto.phone_number == null)
+            {
+                return NotFound(new { message = "Phone number is null" });
             }
 
             user.email = userDto.email;

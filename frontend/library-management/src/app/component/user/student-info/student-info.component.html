@@ -5,7 +5,7 @@
 
   <div class="right-section">
     <h2>Thông Tin Sinh Viên</h2>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Hiển thị thông báo lỗi -->
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> 
 
     <table>
       <tbody>
@@ -20,15 +20,15 @@
         <tr>
           <th>Email</th>
           <td>
-            <span *ngIf="!isEditing">{{ user.Email }}</span>
-            <input *ngIf="isEditing" type="email" [(ngModel)]="user.Email" />
+            <span *ngIf="!isEditing">{{ student.Email }}</span>
+            <input *ngIf="isEditing" type="email" [(ngModel)]="student.Email" />
           </td>
         </tr>
         <tr>
           <th>Số điện thoại</th>
           <td>
-            <span *ngIf="!isEditing">{{ user.PhoneNumber }}</span>
-            <input *ngIf="isEditing" type="text" [(ngModel)]="user.PhoneNumber" />
+            <span *ngIf="!isEditing">{{ student.PhoneNumber }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="student.PhoneNumber" />
           </td>
         </tr>
         <tr>
