@@ -223,17 +223,8 @@ export class BookDetailComponent implements OnInit, OnChanges {
   }
 
   private handleFallback(fileUrl: string): void {
-    const downloadChoice = confirm(
-      'Không thể xem trực tiếp file này. Bạn có muốn tải xuống không?'
-    );
-    if (downloadChoice) {
-      const anchor = document.createElement('a');
-      anchor.href = fileUrl;
-      anchor.download = this.book.title || 'document';
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-    }
+    this.showDialog = true;
+    this.dialogMessage = 'Định dạng file không được hỗ trợ. Chỉ hỗ trợ xem file PDF và DOCX.';
     URL.revokeObjectURL(fileUrl);
   }
 
@@ -296,20 +287,25 @@ export class BookDetailComponent implements OnInit, OnChanges {
       if (this.book.accessLevel === 'public' || userRole === 'admin' || this.book.accessLevel === userRole) {
         this.bookService.getBookFile(this.book.book_id).subscribe(
           (response: Blob) => {
-            const fileName =
-              this.book.title + this.getFileExtension(response.type);
+            const mimeType = response.type;
+            if (mimeType !== 'application/pdf' && 
+                mimeType !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+              this.showDialog = true;
+              this.dialogMessage = 'Định dạng file không được hỗ trợ. Chỉ hỗ trợ tải file PDF và DOCX.';
+              return;
+            }
+
+            const extension = mimeType === 'application/pdf' ? '.pdf' : '.docx';
+            const fileName = this.book.title + extension;
             const fileURL = URL.createObjectURL(response);
 
-            // Tạo một thẻ <a> để kích hoạt tải xuống
             const anchor = document.createElement('a');
             anchor.href = fileURL;
             anchor.download = fileName;
             anchor.click();
 
-            // Thu hồi URL sau khi tải
             URL.revokeObjectURL(fileURL);
 
-            // Hiển thị thông báo tải thành công
             this.showDialog = true;
             this.dialogMessage = 'Tải tài liệu thành công!';
           },
@@ -327,20 +323,6 @@ export class BookDetailComponent implements OnInit, OnChanges {
       this.showDialog = true;
       this.dialogMessage = 'Vui lòng đăng nhập để tải tài liệu.';
     }
-  }
-
-  // Hàm hỗ trợ để lấy phần mở rộng file từ MIME type
-  private getFileExtension(mimeType: string): string {
-    const mimeExtensions: { [key: string]: string } = {
-      'application/pdf': '.pdf',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-        '.docx',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        '.xlsx',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-        '.pptx',
-    };
-    return mimeExtensions[mimeType] || '';
   }
 
   toggleReviewSection(): void {

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6HMRb/eHRWVSBFYadnw3ktQGcEQTpTZyQzCs3M0sIVQ=",
+  "Hash": "3mTeC1Zo0c49vGzbaWOxFubVW4iGsnu+9TCXd6cL4Rk=",
   "Source": "LibraryManagementAPI",
   "BasePath": "_content/LibraryManagementAPI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "LibraryManagementAPI\\wwwroot",
       "Source": "LibraryManagementAPI",
-      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
       "BasePath": "_content/LibraryManagementAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\chap.pptx",
+      "Identity": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\chap.pptx",
       "SourceId": "LibraryManagementAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
       "BasePath": "_content/LibraryManagementAPI",
       "RelativePath": "Uploads/chap.pptx",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\chap.pptx"
     },
     {
-      "Identity": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\moi.pdf",
+      "Identity": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\moi.pdf",
       "SourceId": "LibraryManagementAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
       "BasePath": "_content/LibraryManagementAPI",
       "RelativePath": "Uploads/moi.pdf",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\moi.pdf"
     },
     {
-      "Identity": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\WRITING.docx",
+      "Identity": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\Uploads\\WRITING.docx",
       "SourceId": "LibraryManagementAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (4)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\New folder (5)\\LibraryManagement-Project\\backend\\LibraryManagementAPI\\LibraryManagementAPI\\wwwroot\\",
       "BasePath": "_content/LibraryManagementAPI",
       "RelativePath": "Uploads/WRITING.docx",
       "AssetKind": "All",
