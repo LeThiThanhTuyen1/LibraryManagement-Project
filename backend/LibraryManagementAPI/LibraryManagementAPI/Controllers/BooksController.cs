@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -76,7 +76,6 @@ namespace LibraryManagementAPI.Controllers
             return Ok(books);
         }
 
-
         // GET: api/Books/5
         [HttpGet("GetBookById/{bookId}")]
         public async Task<IActionResult> GetBookById(int bookId)
@@ -132,7 +131,6 @@ namespace LibraryManagementAPI.Controllers
             return Ok(bookDetails);
         }
 
-
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -160,7 +158,6 @@ namespace LibraryManagementAPI.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 

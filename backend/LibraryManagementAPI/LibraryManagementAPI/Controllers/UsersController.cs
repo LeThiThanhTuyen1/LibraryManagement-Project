@@ -307,15 +307,15 @@ namespace LibraryManagementAPI.Controllers
         private async Task<bool> SendVerificationCodeEmail(string email, string verificationCode)
         {
             // Lấy thông tin từ Configuration
-            var gmailUsername = _configuration["GmailUsername"];  // Lấy giá trị GmailUsername từ appsettings hoặc môi trường
-            var gmailAppPassword = _configuration["GmailAppPassword"];  // Lấy giá trị GmailAppPassword từ appsettings hoặc môi trường
+            var gmailUsername = _configuration["GmailUsername"];  
+            var gmailAppPassword = _configuration["GmailAppPassword"];  
 
             try
             {
                 var smtpClient = new SmtpClient("smtp.gmail.com")
                 {
                     Port = 587,
-                    Credentials = new NetworkCredential(gmailUsername, gmailAppPassword), // Sử dụng email và mật khẩu ứng dụng Gmail
+                    Credentials = new NetworkCredential(gmailUsername, gmailAppPassword), 
                     EnableSsl = true,
                 };
 
@@ -359,7 +359,7 @@ namespace LibraryManagementAPI.Controllers
             // Validate file format and size
             foreach (var file in files)
             {
-                if (file.Length > 50 * 1024 * 1024) // Maximum 50MB
+                if (file.Length > 50 * 1024 * 1024) 
                 {
                     return BadRequest(new { message = "Tệp tin quá lớn. Kích thước tối đa là 50MB." });
                 }

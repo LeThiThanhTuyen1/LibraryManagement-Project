@@ -16,7 +16,7 @@ describe('HeaderComponent', () => {
       providers: [
         {
           provide: Router, 
-          useValue: { navigate: jasmine.createSpy('navigate') } // Mock Router
+          useValue: { navigate: jasmine.createSpy('navigate') } 
         }
       ]
     })

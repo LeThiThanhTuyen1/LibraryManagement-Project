@@ -86,7 +86,7 @@ namespace LibraryManagementAPI.Controllers
             _context.Favorites.RemoveRange(favoritesToRemove);
             await _context.SaveChangesAsync();
 
-            return NoContent(); // Trả về NoContent khi xóa thành công
+            return NoContent(); 
         }
 
         private bool FavoriteExists(int id)
