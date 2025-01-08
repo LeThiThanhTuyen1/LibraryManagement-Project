@@ -20,27 +20,28 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
 import { AddBookAdminComponent } from './component/admin/add-book-admin/add-book-admin.component';
 
 import { BookEditComponent } from './component/book/book-edit/book-edit.component';
+import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
-  { path: 'home-admin', component: HomeAdminComponent },
+  { path: 'home-admin', component: HomeAdminComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'book-list', component: BookListComponent },
   { path: 'link-library', component: LinkLibraryComponent },
-  { path: 'favorite-list', component: FavoriteListComponent },
+  { path: 'favorite-list', component: FavoriteListComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'search-documents', component: SearchDocumentsComponent },
   { path: 'book-detail/:id', component: BookDetailComponent },
   { path: 'book-review/:bookId', component: BookReviewComponent },
   { path: 'book/:id', component: BookDetailComponent },
-  { path: 'book-edit/:id', component: BookEditComponent },
-  { path: 'student-info', component: StudentInfoComponent },
-  { path: 'lecturer-info', component: LecturerInfoComponent },
+  { path: 'book-edit/:id', component: BookEditComponent, canActivate: [AuthGuard] },
+  { path: 'student-info', component: StudentInfoComponent, canActivate: [AuthGuard] },
+  { path: 'lecturer-info', component: LecturerInfoComponent, canActivate: [AuthGuard] },
   { path: 'share-documents', component: ShareDocumentsComponent },
-  { path: 'add-book-admin', component: AddBookAdminComponent },
+  { path: 'add-book-admin', component: AddBookAdminComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
