@@ -13,6 +13,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  isLoggedIn(): boolean {
+    const user = localStorage.getItem('user');
+    return user !== null; // Trả về true nếu có thông tin người dùng trong localStorage
+  }
+  
   // Login method with error handling
   login(username: string, password: string): Observable<User> {
     return this.http.post<any>(`${this.apiUrl}/login`, {
