@@ -1,7 +1,7 @@
 /* Container chính */
 .info-container {
   display: flex;
-  flex-direction: row; /* Sắp xếp các phần theo chiều ngang */
+  flex-direction: row; 
   align-items: flex-start;
   padding: 20px;
   width: 80%;
@@ -18,15 +18,23 @@
 
 /* Định dạng ảnh người dùng */
 .profile-picture {
-  margin-top: 90px;
-  width: 200px; /* Chiều rộng của ảnh */
-  height: 150px; /* Chiều cao của ảnh */
+  margin-top: 110px;
+  width: 200px; 
+  height: 150px; 
 }
 
-/* Phần bên phải chứa thông tin sinh viên */
 .right-section {
   flex: 2; /* Phần này chiếm nhiều không gian hơn */
   margin-left: 20px; /* Khoảng cách giữa ảnh và thông tin */
+}
+
+.error-message {
+  color: red;
+  background-color: #f8d7da;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid red;
+  border-radius: 5px;
 }
 
 /* Định dạng tiêu đề */

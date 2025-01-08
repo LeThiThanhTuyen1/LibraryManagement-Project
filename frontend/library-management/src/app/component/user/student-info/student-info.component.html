@@ -1,5 +1,5 @@
 <div class="info-container" *ngIf="student">
-  <div *ngIf="!isChangingPassword" class="left-section">
+  <div class="left-section">
     <img src="https://th.bing.com/th/id/OIP.O9YF9qMWDsUuo7m60RqiqAHaFi?rs=1&pid=ImgDetMain" alt="Student Profile Picture" class="profile-picture">
   </div>
 
@@ -53,13 +53,21 @@
       <button *ngIf="!isEditing" class="edit-info" (click)="openChangePasswordForm()">Thay đổi mật khẩu</button>
     </div>
   </div>
-
-  <!-- Form thay đổi mật khẩu -->
+  
+  <!-- Form đổi mật khẩu -->
   <div *ngIf="isChangingPassword" class="change-password-form">
-    <h2>Đổi Mật Khẩu</h2>
+    <h2>Thông tin người dùng</h2>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     <table>
       <tbody>
+        <tr>
+          <th>Mã</th>
+          <td>{{ student.Username }}</td>
+        </tr>
+        <tr>
+          <th>Họ tên</th>
+          <td>{{ student.FirstName }} {{ student.LastName }}</td>
+        </tr>
         <tr>
           <th>Mật khẩu cũ</th>
           <td><input type="password" id="oldPassword" [(ngModel)]="oldPassword" /></td>
@@ -80,4 +88,5 @@
       <button class="cancel-info" (click)="cancelChangePassword()">Hủy</button>
     </div>
   </div>
+
 </div>
