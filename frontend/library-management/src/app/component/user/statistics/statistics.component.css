@@ -1,0 +1,53 @@
+.statistics-container {
+    display: flex;
+    flex-direction: column; /* Đặt hướng dọc */
+    gap: 16px; /* Khoảng cách giữa các thẻ div */
+    padding: 16px;
+  }
+  
+  .box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f0f8ff;
+    width: 100%; /* Đặt chiều rộng full */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    background-color: #d9eafc;
+    padding: 8px;
+    margin: -16px -16px 16px -16px;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+  
+  strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input[type="number"] {
+    width: 60px;
+    margin: 0 4px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  select {
+    padding: 4px;
+    margin-right: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

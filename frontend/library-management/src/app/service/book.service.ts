@@ -82,5 +82,35 @@ export class BookService {
       responseType: 'blob'
     }).pipe(catchError(this.handleError));
   }
+
+  getAvailableBooksCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrl}/AvailableBooksCount`)
+      .pipe(catchError(this.handleError));
+  }
+  
+  getBooksCountByGenre(genre: string): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrl}/BooksCountByGenre?genre=${genre}`)
+      .pipe(catchError(this.handleError));
+  }
+  
+  getMostPopularGenre(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/MostPopularGenre`)
+      .pipe(catchError(this.handleError));  // Kiểm tra lỗi
+  }
+  
+  getBooksCountByYears(startYear: number, endYear: number): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrl}/BooksCountByYears?startYear=${startYear}&endYear=${endYear}`)
+      .pipe(catchError(this.handleError));
+  }
+  
+  getLibraryUsersCount(): Observable<number> {
+    return this.http
+      .get<number>('http://localhost:5283/api/Users/LibraryUsersCount')
+      .pipe(catchError(this.handleError));
+  }
+  
 } 
 

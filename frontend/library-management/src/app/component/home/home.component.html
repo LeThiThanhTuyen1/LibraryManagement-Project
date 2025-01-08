@@ -1,40 +1,49 @@
 <div class="home-page">
-    <main class="content">
-      <section class="teacher-quote">
-        <div class="avatar">
-          <img src="/assets/images/avatar.jpg" alt="Teacher Avatar">
-        </div>
-        <div class="quote">
-          <p>"Việc nghiên cứu tài liệu là bước đầu tiên để thành công trong học tập và nghiên cứu khoa học."</p>
-          <p>- Giáo sư Nguyễn Văn A</p>
-        </div>
-      </section>
-      <section class="teacher-quote">
-        <div class="avatar">
-          <img src="/assets/images/avatar3.jpg" alt="Teacher Avatar">
-        </div>
-        <div class="quote">
-          <p>"Việc nghiên cứu tài liệu là bước đầu tiên để thành công trong học tập và nghiên cứu khoa học."</p>
-          <p>- Giáo sư Nguyễn Văn A</p>
-        </div>
-      </section>
-      <section class="teacher-quote">
-        <div class="avatar">
-          <img src="/assets/images/avatar2.jpg" alt="Teacher Avatar">
-        </div>
-        <div class="quote">
-          <p>"Việc nghiên cứu tài liệu là bước đầu tiên để thành công trong học tập và nghiên cứu khoa học."</p>
-          <p>- Giáo sư Nguyễn Văn A</p>
-        </div>
-      </section>
-      <app-link-library></app-link-library>
-      <section class="image-carousel">
-        <div class="carousel">
-          <img src="/assets/images/photo1.jpg" alt="Photo 1">
-          <img src="/assets/images/photo2.jpg" alt="Photo 2">
-          <img src="/assets/images/photo3.jpg" alt="Photo 3">
-        </div>
-      </section>
-    </main>
+  <main class="content">
+    <div class="layout-container">
+      <!-- Các phần tử teacher-quote nằm dọc -->
+      <div class="teacher-quotes">
+        <section class="teacher-quote">
+          <div class="avatar">
+            <img src="/assets/images/avatar.jpg" alt="Teacher Avatar">
+          </div>
+          <div class="quote">
+            <p>"Việc nghiên cứu tài liệu là bước đầu tiên để thành công trong học tập và nghiên cứu khoa học."</p>
+            <p>- Giáo sư Nguyễn Văn A</p>
+          </div>
+        </section>
+        <section class="teacher-quote">
+          <div class="avatar">
+            <img src="/assets/images/avatar3.jpg" alt="Teacher Avatar">
+          </div>
+          <div class="quote">
+            <p>"Việc nghiên cứu tài liệu là bước đầu tiên để thành công trong học tập và nghiên cứu khoa học."</p>
+            <p>- Giáo sư Nguyễn Văn A</p>
+          </div>
+        </section>
+        <section class="teacher-quote">
+          <div class="avatar">
+            <img src="/assets/images/avatar2.jpg" alt="Teacher Avatar">
+          </div>
+          <div class="quote">
+            <p>"Việc nghiên cứu tài liệu là bước đầu tiên để thành công trong học tập và nghiên cứu khoa học."</p>
+            <p>- Giáo sư Nguyễn Văn A</p>
+          </div>
+        </section>
+      </div>
+      
+      <!-- Phần tử app-statistics nằm ngang so với teacher-quotes -->
+      <app-statistics></app-statistics>
+    </div>
+
+    <!-- Các phần khác -->
+    <app-link-library></app-link-library>
+    <section class="image-carousel">
+      <div class="carousel">
+        <img src="/assets/images/photo1.jpg" alt="Photo 1">
+        <img src="/assets/images/photo2.jpg" alt="Photo 2">
+        <img src="/assets/images/photo3.jpg" alt="Photo 3">
+      </div>
+    </section>
+  </main>
 </div>
-  

@@ -57,3 +57,49 @@ app-footer {
   margin-top: auto;
   z-index: 1; 
 }
+
+/* Container tổng bao gồm teacher-quotes và app-statistics */
+.layout-container {
+  display: flex;
+  flex-direction: row; /* Sắp xếp các phần tử ngang hàng */
+  align-items: flex-start; /* Căn các phần tử theo đầu */
+  gap: 20px; /* Khoảng cách giữa các phần tử */
+}
+
+/* Teacher-quotes nằm dọc */
+.teacher-quotes {
+  display: flex;
+  flex-direction: column; /* Sắp xếp các section theo chiều dọc */
+  gap: 20px; /* Khoảng cách giữa các phần tử dọc */
+  flex: 1; /* Chiếm tối đa không gian khả dụng */
+}
+
+.teacher-quote {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-quote .avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.teacher-quote .quote {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Phần tử app-statistics */
+app-statistics {
+  flex: 0 0 300px; /* Đặt chiều rộng cố định */
+  background-color: #f0f8ff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
