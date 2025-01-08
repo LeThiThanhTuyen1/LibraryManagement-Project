@@ -26,6 +26,7 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
 import { AddBookAdminComponent } from './component/admin/add-book-admin/add-book-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BookEditComponent } from './component/book/book-edit/book-edit.component';
+import { StatisticsComponent } from './component/user/statistics/statistics.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { BookEditComponent } from './component/book/book-edit/book-edit.componen
     LecturerInfoComponent,
     ShareDocumentsComponent,
     AddBookAdminComponent,
-    BookEditComponent
+    BookEditComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

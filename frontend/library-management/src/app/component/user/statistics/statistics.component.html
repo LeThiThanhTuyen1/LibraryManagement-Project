@@ -1,0 +1,33 @@
+<div class="statistics-container">
+    <div class="box">
+      <h2>📄 THỐNG KÊ</h2>
+      <ul>
+        <li>📚 Sách có sẵn: <strong>{{ availableBooksCount }}</strong></li>
+        <li>
+          📊 Tổng số sách theo:
+          <select [(ngModel)]="selectedGenre" (change)="fetchBooksByGenre()">
+            <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+          </select>
+          : <strong>{{ booksByGenreCount }}</strong>
+        </li>
+        <li>
+            📘 Thể loại sách nhiều nhất trong thư viện: 
+            <strong>{{ mostPopularGenre?.Genre || 'Chưa có dữ liệu' }}</strong> 
+            ({{ mostPopularGenre?.Count || 0 }} sách)
+          </li>                       
+        <li>
+          📅 Số lượng sách trong năm từ năm
+          <input type="number" [(ngModel)]="startYear" (change)="fetchBooksByYears()" />
+          đến năm
+          <input type="number" [(ngModel)]="endYear" (change)="fetchBooksByYears()" />
+          : <strong>{{ booksByYearsCount }}</strong>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="box">
+      <h2>👥 THỐNG KÊ TRUY CẬP</h2>
+      <p>Số lượng người tham gia thư viện: <strong>{{ libraryUsersCount }}</strong></p>
+    </div>
+  </div>
+  
