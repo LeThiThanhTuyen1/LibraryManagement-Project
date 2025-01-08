@@ -28,20 +28,41 @@ git clone https://github.com/LeThiThanhTuyen1/LibraryManagement-Project.git
 ```
 $ Cấu trúc thư mục
 .
-├── database
-│   ├── manage_library.sql
-├── document
-│   ├── ........
-├── images
-│   ├── .........
-├── frontend
-│   ├── model
-│   ├── service
-│   ├── component
-├── backend
-│   ├── model
-│   ├── controller
-│   ├── data
-└── README.md
+|-------database
+│          ├── manage_library.sql
+├-------document
+│          ├── ........
+|-------images
+│          ├── .........
+|------backend/LibraryManagementAPI
+|               |
+|               |------Models
+|               |
+|               |------Data
+|               |
+|               |------wwwroot/Uploads
+|               |
+|               |------Controllers
+|               |
+|               |------appsettings.json
+|               |
+|               |------Program.cs
+|               |
+|-------frontend/library-management
+|               |
+|               |------src
+|               |          |
+|               |          |-----app
+|               |          |
+|               |          |-----index.html
+|               |          |
+|               |          |-----assets
+|               |          |          |
+|               |          |          |-----model
+|               |          |          |
+|               |          |          |-----service
+|               |          |          |
+|               |          |          |-----component
+
 
 ```
