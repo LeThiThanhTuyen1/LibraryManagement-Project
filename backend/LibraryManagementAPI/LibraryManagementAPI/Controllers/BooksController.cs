@@ -224,9 +224,6 @@ namespace LibraryManagementAPI.Controllers
             {
                 ".pdf" => "application/pdf",
                 ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                ".txt" => "text/plain",
                 _ => "application/octet-stream"
             };
 
@@ -290,9 +287,6 @@ namespace LibraryManagementAPI.Controllers
             {
                 ".pdf" => "application/pdf",
                 ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                ".txt" => "text/plain",
                 _ => "application/octet-stream"
             };
 
