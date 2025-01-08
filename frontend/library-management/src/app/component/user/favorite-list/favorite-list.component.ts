@@ -27,11 +27,11 @@ export class FavoriteListComponent {
         next: (data) => {
           console.log('Danh sách yêu thích:', data);
           this.favorites = data;
-          this.isLoading = false; // Hide loading after data is loaded
+          this.isLoading = false; 
         },
         error: (err) => {
           console.error('Lỗi khi lấy danh sách yêu thích', err);
-          this.isLoading = false; // Hide loading even if there's an error
+          this.isLoading = false; 
           alert('Không thể tải danh sách yêu thích. Vui lòng thử lại sau.');
         }
       });

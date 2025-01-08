@@ -22,7 +22,7 @@ export class BookReviewComponent implements OnInit {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   hasUserReviewed = false;
-  userId!: number; // ID người dùng hiện tại sẽ lấy từ localStorage
+  userId!: number; 
   stars: number[] = [1, 2, 3, 4, 5];
   hoveredRating: number | null = null;
   newReview: Partial<BookReview> = { rating: 0, review_text: '' };

@@ -18,7 +18,6 @@ namespace LibraryManagementAPI.Data
         public DbSet<Publisher> Publishers { get; set; }  
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<BookReview> Book_Reviews { get; set; }
-        public DbSet<Download> Downloads { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Major> Majors { get; set; }
         public DbSet<Department> Departments { get; set; }
@@ -33,9 +32,9 @@ namespace LibraryManagementAPI.Data
 
             modelBuilder.Entity<Book>()
             .HasOne(b => b.Publisher)
-            .WithMany() // Nếu Publisher không có danh sách sách liên quan, để trống
+            .WithMany() 
             .HasForeignKey(b => b.PublisherId)
-            .OnDelete(DeleteBehavior.Cascade); // Thiết lập hành vi xóa liên kết
+            .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }

@@ -16,7 +16,7 @@ export class ForgotPasswordComponent {
     this.authService.forgotPassword(this.email).subscribe({
       next: () => {
         alert('Mã xác nhận đã được gửi qua email.');
-        this.router.navigate(['/reset-password']); // Sử dụng Router để điều hướng
+        this.router.navigate(['/reset-password']); 
       },
       error: err => {
         alert(err.error.message || 'Có lỗi xảy ra!');

@@ -18,7 +18,7 @@ export class HeaderComponent {
     if (storedUser) {
       const user = JSON.parse(storedUser);
       this.userRole = user.role;
-      this.userLastName = user.last_name; // Lấy last_name từ thông tin user
+      this.userLastName = user.last_name; 
     }
   }
 
