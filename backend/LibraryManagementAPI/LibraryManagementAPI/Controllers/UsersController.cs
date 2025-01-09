@@ -410,5 +410,13 @@ namespace LibraryManagementAPI.Controllers
             var documents = await _context.Documents.ToListAsync();
             return Ok(documents);
         }
+
+        [HttpGet("LibraryUsersCount")]
+        public async Task<IActionResult> GetLibraryUsersCount()
+        {
+            var count = await _context.Users.CountAsync();
+            return Ok(count);
+        }
+
     }
 }

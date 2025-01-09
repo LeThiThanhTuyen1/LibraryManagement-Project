@@ -294,6 +294,53 @@ namespace LibraryManagementAPI.Controllers
             return File(fileBytes, mimeType);
         }
 
+        [HttpGet("AvailableBooksCount")]
+        public async Task<IActionResult> GetAvailableBooksCount()
+        {
+            var count = await _context.Books.CountAsync();
+            return Ok(count);
+        }
+
+        [HttpGet("BooksCountByGenre")]
+        public async Task<IActionResult> GetBooksCountByGenre(string genre)
+        {
+            var count = await _context.Books
+                .Where(b => b.genre == genre)
+                .CountAsync();
+            return Ok(count);
+        }
+
+        [HttpGet("MostPopularGenre")]
+        public async Task<IActionResult> GetMostPopularGenre()
+        {
+            var mostPopularGenre = await _context.Books
+                .Where(b => !string.IsNullOrEmpty(b.genre))  // Chỉ lấy những sách có thể loại
+                .GroupBy(b => b.genre)
+                .OrderByDescending(g => g.Count())  // Sắp xếp theo số lượng sách trong mỗi thể loại
+                .Select(g => new { Genre = g.Key, Count = g.Count() })
+                .FirstOrDefaultAsync();
+
+            if (mostPopularGenre == null)
+            {
+                // Trả về thể loại mặc định nếu không có dữ liệu
+                return Ok(new { Genre = "Không xác định", Count = 0 });
+            }
+            Console.WriteLine($"Thể loại phổ biến: {mostPopularGenre?.Genre}, Số lượng: {mostPopularGenre?.Count}");
+            return Ok(mostPopularGenre);
+        }
+
+        [HttpGet("BooksCountByYears")]
+        public async Task<IActionResult> GetBooksCountByYears(int startYear, int endYear)
+        {
+            var count = await _context.Books
+                .Where(b => b.publication_year >= startYear && b.publication_year <= endYear)
+                .CountAsync();
+
+            return Ok(count);
+        }
+
+
+
     }
 }
 
