@@ -1,70 +1,73 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { Document } from '../../../model/document.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-share-documents',
   templateUrl: './share-documents.component.html',
-  styleUrl: './share-documents.component.css'
+  styleUrls: ['./share-documents.component.css']
 })
 export class ShareDocumentsComponent {
-  senderName: string = '';
-  role: string = 'GiangVien';
-  department: string = '';
-  major: string = '';
-  files: File[] = [];
-  documents: Document[] = [];
-  showShareForm: boolean = true; 
-  constructor(private authService: AuthService, private http: HttpClient) {}
-  ngOnInit(): void {
-    this.getDocuments();  
-  }
+  document: Document = {
+    Id: 0,
+    FileName: '',
+    FilePath: '',
+    UploadDate: new Date(),
+    Status: 'chờ duyệt',
+    Title: '',
+    Isbn: '',
+    Publication_year: 0,
+    Genre: '',
+    Summary: '',
+    Language: ''
+  };
+  selectedFile: File | null = null;
+  uploadStatus: { success: boolean, message: string } | null = null;
+
+  constructor(private authService: AuthService) {}
+
   onFileChange(event: any): void {
-    this.files = event.target.files;
+    this.selectedFile = event.target.files[0];
   }
+
   onSubmit(): void {
-    const formData = new FormData();
-    formData.append('senderName', this.senderName);
-    formData.append('role', this.role);
-    formData.append('department', this.department);
-    formData.append('major', this.major);
-    
-    Array.from(this.files).forEach(file => {
-      formData.append('files', file, file.name);
-    });
-    this.authService.uploadDocument(formData).subscribe(
-      (response) => {
-        alert('Tài liệu đã được gửi thành công!');
-        // Làm mới các trường nhập liệu sau khi gửi thành công
-        this.senderName = '';
-        this.role = 'GiangVien';  // Giá trị mặc định của role
-        this.department = '';
-        this.major = '';
-        // Reset lại input file
-        const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
-        if (fileInput) {
-          fileInput.value = '';  // Xóa danh sách các file đã chọn
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('title', this.document.Title);
+      formData.append('publication_year', this.document.Publication_year.toString());
+      formData.append('genre', this.document.Genre);
+      formData.append('summary', this.document.Summary);
+      formData.append('language', this.document.Language);
+      formData.append('file', this.selectedFile, this.selectedFile.name);
+  
+      this.authService.uploadDocument(formData).subscribe({
+        next: (response) => {
+          console.log('Tài liệu đã được chia sẻ thành công!', response);
+          this.uploadStatus = { success: true, message: 'Tài liệu đã được chia sẻ thành công!' };
+          // Reset form
+          this.document = {
+            Id: 0,
+            FileName: '',
+            FilePath: '',
+            UploadDate: new Date(),
+            Status: 'chờ duyệt',
+            Title: '',
+            Isbn: '',
+            Publication_year: 0,
+            Genre: '',
+            Summary: '',
+            Language: ''
+          };
+          this.selectedFile = null;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Lỗi khi chia sẻ tài liệu:', error.message);
+          this.uploadStatus = { success: false, message: 'Lỗi khi chia sẻ tài liệu. Vui lòng thử lại.' };
         }
-        this.getDocuments();  // Refresh the document list
-      },
-      (error) => {
-        alert('Lỗi khi upload tài liệu');
-      }
-    );
-  }
-  getDocuments(): void {
-    this.authService.getDocuments().subscribe(
-      (data: Document[]) => {
-        this.documents = data;
-      },
-      (error) => {
-        console.error('Lỗi khi tải tài liệu', error);
-      }
-    );
+      });
+    }
   }
   
-  showDocumentList(): void {
-    this.showShareForm = false;  // Chuyển sang hiển thị form tài liệu đã gửi
-  }
+  
 }

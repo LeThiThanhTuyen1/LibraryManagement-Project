@@ -1,82 +1,41 @@
-<div class="share-documents-form" *ngIf="showShareForm">
-    <form (ngSubmit)="onSubmit()" #shareForm="ngForm">
-      <div>
-        <label for="senderName">Họ và tên người gửi</label>
-        <input
-          id="senderName"
-          type="text"
-          name="senderName"
-          [(ngModel)]="senderName"
-          required
-        />
-      </div>
-      <div>
-        <label for="role">Là giảng viên/ Học sinh/ Sinh viên</label>
-        <select
-          id="role"
-          name="role"
-          [(ngModel)]="role"
-          required
-        >
-          <option value="GiangVien">Giảng viên</option>
-          <option value="HocSinh">Học sinh</option>
-          <option value="SinhVien">Sinh viên</option>
-        </select>
-      </div>
-      <div>
-        <label for="department">Khoa</label>
-        <input
-          id="department"
-          type="text"
-          name="department"
-          [(ngModel)]="department"
-          required
-        />
-      </div>
-      <div>
-        <label for="major">Ngành đào tạo</label>
-        <input
-          id="major"
-          type="text"
-          name="major"
-          [(ngModel)]="major"
-        />
-      </div>
-      <div>
-        <label for="fileUpload">Upload File đính kèm (PDF, DOCX)</label>
-        <input
-          type="file"
-          id="fileUpload"
-          (change)="onFileChange($event)"
-          accept=".pdf,.docx"
-          multiple
-          required
-        />
-      </div>
-      <button type="submit" [disabled]="!shareForm.form.valid">Chia sẻ tài liệu</button>
-    </form>
-    <button (click)="showDocumentList()">Xem tài liệu đã gửi</button>
+<div class="document-form-container">
+  <h2>Chia sẻ tài liệu</h2>
+  <form (ngSubmit)="onSubmit()" #documentForm="ngForm">
+    <div class="form-group">
+      <label for="title">Tiêu đề:</label>
+      <input type="text" id="title" [(ngModel)]="document.Title" name="title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="publicationYear">Năm xuất bản:</label>
+      <input type="text" id="publicationYear" [(ngModel)]="document.Publication_year" name="publicationYear" required>
+    </div>
+
+    <div class="form-group">
+      <label for="genre">Thể loại:</label>
+      <input type="text" id="genre" [(ngModel)]="document.Genre" name="genre" required>
+    </div>
+
+    <div class="form-group">
+      <label for="summary">Tóm tắt:</label>
+      <textarea id="summary" [(ngModel)]="document.Summary" name="summary" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="language">Ngôn ngữ:</label>
+      <input type="text" id="language" [(ngModel)]="document.Language" name="language" required>
+    </div>
+
+    <div class="form-group">
+      <label for="file">Tải lên tài liệu (PDF, DOCX):</label>
+      <input type="file" id="file" (change)="onFileChange($event)" accept=".pdf, .docx" required>
+    </div>
+
+    <button type="submit" class="submit-btn">Chia sẻ tài liệu</button>
+  </form>
+
+  <!-- Thông báo kết quả -->
+  <div *ngIf="uploadStatus" class="alert" [ngClass]="{'alert-success': uploadStatus.success, 'alert-danger': !uploadStatus.success}">
+    {{ uploadStatus.message }}
   </div>
-  <!-- Table to display uploaded documents -->
-  <div class="document-list" *ngIf="!showShareForm">
-    <h3>Tài liệu đã gửi</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Số thứ tự</th>
-          <th>Tên tài liệu</th>
-          <th>Ngày gửi</th>
-          <th>Trạng thái</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let document of documents">
-          <td>{{ document.Id }}</td>
-          <td>{{ document.FileName }}</td>
-          <td>{{ document.UploadDate | date:'dd/MM/yyyy' }}</td> 
-          <td>{{ document.Status }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <button (click)="showShareForm = true">Quay lại chia sẻ tài liệu</button>
-  </div>
+</div>
