@@ -2,11 +2,12 @@
 {
     public class DocumentUploadRequest
     {
-        public string? Title { get; set; }
-        public int? Publication_year { get; set; }
-        public string? Genre { get; set; }
-        public string? Summary { get; set; }
-        public string? Language { get; set; }
+        public int? user_id{ get; set; }
+        public string? title { get; set; }
+        public int? publication_year { get; set; }
+        public string? genre { get; set; }
+        public string? summary { get; set; }
+        public string? language { get; set; }
         public IFormFile File { get; set; }
     }
 }

@@ -1,1 +1,37 @@
-<p>browse-documents works!</p>
+<div class="container">
+    <h2>Danh sách tài liệu chờ duyệt</h2>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tiêu đề</th>
+          <th>Năm xuất bản</th>
+          <th>Thể loại</th>
+          <th>Ngôn ngữ</th>
+          <th>Ngày tải lên</th>
+          <th>Trạng thái</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents">
+          <td>{{ document.Id }}</td>
+          <td>{{ document.title }}</td>
+          <td>{{ document.publication_year }}</td>
+          <td>{{ document.genre }}</td>
+          <td>{{ document.language }}</td>
+          <td>{{ document.upload_date | date: 'short' }}</td>
+          <td>{{ document.status }}</td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="approveDocument(document.Id)">Duyệt</button>
+            <button class="btn btn-danger btn-sm" (click)="rejectDocument(document.Id)">Từ chối</button>
+          </td>
+        </tr>
+        <tr *ngIf="documents.length === 0">
+          <td colspan="8" class="text-center">Không có tài liệu nào cần duyệt.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

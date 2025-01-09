@@ -11,18 +11,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ShareDocumentsComponent {
   document: Document = {
     Id: 0,
-    FileName: '',
-    FilePath: '',
-    UploadDate: new Date(),
-    Status: 'chờ duyệt',
-    Title: '',
-    Isbn: '',
-    Publication_year: 0,
-    Genre: '',
-    Summary: '',
-    Language: ''
+    user_id: 0,
+    file_name: '',
+    file_path: '',
+    upload_date: new Date(),
+    status: 'chờ duyệt',
+    title: '',
+    isbn: '',
+    publication_year: 0,
+    genre: '',
+    summary: '',
+    language: ''
   };
   selectedFile: File | null = null;
+  UserId: string = '';
   uploadStatus: { success: boolean, message: string } | null = null;
 
   constructor(private documentService: DocumentService) {}
@@ -33,14 +35,21 @@ export class ShareDocumentsComponent {
 
   onSubmit(): void {
     if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('title', this.document.Title);
-      formData.append('publication_year', this.document.Publication_year.toString());
-      formData.append('genre', this.document.Genre);
-      formData.append('summary', this.document.Summary);
-      formData.append('language', this.document.Language);
-      formData.append('file', this.selectedFile, this.selectedFile.name);
-  
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      this.UserId = user.user_id;
+          console.log(this.UserId);
+          const formData = new FormData();
+          formData.append('user_id', this.UserId); // Thêm user_id
+          formData.append('title', this.document.title);
+          formData.append('publication_year', this.document.publication_year.toString());
+          formData.append('genre', this.document.genre);
+          formData.append('summary', this.document.summary);
+          formData.append('language', this.document.language);
+          formData.append('file', this.selectedFile, this.selectedFile.name);
+
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
       this.documentService.uploadDocument(formData).subscribe({
         next: (response) => {
           console.log('Tài liệu đã được chia sẻ thành công!', response);
@@ -48,16 +57,17 @@ export class ShareDocumentsComponent {
           // Reset form
           this.document = {
             Id: 0,
-            FileName: '',
-            FilePath: '',
-            UploadDate: new Date(),
-            Status: 'chờ duyệt',
-            Title: '',
-            Isbn: '',
-            Publication_year: 0,
-            Genre: '',
-            Summary: '',
-            Language: ''
+            user_id: 0,
+            file_name: '',
+            file_path: '',
+            upload_date: new Date(),
+            status: 'chờ duyệt',
+            title: '',
+            isbn: '',
+            publication_year: 0,
+            genre: '',
+            summary: '',
+            language: ''
           };
           this.selectedFile = null;
         },
