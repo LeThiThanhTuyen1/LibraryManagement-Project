@@ -131,12 +131,15 @@ namespace LibraryManagementAPI.Controllers
                     await model.File.CopyToAsync(stream);
                 }
 
+                var isbn = GenerateIsbn();
+
                 var document = new Document
                 {
                     user_id = model.user_id, // Map giá trị user_id từ model
                     file_name = model.File.FileName,
                     file_path = filePath,
                     title = model.title,
+                    isbn = isbn,
                     publication_year = model.publication_year,
                     genre = model.genre,
                     summary = model.summary,
@@ -155,6 +158,14 @@ namespace LibraryManagementAPI.Controllers
                 Console.WriteLine($"Lỗi: {ex.Message} - {ex.InnerException?.Message}");
                 return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
             }
+        }
+
+        // Hàm tạo ISBN tự động
+        private string GenerateIsbn()
+        {
+            // Tạo ISBN gồm 13 chữ số ngẫu nhiên
+            var random = new Random();
+            return string.Join("", Enumerable.Range(0, 13).Select(_ => random.Next(0, 10).ToString()));
         }
 
         [HttpPost("{id}/approve")]
