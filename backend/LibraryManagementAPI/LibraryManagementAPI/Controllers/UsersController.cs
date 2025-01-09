@@ -349,7 +349,23 @@ namespace LibraryManagementAPI.Controllers
             return Ok(count);
         }
 
-        
+        [HttpGet("GetDocumentsByUser/{userId}")]
+        public async Task<IActionResult> GetDocumentsByUser(int userId)
+        {
+            var documents = await _context.Documents
+                .Where(d => d.user_id == userId)
+                .Select(d => new
+                {
+                    d.Id,
+                    d.file_name,
+                    d.upload_date,
+                    d.status
+                })
+                .ToListAsync();
+
+            return Ok(documents);
+        }
+
 
 
     }

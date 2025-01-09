@@ -22,6 +22,7 @@ import { AddBookAdminComponent } from './component/admin/add-book-admin/add-book
 import { BookEditComponent } from './component/book/book-edit/book-edit.component';
 import { StatisticsComponent } from './component/user/statistics/statistics.component';
 import { BrowseDocumentsComponent } from './component/admin/browse-documents/browse-documents.component';
+import { ViewDocumentsComponent } from './component/user/view-documents/view-documents.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'add-book-admin', component: AddBookAdminComponent },
   { path: 'statistics', component: StatisticsComponent },
   { path: 'browse-documents', component: BrowseDocumentsComponent },
+  { path: 'view-documents', component: ViewDocumentsComponent },
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

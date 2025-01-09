@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>Danh sách tài liệu đã gửi</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Số thứ tự</th>
+          <th>Tên tài liệu</th>
+          <th>Ngày tải lên</th>
+          <th>Tình trạng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents">
+          <td>{{ document.Id }}</td>
+          <td>{{ document.file_name }}</td>
+          <td>{{ document.upload_date | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ document.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

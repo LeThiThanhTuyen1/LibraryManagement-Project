@@ -21,7 +21,7 @@
         <td>{{ document.publication_year }}</td>
         <td>{{ document.genre }}</td>
         <td>{{ document.language }}</td>
-        <td>{{ document.upload_date | date: 'short' }}</td>
+        <td>{{ document.upload_date | date: 'dd/MM/yyyy' }}</td>
         <td>{{ document.status }}</td>
         <td>
           <button class="btn btn-primary btn-sm" (click)="viewDocument(document)">Xem</button>

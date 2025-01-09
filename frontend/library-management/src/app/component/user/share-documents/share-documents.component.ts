@@ -18,7 +18,7 @@ export class ShareDocumentsComponent {
     status: 'chờ duyệt',
     title: '',
     isbn: '',
-    publication_year: 0,
+    publication_year: 2000,
     genre: '',
     summary: '',
     language: ''
@@ -64,7 +64,7 @@ export class ShareDocumentsComponent {
             status: 'chờ duyệt',
             title: '',
             isbn: '',
-            publication_year: 0,
+            publication_year: 2000,
             genre: '',
             summary: '',
             language: ''
