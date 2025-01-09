@@ -342,6 +342,13 @@ namespace LibraryManagementAPI.Controllers
             }
         }
 
+        [HttpGet("LibraryUsersCount")]
+        public async Task<IActionResult> GetLibraryUsersCount()
+        {
+            var count = await _context.Users.CountAsync();
+            return Ok(count);
+        }
+
         [HttpPost("upload")]
         public async Task<IActionResult> UploadDocument([FromForm] DocumentUploadRequest model)
         {
