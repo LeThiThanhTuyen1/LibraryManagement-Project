@@ -14,6 +14,11 @@ export class LecturerInfoComponent implements OnInit {
   originalUser: any;
   errorMessage: string = '';
 
+  isChangingPassword = false;
+  oldPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+
   constructor(private lecturerService: LecturerService, private userService: AuthService) {}
 
   ngOnInit(): void {
@@ -91,5 +96,56 @@ export class LecturerInfoComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
     this.lecturer = { ...this.originalUser }; 
+  }
+
+  // Mở form đổi mật khẩu
+  openChangePasswordForm() {
+    this.isChangingPassword = true;
+  }
+
+  // Đóng form đổi mật khẩu
+  cancelChangePassword() {
+    this.isChangingPassword = false;
+    this.oldPassword = '';
+    this.newPassword = '';
+    this.confirmPassword = '';
+    this.errorMessage = '';
+  }
+
+    // Thay đổi mật khẩu
+  changePassword() {
+    this.errorMessage = '';
+
+    // Kiểm tra tính hợp lệ của mật khẩu cũ
+    if (!this.oldPassword) {
+      this.errorMessage = 'Mật khẩu cũ không được để trống.';
+      return;
+    }
+
+    // Kiểm tra tính hợp lệ của mật khẩu mới và xác nhận mật khẩu
+    if (!this.newPassword) {
+      this.errorMessage = 'Mật khẩu mới không được để trống.';
+      return;
+    }
+
+    if (!this.confirmPassword) {
+      this.errorMessage = 'Vui lòng nhập xác nhận mật khẩu mới.';
+      return;
+    }
+
+    // Gọi API để thay đổi mật khẩu
+    this.userService.changePassword(this.userId, this.oldPassword, this.newPassword, this.confirmPassword).subscribe(
+      response => {
+        alert('Đổi mật khẩu thành công');
+        this.cancelChangePassword();
+      },
+      error => {
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+        } else {
+          this.errorMessage = 'Đổi mật khẩu thất bại. Vui lòng thử lại.';
+        }
+      }
+    );
   }
 }
