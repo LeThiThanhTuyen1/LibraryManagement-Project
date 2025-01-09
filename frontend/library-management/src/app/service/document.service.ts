@@ -83,4 +83,9 @@ export class DocumentService {
       })
     );
   }
+
+  viewDocument(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/ViewDocument/${id}`, { responseType: 'blob' });
+  }
+  
 }
