@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementAPI.Controllers
 {
@@ -204,6 +205,42 @@ namespace LibraryManagementAPI.Controllers
 
             return Ok("Tài liệu đã bị từ chối.");
         }
+
+        [HttpGet("ViewDocument/{documentId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ViewDocument(int documentId)
+        {
+            var document = await _context.Documents.FirstOrDefaultAsync(d => d.Id == documentId);
+
+            if (document == null || string.IsNullOrEmpty(document.file_path))
+            {
+                return NotFound(new { message = "Document not found." });
+            }
+
+            // Tạo đường dẫn đầy đủ đến file tài liệu
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), document.file_path);
+
+            // Kiểm tra xem file có tồn tại không
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound(new { message = "File does not exist on server." });
+            }
+
+            // Xác định loại MIME của file (PDF, DOCX, TXT, ...)
+            var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
+            string mimeType = fileExtension switch
+            {
+                ".pdf" => "application/pdf",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".txt" => "text/plain",
+                _ => "application/octet-stream"
+            };
+
+            // Đọc file và trả về dưới dạng file response
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(fileBytes, mimeType);
+        }
+
 
     }
 }
