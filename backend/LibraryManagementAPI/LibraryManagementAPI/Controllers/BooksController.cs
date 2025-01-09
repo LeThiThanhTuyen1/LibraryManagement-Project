@@ -265,7 +265,6 @@ namespace LibraryManagementAPI.Controllers
          }
 
         [HttpGet("ViewDocument/{bookId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> ViewDocument(int bookId)
         {
             var book = await _context.Books.FirstOrDefaultAsync(b => b.book_id == bookId);
