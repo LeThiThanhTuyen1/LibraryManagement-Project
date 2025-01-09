@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../service/auth.service';
+import { DocumentService } from '../../../service/document.service';
 import { Document } from '../../../model/document.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -25,7 +25,7 @@ export class ShareDocumentsComponent {
   selectedFile: File | null = null;
   uploadStatus: { success: boolean, message: string } | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private documentService: DocumentService) {}
 
   onFileChange(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -41,7 +41,7 @@ export class ShareDocumentsComponent {
       formData.append('language', this.document.Language);
       formData.append('file', this.selectedFile, this.selectedFile.name);
   
-      this.authService.uploadDocument(formData).subscribe({
+      this.documentService.uploadDocument(formData).subscribe({
         next: (response) => {
           console.log('Tài liệu đã được chia sẻ thành công!', response);
           this.uploadStatus = { success: true, message: 'Tài liệu đã được chia sẻ thành công!' };

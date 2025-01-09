@@ -20,6 +20,9 @@ import { ShareDocumentsComponent } from './component/user/share-documents/share-
 import { AddBookAdminComponent } from './component/admin/add-book-admin/add-book-admin.component';
 
 import { BookEditComponent } from './component/book/book-edit/book-edit.component';
+import { StatisticsComponent } from './component/user/statistics/statistics.component';
+import { BrowseDocumentsComponent } from './component/admin/browse-documents/browse-documents.component';
+
 import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
@@ -41,7 +44,12 @@ const routes: Routes = [
   { path: 'student-info', component: StudentInfoComponent, canActivate: [AuthGuard] },
   { path: 'lecturer-info', component: LecturerInfoComponent, canActivate: [AuthGuard] },
   { path: 'share-documents', component: ShareDocumentsComponent },
+
+  { path: 'statistics', component: StatisticsComponent },
+  { path: 'browse-documents', component: BrowseDocumentsComponent },
+
   { path: 'add-book-admin', component: AddBookAdminComponent, canActivate: [AuthGuard] },
+
   { path: '', redirectTo: '/book-detail', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

@@ -67,15 +67,7 @@ export class AuthService {
     return this.http.get<User>(`${this.apiUrl}/${userId}`);
   }
 
-  uploadDocument(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/upload`, formData, {
-      observe: 'response'  // Đảm bảo nhận toàn bộ phản hồi, bao gồm cả body và status
-    }).pipe(
-      catchError(error => {
-        return throwError(() => new Error('Lỗi khi chia sẻ tài liệu: ' + error.message));
-      })
-    );
-  }
+
   
   
 }
