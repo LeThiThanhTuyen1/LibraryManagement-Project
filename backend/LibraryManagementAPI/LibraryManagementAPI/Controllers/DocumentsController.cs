@@ -132,13 +132,14 @@ namespace LibraryManagementAPI.Controllers
 
                 var document = new Document
                 {
+                    user_id = model.user_id, // Map giá trị user_id từ model
                     file_name = model.File.FileName,
                     file_path = filePath,
-                    title = model.Title,
-                    publication_year = model.Publication_year,
-                    genre = model.Genre,
-                    summary = model.Summary,
-                    language = model.Language,
+                    title = model.title,
+                    publication_year = model.publication_year,
+                    genre = model.genre,
+                    summary = model.summary,
+                    language = model.language,
                     upload_date = DateTime.UtcNow,
                     status = "chờ duyệt"
                 };
@@ -146,7 +147,6 @@ namespace LibraryManagementAPI.Controllers
                 _context.Documents.Add(document);
                 await _context.SaveChangesAsync();
 
-                // Trả về một phản hồi đơn giản để Angular dễ dàng xử lý
                 return Ok("Tài liệu đã được tải lên thành công!");
             }
             catch (Exception ex)
@@ -154,6 +154,55 @@ namespace LibraryManagementAPI.Controllers
                 Console.WriteLine($"Lỗi: {ex.Message} - {ex.InnerException?.Message}");
                 return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
             }
+        }
+
+        [HttpPost("{id}/approve")]
+        public async Task<IActionResult> ApproveDocument(int id)
+        {
+            var document = await _context.Documents.FindAsync(id);
+            if (document == null)
+            {
+                return NotFound("Tài liệu không tồn tại.");
+            }
+
+            // Thêm tài liệu vào bảng Books
+            var book = new Book
+            {
+                title = document.title,
+                isbn = document.isbn,
+                publication_year = document.publication_year,
+                genre = document.genre,
+                summary = document.summary,
+                language = document.language,
+                file_path = document.file_path,
+                accessLevel = "Public" // Giá trị mặc định
+            };
+
+            _context.Books.Add(book);
+
+            // Cập nhật trạng thái tài liệu
+            document.status = "đã duyệt";
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Tài liệu đã được duyệt và thêm vào bảng Books.");
+        }
+
+        [HttpPost("{id}/reject")]
+        public async Task<IActionResult> RejectDocument(int id)
+        {
+            var document = await _context.Documents.FindAsync(id);
+            if (document == null)
+            {
+                return NotFound("Tài liệu không tồn tại.");
+            }
+
+            // Cập nhật trạng thái tài liệu
+            document.status = "từ chối";
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Tài liệu đã bị từ chối.");
         }
 
     }

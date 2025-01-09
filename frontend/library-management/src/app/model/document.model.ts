@@ -1,14 +1,15 @@
 
 export interface Document {
   Id: number;
-  FileName: string;
-  FilePath: string;
-  UploadDate: Date;
-  Status: string;
-  Title: string;
-  Isbn: string;
-  Publication_year: number;
-  Genre: string;
-  Summary: string;
-  Language: string;
+  user_id: number;
+  file_name: string;
+  file_path: string;
+  upload_date: Date;
+  status: string;
+  title: string;
+  isbn: string;
+  publication_year: number;
+  genre: string;
+  summary: string;
+  language: string;
 }

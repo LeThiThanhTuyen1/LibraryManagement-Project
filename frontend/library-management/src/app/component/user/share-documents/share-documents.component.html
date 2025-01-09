@@ -3,27 +3,27 @@
   <form (ngSubmit)="onSubmit()" #documentForm="ngForm">
     <div class="form-group">
       <label for="title">Tiêu đề:</label>
-      <input type="text" id="title" [(ngModel)]="document.Title" name="title" required>
+      <input type="text" id="title" [(ngModel)]="document.title" name="title" required>
     </div>
 
     <div class="form-group">
       <label for="publicationYear">Năm xuất bản:</label>
-      <input type="text" id="publicationYear" [(ngModel)]="document.Publication_year" name="publicationYear" required>
+      <input type="text" id="publicationYear" [(ngModel)]="document.publication_year" name="publicationYear" required>
     </div>
 
     <div class="form-group">
       <label for="genre">Thể loại:</label>
-      <input type="text" id="genre" [(ngModel)]="document.Genre" name="genre" required>
+      <input type="text" id="genre" [(ngModel)]="document.genre" name="genre" required>
     </div>
 
     <div class="form-group">
       <label for="summary">Tóm tắt:</label>
-      <textarea id="summary" [(ngModel)]="document.Summary" name="summary" required></textarea>
+      <textarea id="summary" [(ngModel)]="document.summary" name="summary" required></textarea>
     </div>
 
     <div class="form-group">
       <label for="language">Ngôn ngữ:</label>
-      <input type="text" id="language" [(ngModel)]="document.Language" name="language" required>
+      <input type="text" id="language" [(ngModel)]="document.language" name="language" required>
     </div>
 
     <div class="form-group">
