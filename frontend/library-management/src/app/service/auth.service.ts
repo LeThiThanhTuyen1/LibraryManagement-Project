@@ -67,7 +67,9 @@ export class AuthService {
     return this.http.get<User>(`${this.apiUrl}/${userId}`);
   }
 
-
+  getDocumentsByUser(userId: number): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/GetDocumentsByUser/${userId}`);
+  }
   
   
 }

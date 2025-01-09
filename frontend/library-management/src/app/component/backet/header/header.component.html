@@ -14,6 +14,8 @@
         <li *ngIf="userRole != 'admin'"><a routerLink="/favorite-list">BỘ SƯU TẬP</a></li>
         <li *ngIf="userRole != 'admin'"><a routerLink="/search-documents">TRA CỨU</a></li>
         <li *ngIf="userRole != 'admin'"><a routerLink="/share-documents">CHIA SẺ TÀI LIỆU</a></li>
+        <li *ngIf="userRole != 'admin'"><a routerLink="/view-documents">TÀI LIỆU CỦA TÔI</a></li>
+
 
         <!-- Các mục menu cho admin -->
         <li *ngIf="userRole === 'admin'"><a routerLink="/home-admin">TRANG CHỦ ADMIN</a></li>

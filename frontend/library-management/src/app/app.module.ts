@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookEditComponent } from './component/book/book-edit/book-edit.component';
 import { StatisticsComponent } from './component/user/statistics/statistics.component';
 import { BrowseDocumentsComponent } from './component/admin/browse-documents/browse-documents.component';
+import { ViewDocumentsComponent } from './component/user/view-documents/view-documents.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { BrowseDocumentsComponent } from './component/admin/browse-documents/bro
     AddBookAdminComponent,
     BookEditComponent,
     StatisticsComponent,
-    BrowseDocumentsComponent
+    BrowseDocumentsComponent,
+    ViewDocumentsComponent
   ],
   imports: [
     BrowserModule,
