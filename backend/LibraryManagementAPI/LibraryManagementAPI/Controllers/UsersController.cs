@@ -349,49 +349,7 @@ namespace LibraryManagementAPI.Controllers
             return Ok(count);
         }
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> UploadDocument([FromForm] DocumentUploadRequest model)
-        {
-            try
-            {
-                if (model.File == null || model.File.Length == 0)
-                    return BadRequest("File không hợp lệ.");
-
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-                if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
-
-                var filePath = Path.Combine(uploadsFolder, model.File.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await model.File.CopyToAsync(stream);
-                }
-
-                var document = new Document
-                {
-                    file_name = model.File.FileName,
-                    file_path = filePath,
-                    title = model.Title,
-                    publication_year = model.Publication_year,
-                    genre = model.Genre,
-                    summary = model.Summary,
-                    language = model.Language,
-                    upload_date = DateTime.UtcNow,
-                    status = "chờ duyệt"
-                };
-
-                _context.Documents.Add(document);
-                await _context.SaveChangesAsync();
-
-                // Trả về một phản hồi đơn giản để Angular dễ dàng xử lý
-                return Ok("Tài liệu đã được tải lên thành công!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi: {ex.Message} - {ex.InnerException?.Message}");
-                return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
-            }
-        }
-
+        
 
 
     }
