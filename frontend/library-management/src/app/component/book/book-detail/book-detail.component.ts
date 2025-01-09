@@ -14,6 +14,13 @@ import { Favorite } from '../../../model/favorite.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as mammoth from 'mammoth';
 
+interface MammothOptions {
+  arrayBuffer: ArrayBuffer;
+  convertImage?: any;
+  includeDefaultStyleMap?: boolean;
+  styleMap?: string[];
+}
+
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
@@ -186,9 +193,21 @@ export class BookDetailComponent implements OnInit, OnChanges {
     reader.onload = async (e) => {
       try {
         const arrayBuffer = e.target?.result as ArrayBuffer;
-        const result = await mammoth.convertToHtml({ arrayBuffer });
+        const options: MammothOptions = {
+          arrayBuffer: arrayBuffer,
+          styleMap: [
+            "p[style-name='Title'] => h1:fresh",
+            "p[style-name='Heading 1'] => h2:fresh",
+            "p[style-name='Heading 2'] => h3:fresh",
+            "table => table",
+            "tr => tr",
+            "td => td"
+          ]
+        };
 
-        // Tạo HTML content với styling
+        const result = await mammoth.convertToHtml(options);
+
+        // Tạo HTML content với styling cập nhật
         const htmlContent = `
           <html>
             <head>
@@ -203,6 +222,54 @@ export class BookDetailComponent implements OnInit, OnChanges {
                 img {
                   max-width: 100%;
                   height: auto;
+                }
+                /* Style cho bảng */
+                table {
+                  border-collapse: collapse;
+                  width: 100%;
+                  margin: 15px 0;
+                  table-layout: fixed;
+                }
+                th, td {
+                  border: 1px solid #ddd;
+                  padding: 8px;
+                  text-align: left;
+                  word-wrap: break-word;
+                  min-width: 100px;
+                }
+                th {
+                  background-color: #f2f2f2;
+                  font-weight: bold;
+                }
+                tr:nth-child(even) {
+                  background-color: #f9f9f9;
+                }
+                tr:hover {
+                  background-color: #f5f5f5;
+                }
+                /* Style cho tiêu đề */
+                h1 {
+                  color: #2c3e50;
+                  font-size: 24px;
+                  margin-bottom: 20px;
+                }
+                h2 {
+                  color: #34495e;
+                  font-size: 20px;
+                  margin: 15px 0;
+                }
+                h3 {
+                  color: #7f8c8d;
+                  font-size: 18px;
+                  margin: 10px 0;
+                }
+                /* Style cho danh sách */
+                ul, ol {
+                  margin: 10px 0;
+                  padding-left: 20px;
+                }
+                li {
+                  margin: 5px 0;
                 }
               </style>
             </head>

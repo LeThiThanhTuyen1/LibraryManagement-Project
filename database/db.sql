@@ -68,14 +68,6 @@ CREATE TABLE Book_Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-CREATE TABLE Downloads (
-    download_id INT PRIMARY KEY IDENTITY(1,1),
-    user_id INT,
-    book_id INT,
-    download_date DATETIME,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (book_id) REFERENCES Books(book_id)
-);
 CREATE TABLE Departments (
     department_id INT PRIMARY KEY IDENTITY(1,1),
     department_name NVARCHAR(100)
@@ -117,20 +109,16 @@ CREATE TABLE LinkLibraries (
 
 CREATE TABLE Documents (
     Id INT IDENTITY(1,1) PRIMARY KEY,
-    FileName VARCHAR(255) NOT NULL,
-    FilePath VARCHAR(255) NOT NULL,
-    SenderName VARCHAR(255) NOT NULL,
-    Role VARCHAR(50) NOT NULL,
-    Department VARCHAR(255) NOT NULL,
-    Major VARCHAR(255),
-    user_id INT NOT NULL,
+    FileName NVARCHAR(255) NOT NULL,
+    FilePath NVARCHAR(255) NOT NULL,
+    UserId INT NOT NULL,
     UploadDate DATETIME NOT NULL,
-    Status VARCHAR(50) NOT NULL
+    Status NVARCHAR(50) NOT NULL
 );
 
 -- Tạo khóa ngoại liên kết với bảng Users
 ALTER TABLE Documents
-ADD CONSTRAINT FK_Documents_User FOREIGN KEY (user_id) REFERENCES Users(user_id);
+ADD CONSTRAINT FK_Documents_User FOREIGN KEY (UserId) REFERENCES Users(user_id);
 
 
 -- Thêm dữ liệu vào bảng LinkLibraries

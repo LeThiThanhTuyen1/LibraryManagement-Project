@@ -3,7 +3,7 @@
     <img src="https://th.bing.com/th/id/OIP.O9YF9qMWDsUuo7m60RqiqAHaFi?rs=1&pid=ImgDetMain" alt="Lecturer Profile Picture" class="profile-picture">
   </div>
 
-  <div class="right-section">
+  <div *ngIf="!isChangingPassword" class="right-section">
     <h2>Thông Tin Giảng Viên</h2>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Display error message -->
     <table>
@@ -49,7 +49,42 @@
       <button *ngIf="!isEditing" class="edit-info" (click)="enableEditing()">Thay đổi thông tin</button>
       <button *ngIf="isEditing" class="save-info" (click)="saveChanges()">Lưu thay đổi</button>
       <button *ngIf="isEditing" class="cancel-info" (click)="cancelEditing()">Hủy</button>
-      <button *ngIf="!isEditing" class="edit-info">Thay đổi mật khẩu</button>
+      <button *ngIf="!isEditing" class="edit-info" (click)="openChangePasswordForm()">Thay đổi mật khẩu</button>
+    </div>
+  </div>
+
+  <!-- Form đổi mật khẩu -->
+  <div *ngIf="isChangingPassword" class="change-password-form">
+    <h2>Thông tin người dùng</h2>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <table>
+      <tbody>
+        <tr>
+          <th>Mã</th>
+          <td>{{ lecturer.Username }}</td>
+        </tr>
+        <tr>
+          <th>Họ tên</th>
+          <td>{{ lecturer.FirstName }} {{ lecturer.LastName }}</td>
+        </tr>
+        <tr>
+          <th>Mật khẩu cũ</th>
+          <td><input type="password" id="oldPassword" [(ngModel)]="oldPassword" /></td>
+        </tr>
+        <tr>
+          <th>Mật khẩu mới</th>
+          <td><input type="password" id="newPassword" [(ngModel)]="newPassword" /></td>
+        </tr>
+        <tr>
+          <th>Nhập lại mật khẩu mới</th>
+          <td><input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="button-container">
+      <button class="save-info" (click)="changePassword()">Lưu thay đổi</button>
+      <button class="cancel-info" (click)="cancelChangePassword()">Hủy</button>
     </div>
   </div>
 </div>

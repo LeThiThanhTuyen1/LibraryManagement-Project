@@ -33,6 +33,7 @@
             <li><a (click)="onLogout()">Đăng xuất</a></li>
           </ul>
         </li>
+          <li *ngIf="!isLoggedIn"><a routerLink="/login">Đăng nhập</a></li>
       </ul>
     </nav>
   </header>

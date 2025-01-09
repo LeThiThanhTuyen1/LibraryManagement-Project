@@ -224,9 +224,6 @@ namespace LibraryManagementAPI.Controllers
             {
                 ".pdf" => "application/pdf",
                 ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                ".txt" => "text/plain",
                 _ => "application/octet-stream"
             };
 
@@ -268,7 +265,6 @@ namespace LibraryManagementAPI.Controllers
          }
 
         [HttpGet("ViewDocument/{bookId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> ViewDocument(int bookId)
         {
             var book = await _context.Books.FirstOrDefaultAsync(b => b.book_id == bookId);
@@ -290,9 +286,6 @@ namespace LibraryManagementAPI.Controllers
             {
                 ".pdf" => "application/pdf",
                 ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                ".txt" => "text/plain",
                 _ => "application/octet-stream"
             };
 
