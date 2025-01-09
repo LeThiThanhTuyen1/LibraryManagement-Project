@@ -1,10 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+
 import { ShareDocumentsComponent } from './share-documents.component';
-import { StudentService } from '../../../service/student.service';
-import { BookService } from '../../../service/book.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ShareDocumentsComponent', () => {
   let component: ShareDocumentsComponent;
@@ -12,10 +8,9 @@ describe('ShareDocumentsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShareDocumentsComponent],
-      imports: [HttpClientModule, FormsModule, HttpClientTestingModule],  
-      providers: [StudentService, BookService]   
-    }).compileComponents();
+      declarations: [ShareDocumentsComponent]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(ShareDocumentsComponent);
     component = fixture.componentInstance;

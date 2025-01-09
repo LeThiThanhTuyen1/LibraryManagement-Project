@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -58,16 +58,19 @@ export class AuthService {
     });
   }
 
-  // Upload document with files
-  uploadDocument(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/upload-document`, formData);
-  }
-  // Get list of uploaded documents
-  getDocuments(): Observable<Document[]> {
-    return this.http.get<Document[]>(`${this.apiUrl}/documents`);
-  }
-
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${userId}`);
   }
+
+  uploadDocument(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/upload`, formData, {
+      observe: 'response'  // Đảm bảo nhận toàn bộ phản hồi, bao gồm cả body và status
+    }).pipe(
+      catchError(error => {
+        return throwError(() => new Error('Lỗi khi chia sẻ tài liệu: ' + error.message));
+      })
+    );
+  }
+  
+  
 }

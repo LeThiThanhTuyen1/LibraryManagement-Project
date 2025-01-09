@@ -342,81 +342,50 @@ namespace LibraryManagementAPI.Controllers
             }
         }
 
-        [HttpPost("upload-document")]
-        public async Task<IActionResult> UploadDocument(IFormCollection form)
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadDocument([FromForm] DocumentUploadRequest model)
         {
-            var senderName = form["senderName"];
-            var role = form["role"];
-            var department = form["department"];
-            var major = form["major"];
-            var files = form.Files;
-
-            if (files.Count == 0)
+            try
             {
-                return BadRequest(new { message = "Chưa có file nào được chọn." });
-            }
+                if (model.File == null || model.File.Length == 0)
+                    return BadRequest("File không hợp lệ.");
 
-            // Validate file format and size
-            foreach (var file in files)
-            {
-                if (file.Length > 50 * 1024 * 1024) 
-                {
-                    return BadRequest(new { message = "Tệp tin quá lớn. Kích thước tối đa là 50MB." });
-                }
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
 
-                var fileExtension = Path.GetExtension(file.FileName).ToLower();
-                if (fileExtension != ".pdf" && fileExtension != ".docx")
-                {
-                    return BadRequest(new { message = "Chỉ chấp nhận tệp PDF hoặc DOCX." });
-                }
-            }
-
-            var documentList = new List<Document>();
-
-            foreach (var file in files)
-            {
-                var fileName = $"{senderName}_{major}_{department}_{file.FileName}";
-                var filePath = Path.Combine("uploads", fileName);
-
+                var filePath = Path.Combine(uploadsFolder, model.File.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.CopyToAsync(stream);
+                    await model.File.CopyToAsync(stream);
                 }
 
                 var document = new Document
                 {
-                    FileName = fileName,
-                    FilePath = filePath,
-                    SenderName = senderName,
-                    Role = role,
-                    Department = department,
-                    Major = major,
-                    UploadDate = DateTime.Now,
-                    Status = "Upload thành công"
+                    file_name = model.File.FileName,
+                    file_path = filePath,
+                    title = model.Title,
+                    publication_year = model.Publication_year,
+                    genre = model.Genre,
+                    summary = model.Summary,
+                    language = model.Language,
+                    upload_date = DateTime.UtcNow,
+                    status = "chờ duyệt"
                 };
 
-                // Save document info to database (Assuming Document is a model)
                 _context.Documents.Add(document);
                 await _context.SaveChangesAsync();
-                documentList.Add(document);
+
+                // Trả về một phản hồi đơn giản để Angular dễ dàng xử lý
+                return Ok("Tài liệu đã được tải lên thành công!");
             }
-
-            return Ok(new { message = "Tài liệu đã được tải lên thành công", documents = documentList });
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message} - {ex.InnerException?.Message}");
+                return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
+            }
         }
 
-        [HttpGet("documents")]
-        public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
-        {
-            var documents = await _context.Documents.ToListAsync();
-            return Ok(documents);
-        }
 
-        [HttpGet("LibraryUsersCount")]
-        public async Task<IActionResult> GetLibraryUsersCount()
-        {
-            var count = await _context.Users.CountAsync();
-            return Ok(count);
-        }
 
     }
 }

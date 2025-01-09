@@ -1,18 +1,18 @@
-﻿namespace LibraryManagementAPI.Models
+﻿using LibraryManagementAPI.Models;
+
+public class Document
 {
-    public class Document
-    {
-        public int Id { get; set; }
-        public string? FileName { get; set; }
-        public string? FilePath { get; set; }
-        public string? SenderName { get; set; }
-        public string? Role { get; set; }
-        public string? Department { get; set; }
-        public string? Major { get; set; }
-        public DateTime UploadDate { get; set; }
-        public string? Status { get; set; }
-        public int UserId { get; set; } // Thêm thuộc tính UserId
-        //// Điều này giúp khai báo quan hệ với bảng User (1-n relationship)
-        public User User { get; set; }
-    }
+    public int Id { get; set; }
+    public string? file_name { get; set; }
+    public string? file_path { get; set; }
+    public DateTime? upload_date { get; set; }
+    public string? status { get; set; }
+    public string? title { get; set; }
+    public string? isbn { get; set; }
+    public int? publication_year { get; set; }
+    public string? genre { get; set; }
+    public string? summary { get; set; }
+    public string? language { get; set; }
+    public int? user_id { get; set; }
 }
+
