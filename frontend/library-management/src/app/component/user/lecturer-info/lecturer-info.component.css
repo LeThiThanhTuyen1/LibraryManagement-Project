@@ -127,7 +127,7 @@
     border: 1px solid red;
     border-radius: 5px;
   }
-  * Form thay đổi mật khẩu */
+  /* Form thay đổi mật khẩu */
 .change-password-form {
   display: flex;
   flex-direction: column;
