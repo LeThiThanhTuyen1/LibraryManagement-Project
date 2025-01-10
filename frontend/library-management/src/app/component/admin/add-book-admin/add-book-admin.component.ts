@@ -44,17 +44,14 @@ export class AddBookAdminComponent {
       const file = input.files[0];
       const allowedTypes = [
         'application/pdf', // PDF
-        'application/msword', // DOC
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // DOCX
-        'text/plain', // TXT
-
       ];
-      const maxSizeInMB = 1; // Giới hạn kích thước file là 1MB
+      const maxSizeInMB = 10; // Giới hạn kích thước file là 1MB
       const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
 
       // Kiểm tra loại file
       if (!allowedTypes.includes(file.type)) {
-        alert('File không hợp lệ. Vui lòng tải lên tài liệu hợp lệ (PDF, DOC, DOCX, TXT).');
+        alert('File không hợp lệ. Vui lòng tải lên tài liệu hợp lệ (PDF, DOCX).');
         this.isFileValid = false; // Đánh dấu file không hợp lệ
         this.selectedFile = null; // Xóa file đã chọn
         return;
@@ -84,7 +81,7 @@ export class AddBookAdminComponent {
       alert('Vui lòng nhập đầy đủ thông tin hợp lệ và chọn file!');
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('title', this.addBookForm.value.title);
     formData.append('isbn', this.addBookForm.value.isbn || 'Chưa có thông tin');
@@ -92,18 +89,20 @@ export class AddBookAdminComponent {
     formData.append('publicationYear', this.addBookForm.value.publicationYear);
     formData.append('summary', this.addBookForm.value.summary || 'Chưa có thông tin');
     formData.append('genre', this.addBookForm.value.genre || 'Chưa có thông tin');
-
+  
+    // Thông tin tác giả
     formData.append('authorName', this.addBookForm.value.authorName || 'Chưa có thông tin');
     formData.append('authorNationality', this.addBookForm.value.authorNationality || 'Chưa có thông tin');
     formData.append('authorBirthYear', this.addBookForm.value.authorBirthYear ? this.addBookForm.value.authorBirthYear.toString() : 'Chưa có thông tin');
+  
+    // Thông tin nhà xuất bản
     formData.append('publisherName', this.addBookForm.value.publisherName || 'Chưa có thông tin');
     formData.append('publisherAddress', this.addBookForm.value.publisherAddress || 'Chưa có thông tin');
-    formData.append('publisherPhone', this.addBookForm.value.publisherPhone || 'Chưa có thông tin');
-
+  
     if (this.selectedFile) {
       formData.append('file', this.selectedFile);
     }
-
+  
     this.bookAdminService.addBook(formData).subscribe({
       next: (response) => {
         alert('Thêm sách thành công!');
@@ -118,6 +117,7 @@ export class AddBookAdminComponent {
       },
     });
   }
+  
   onCancel(): void {
     this.location.back();
   }
